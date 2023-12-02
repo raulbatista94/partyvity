@@ -50,7 +50,7 @@ public extension UIImage {
     static let logoLetterV = R.image.logoV()!
     static let logoLetterYBlue = R.image.logoYBlue()!
     static let logoLetterYYellow = R.image.logoYYellow()!
-    
+
     // MARK: - Medal
     static let medalBackground = R.image.bg_medal()!
     static let medalGlow = R.image.glow()!
@@ -58,7 +58,7 @@ public extension UIImage {
     static let medalContour = R.image.medal_contour()!
     static let medal = R.image.medal()!
     static let winnderRoundTitle = R.image.winnerTitle()!
-    
+
     // MARK: - ProgressBars
     static let progressBarRed = R.image.progressBar_1()!
     static let progressBarPurple = R.image.progressBar_2()!
@@ -67,7 +67,7 @@ public extension UIImage {
     static let progressBarPink = R.image.progressBar_5()!
     static let progressBarOrange = R.image.progressBar_6()!
     static let progressBarBackground = R.image.progressBar_background()!
-    
+
     // MARK: - Word swipe badge
     static let wordSwipeArrow = R.image.arrow()!
     static let wordTopShadow = R.image.topWordShadow()
