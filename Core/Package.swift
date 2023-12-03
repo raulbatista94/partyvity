@@ -5,19 +5,35 @@ import PackageDescription
 
 let package = Package(
     name: "Core",
+    defaultLocalization: "en",
+    platforms: [
+        .iOS(.v16)
+    ],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "Core",
-            targets: ["Core"]),
+            targets: ["Core"]
+        )
+    ],
+    dependencies: [
+        .package(url: "https://github.com/realm/SwiftLint", exact: "0.53.0"),
+        .package(url: "https://github.com/CombineCommunity/CombineExt.git", exact: "1.8.1")
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "Core"),
+            name: "Core",
+            path: "Sources",
+            swiftSettings: [
+                .enableUpcomingFeature("StrictConcurrency=targeted")
+            ],
+            plugins: [
+                .plugin(name: "SwiftLintPlugin", package: "SwiftLint")
+            ]
+        ),
         .testTarget(
             name: "CoreTests",
-            dependencies: ["Core"]),
-    ]
+            dependencies: ["Core"]
+        )
+    ],
+    swiftLanguageVersions: [.v5]
 )

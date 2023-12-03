@@ -3,23 +3,50 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2080979B2B12524500972BE9 /* PartyvityApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2080979A2B12524500972BE9 /* PartyvityApp.swift */; };
-		2080979D2B12524500972BE9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2080979C2B12524500972BE9 /* ContentView.swift */; };
+		200CB8A22B1BC78D006A7DD7 /* ManagerContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200CB8A12B1BC78D006A7DD7 /* ManagerContainer.swift */; };
+		200CB8A62B1BC855006A7DD7 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200CB8A52B1BC855006A7DD7 /* Coordinator.swift */; };
+		200CB8A92B1BCAD9006A7DD7 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 200CB8A82B1BCAD9006A7DD7 /* Core */; };
+		200CB8AC2B1BCAE2006A7DD7 /* SharedUI in Frameworks */ = {isa = PBXBuildFile; productRef = 200CB8AB2B1BCAE2006A7DD7 /* SharedUI */; };
+		200CB8AE2B1BCD40006A7DD7 /* AppCoordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200CB8AD2B1BCD40006A7DD7 /* AppCoordinating.swift */; };
+		200CB8B02B1BCD75006A7DD7 /* SceneCoordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200CB8AF2B1BCD75006A7DD7 /* SceneCoordinating.swift */; };
+		200CB8B22B1BCD96006A7DD7 /* ViewControllerCoordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200CB8B12B1BCD96006A7DD7 /* ViewControllerCoordinating.swift */; };
+		200CB8B52B1BCFF0006A7DD7 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 200CB8B42B1BCFF0006A7DD7 /* Core */; };
+		200CB8B82B1BCFF9006A7DD7 /* SharedUI in Frameworks */ = {isa = PBXBuildFile; productRef = 200CB8B72B1BCFF9006A7DD7 /* SharedUI */; };
+		200CB8BB2B1BD0BC006A7DD7 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 200CB8BA2B1BD0BC006A7DD7 /* Swinject */; };
+		200CB8BD2B1BD0BC006A7DD7 /* Swinject-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 200CB8BC2B1BD0BC006A7DD7 /* Swinject-Dynamic */; };
+		207ED6222B1CBF7600273139 /* InitialSceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207ED6212B1CBF7600273139 /* InitialSceneCoordinator.swift */; };
+		207ED6242B1CBFEF00273139 /* InitialSceneCoordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207ED6232B1CBFEF00273139 /* InitialSceneCoordinating.swift */; };
+		207ED6272B1CC14C00273139 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 207ED6262B1CC14C00273139 /* LaunchScreen.storyboard */; };
+		207ED6322B1CC50800273139 /* RswiftLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 207ED6312B1CC50800273139 /* RswiftLibrary */; };
+		207ED6342B1CC50800273139 /* rswift in Frameworks */ = {isa = PBXBuildFile; productRef = 207ED6332B1CC50800273139 /* rswift */; };
+		207ED6372B1CC71000273139 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207ED6362B1CC71000273139 /* AppDelegate.swift */; };
+		207ED6392B1CC75900273139 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207ED6382B1CC75900273139 /* SceneDelegate.swift */; };
+		207ED63C2B1CCEA200273139 /* AppLifecycleResponding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207ED63B2B1CCEA200273139 /* AppLifecycleResponding.swift */; };
+		207ED63F2B1CD1BD00273139 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207ED63E2B1CD1BD00273139 /* AppCoordinator.swift */; };
 		2080979F2B12524600972BE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2080979E2B12524600972BE9 /* Assets.xcassets */; };
-		208097A22B12524600972BE9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 208097A12B12524600972BE9 /* Preview Assets.xcassets */; };
 		208FC61B2B125C930028F500 /* SharedUI in Frameworks */ = {isa = PBXBuildFile; productRef = 208FC61A2B125C930028F500 /* SharedUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		200CB8A12B1BC78D006A7DD7 /* ManagerContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerContainer.swift; sourceTree = "<group>"; };
+		200CB8A52B1BC855006A7DD7 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		200CB8AD2B1BCD40006A7DD7 /* AppCoordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinating.swift; sourceTree = "<group>"; };
+		200CB8AF2B1BCD75006A7DD7 /* SceneCoordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinating.swift; sourceTree = "<group>"; };
+		200CB8B12B1BCD96006A7DD7 /* ViewControllerCoordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCoordinating.swift; sourceTree = "<group>"; };
+		207ED6212B1CBF7600273139 /* InitialSceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneCoordinator.swift; sourceTree = "<group>"; };
+		207ED6232B1CBFEF00273139 /* InitialSceneCoordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneCoordinating.swift; sourceTree = "<group>"; };
+		207ED6262B1CC14C00273139 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		207ED6362B1CC71000273139 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		207ED6382B1CC75900273139 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		207ED63B2B1CCEA200273139 /* AppLifecycleResponding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLifecycleResponding.swift; sourceTree = "<group>"; };
+		207ED63E2B1CD1BD00273139 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		207ED6402B1CD3F400273139 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		208097972B12524500972BE9 /* Partyvity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Partyvity.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		2080979A2B12524500972BE9 /* PartyvityApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyvityApp.swift; sourceTree = "<group>"; };
-		2080979C2B12524500972BE9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2080979E2B12524600972BE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		208097A12B12524600972BE9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		208FC61C2B125DAA0028F500 /* SharedUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SharedUI; sourceTree = "<group>"; };
 		20D39D142B13400A00C6288E /* Core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Core; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -29,13 +56,94 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				200CB8AC2B1BCAE2006A7DD7 /* SharedUI in Frameworks */,
+				207ED6322B1CC50800273139 /* RswiftLibrary in Frameworks */,
+				200CB8BD2B1BD0BC006A7DD7 /* Swinject-Dynamic in Frameworks */,
+				200CB8A92B1BCAD9006A7DD7 /* Core in Frameworks */,
+				200CB8B82B1BCFF9006A7DD7 /* SharedUI in Frameworks */,
 				208FC61B2B125C930028F500 /* SharedUI in Frameworks */,
+				200CB8B52B1BCFF0006A7DD7 /* Core in Frameworks */,
+				200CB8BB2B1BD0BC006A7DD7 /* Swinject in Frameworks */,
+				207ED6342B1CC50800273139 /* rswift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		200CB8A02B1BC77D006A7DD7 /* DependencyInjection */ = {
+			isa = PBXGroup;
+			children = (
+				200CB8A12B1BC78D006A7DD7 /* ManagerContainer.swift */,
+			);
+			path = DependencyInjection;
+			sourceTree = "<group>";
+		};
+		200CB8A32B1BC832006A7DD7 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				207ED63D2B1CD1B600273139 /* App */,
+				207ED61F2B1CBF5700273139 /* Coordinators */,
+				200CB8A42B1BC846006A7DD7 /* Protocols */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		200CB8A42B1BC846006A7DD7 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				200CB8A52B1BC855006A7DD7 /* Coordinator.swift */,
+				200CB8AF2B1BCD75006A7DD7 /* SceneCoordinating.swift */,
+				200CB8AD2B1BCD40006A7DD7 /* AppCoordinating.swift */,
+				200CB8B12B1BCD96006A7DD7 /* ViewControllerCoordinating.swift */,
+				207ED6232B1CBFEF00273139 /* InitialSceneCoordinating.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		207ED61F2B1CBF5700273139 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				207ED6202B1CBF6300273139 /* InitialScene */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		207ED6202B1CBF6300273139 /* InitialScene */ = {
+			isa = PBXGroup;
+			children = (
+				207ED6212B1CBF7600273139 /* InitialSceneCoordinator.swift */,
+			);
+			path = InitialScene;
+			sourceTree = "<group>";
+		};
+		207ED6252B1CC12C00273139 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2080979E2B12524600972BE9 /* Assets.xcassets */,
+				207ED6262B1CC14C00273139 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		207ED6352B1CC70700273139 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				207ED6362B1CC71000273139 /* AppDelegate.swift */,
+				207ED6382B1CC75900273139 /* SceneDelegate.swift */,
+				207ED63B2B1CCEA200273139 /* AppLifecycleResponding.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		207ED63D2B1CD1B600273139 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				207ED63E2B1CD1BD00273139 /* AppCoordinator.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		2080978E2B12524500972BE9 = {
 			isa = PBXGroup;
 			children = (
@@ -57,20 +165,13 @@
 		208097992B12524500972BE9 /* Partyvity */ = {
 			isa = PBXGroup;
 			children = (
-				2080979A2B12524500972BE9 /* PartyvityApp.swift */,
-				2080979C2B12524500972BE9 /* ContentView.swift */,
-				2080979E2B12524600972BE9 /* Assets.xcassets */,
-				208097A02B12524600972BE9 /* Preview Content */,
+				207ED6402B1CD3F400273139 /* Info.plist */,
+				207ED6352B1CC70700273139 /* Application */,
+				207ED6252B1CC12C00273139 /* Resources */,
+				200CB8A32B1BC832006A7DD7 /* Navigation */,
+				200CB8A02B1BC77D006A7DD7 /* DependencyInjection */,
 			);
 			path = Partyvity;
-			sourceTree = "<group>";
-		};
-		208097A02B12524600972BE9 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				208097A12B12524600972BE9 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -87,10 +188,19 @@
 			buildRules = (
 			);
 			dependencies = (
+				207ED62E2B1CC1AB00273139 /* PBXTargetDependency */,
 			);
 			name = Partyvity;
 			packageProductDependencies = (
 				208FC61A2B125C930028F500 /* SharedUI */,
+				200CB8A82B1BCAD9006A7DD7 /* Core */,
+				200CB8AB2B1BCAE2006A7DD7 /* SharedUI */,
+				200CB8B42B1BCFF0006A7DD7 /* Core */,
+				200CB8B72B1BCFF9006A7DD7 /* SharedUI */,
+				200CB8BA2B1BD0BC006A7DD7 /* Swinject */,
+				200CB8BC2B1BD0BC006A7DD7 /* Swinject-Dynamic */,
+				207ED6312B1CC50800273139 /* RswiftLibrary */,
+				207ED6332B1CC50800273139 /* rswift */,
 			);
 			productName = Partyvity;
 			productReference = 208097972B12524500972BE9 /* Partyvity.app */;
@@ -121,6 +231,10 @@
 			);
 			mainGroup = 2080978E2B12524500972BE9;
 			packageReferences = (
+				200CB8B32B1BCFF0006A7DD7 /* XCLocalSwiftPackageReference "Core" */,
+				200CB8B62B1BCFF9006A7DD7 /* XCLocalSwiftPackageReference "SharedUI" */,
+				200CB8B92B1BD0BC006A7DD7 /* XCRemoteSwiftPackageReference "Swinject" */,
+				207ED6302B1CC50800273139 /* XCRemoteSwiftPackageReference "R.swift" */,
 			);
 			productRefGroup = 208097982B12524500972BE9 /* Products */;
 			projectDirPath = "";
@@ -136,7 +250,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				208097A22B12524600972BE9 /* Preview Assets.xcassets in Resources */,
+				207ED6272B1CC14C00273139 /* LaunchScreen.storyboard in Resources */,
 				2080979F2B12524600972BE9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -148,12 +262,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2080979D2B12524500972BE9 /* ContentView.swift in Sources */,
-				2080979B2B12524500972BE9 /* PartyvityApp.swift in Sources */,
+				207ED63F2B1CD1BD00273139 /* AppCoordinator.swift in Sources */,
+				200CB8A62B1BC855006A7DD7 /* Coordinator.swift in Sources */,
+				200CB8B22B1BCD96006A7DD7 /* ViewControllerCoordinating.swift in Sources */,
+				207ED6242B1CBFEF00273139 /* InitialSceneCoordinating.swift in Sources */,
+				200CB8AE2B1BCD40006A7DD7 /* AppCoordinating.swift in Sources */,
+				207ED6222B1CBF7600273139 /* InitialSceneCoordinator.swift in Sources */,
+				207ED63C2B1CCEA200273139 /* AppLifecycleResponding.swift in Sources */,
+				200CB8A22B1BC78D006A7DD7 /* ManagerContainer.swift in Sources */,
+				207ED6392B1CC75900273139 /* SceneDelegate.swift in Sources */,
+				207ED6372B1CC71000273139 /* AppDelegate.swift in Sources */,
+				200CB8B02B1BCD75006A7DD7 /* SceneCoordinating.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		207ED62E2B1CC1AB00273139 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 207ED62D2B1CC1AB00273139 /* RswiftGenerateInternalResources */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		208097A32B12524600972BE9 /* Debug */ = {
@@ -282,15 +412,18 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Partyvity/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = VJ4397ZV9N;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = Partyvity/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Partyvity;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.trivia-games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -311,15 +444,18 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Partyvity/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = VJ4397ZV9N;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = Partyvity/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Partyvity;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.trivia-games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -356,7 +492,86 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		200CB8B32B1BCFF0006A7DD7 /* XCLocalSwiftPackageReference "Core" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Core;
+		};
+		200CB8B62B1BCFF9006A7DD7 /* XCLocalSwiftPackageReference "SharedUI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = SharedUI;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		200CB8B92B1BD0BC006A7DD7 /* XCRemoteSwiftPackageReference "Swinject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/Swinject.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.4;
+			};
+		};
+		207ED6282B1CC16D00273139 /* XCRemoteSwiftPackageReference "R.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:mac-cain13/R.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.4.0;
+			};
+		};
+		207ED6302B1CC50800273139 /* XCRemoteSwiftPackageReference "R.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mac-cain13/R.swift.git";
+			requirement = {
+				kind = exactVersion;
+				version = 7.4.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		200CB8A82B1BCAD9006A7DD7 /* Core */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Core;
+		};
+		200CB8AB2B1BCAE2006A7DD7 /* SharedUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SharedUI;
+		};
+		200CB8B42B1BCFF0006A7DD7 /* Core */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Core;
+		};
+		200CB8B72B1BCFF9006A7DD7 /* SharedUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SharedUI;
+		};
+		200CB8BA2B1BD0BC006A7DD7 /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 200CB8B92B1BD0BC006A7DD7 /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
+		};
+		200CB8BC2B1BD0BC006A7DD7 /* Swinject-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 200CB8B92B1BD0BC006A7DD7 /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = "Swinject-Dynamic";
+		};
+		207ED62D2B1CC1AB00273139 /* RswiftGenerateInternalResources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 207ED6282B1CC16D00273139 /* XCRemoteSwiftPackageReference "R.swift" */;
+			productName = "plugin:RswiftGenerateInternalResources";
+		};
+		207ED6312B1CC50800273139 /* RswiftLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 207ED6302B1CC50800273139 /* XCRemoteSwiftPackageReference "R.swift" */;
+			productName = RswiftLibrary;
+		};
+		207ED6332B1CC50800273139 /* rswift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 207ED6302B1CC50800273139 /* XCRemoteSwiftPackageReference "R.swift" */;
+			productName = rswift;
+		};
 		208FC61A2B125C930028F500 /* SharedUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SharedUI;

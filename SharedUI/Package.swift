@@ -13,7 +13,8 @@ let package = Package(
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "SharedUI",
-            targets: ["SharedUI"]),
+            targets: ["SharedUI"]
+        ),
     ],
     dependencies: [
         .package(url: "https://github.com/mac-cain13/R.swift.git", exact: "7.4.0"),
