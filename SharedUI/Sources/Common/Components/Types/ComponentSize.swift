@@ -9,6 +9,7 @@ import Foundation
 
 
 public enum ComponentSize {
+    case xlarge
     case large
     case medium
     case small

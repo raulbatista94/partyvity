@@ -7,13 +7,16 @@
 
 import Foundation
 import Swinject
+import SharedUI
 import UIKit
+import SwiftUI
 
 @MainActor
 final class InitialSceneCoordinator {
     var childCoordinators = [Coordinator]()
     let window: UIWindow
     let container: Assembler
+    private(set) lazy var navigationController: UINavigationController = UINavigationController()
     
     init(window: UIWindow, container: Assembler) {
         self.window = window
@@ -22,17 +25,29 @@ final class InitialSceneCoordinator {
 }
 
 extension InitialSceneCoordinator: InitialSceneCoordinating {
-    
     func start() {
         setLaunchscreenWindow()
+        // TOOD: At this point we will check if we will
+        // open the main menu or continue game.
+        startUserInitialScreen()
+        
     }
 }
+
+extension InitialSceneCoordinator: NavigationControllerCoordinator {}
 
 private extension InitialSceneCoordinator {
     func setLaunchscreenWindow() {
         let launchScreen = R.storyboard.launchScreen(bundle: .main).instantiateInitialViewController()
         window.rootViewController = launchScreen
         window.makeKeyAndVisible()
+    }
+    
+    func startUserInitialScreen() {
+        setRootCoordinator(
+            CoordinatorsFactory
+                .makeMainMenuCoordinator(container: container)
+        )
     }
 }
 

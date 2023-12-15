@@ -10,27 +10,64 @@ import SwiftUI
 struct ActionButton: View {
     private let onTap: () -> Void
     private let title: String
-    private let style: CustomButtonStyle
+    let style: ComponentStyle
+    let size: ComponentSize
+    let icon: Image?
 
     init(
         onTap: @escaping () -> Void,
         title: String,
-        style: CustomButtonStyle
+        style: ComponentStyle,
+        size: ComponentSize = .medium,
+        icon: Image? = nil
     ) {
         self.onTap = onTap
         self.title = title
         self.style = style
+        self.size = size
+        self.icon = icon
     }
 
     var body: some View {
         Button(
             action: onTap,
             label: {
-                Text(title)
+                ZStack {
+                    RoundedRectangle(cornerRadius: 24)
+                        .fill(backgroundColor)
+
+                    Text(title)
+                        .font(font)
+                        .foregroundStyle(.white)
+                }
             }
         )
-        .buttonStyle(style)
-        .frame(height: 64)
+    }
+}
+
+private extension ActionButton {
+    var backgroundColor: Color {
+        switch style {
+        case .primary:
+            .carmineRed
+        case .secondary:
+            .blueDark
+        case .tertiary:
+            .blueLight
+        }
+    }
+
+    var font: Font {
+        switch size {
+        case .xlarge:
+            .titleXXLarge
+        case .large:
+            .titleXLarge
+        case .medium:
+            .headlineMedium
+        case .small:
+            .bodyMedium
+        }
     }
 }
 
@@ -38,9 +75,7 @@ struct ActionButton: View {
     ActionButton(
         onTap: {},
         title: "Main Menu",
-        style: CustomButtonStyle(
-            style: .primary,
-            size: .large
-        )
+        style: .primary, 
+        size: .medium
     )
 }

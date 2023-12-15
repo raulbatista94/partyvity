@@ -9,7 +9,8 @@ import SwiftUI
 import RswiftResources
 
 public extension Font {
-    static let titleXLarge = makeFont(name: R.font.nunitoExtraBold.name, size: 40, relativeTo: .largeTitle)
+    static let titleXXLarge = makeFont(name: R.font.nunitoBlack.name, size: 48, relativeTo: .largeTitle)
+    static let titleXLarge = makeFont(name: R.font.nunitoExtraBold.name, size: 40, relativeTo: .title)
     static let titleMedium = makeFont(name: R.font.nunitoExtraBold.name, size: 26, relativeTo: .title2)
     static let headlineMedium = makeFont(name: R.font.nunitoBold.name, size: 30, relativeTo: .headline)
     static let bodyLarge = makeFont(name: R.font.nunitoSemiBold.name, size: 36, relativeTo: .body)

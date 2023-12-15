@@ -29,6 +29,12 @@
 		207ED63F2B1CD1BD00273139 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207ED63E2B1CD1BD00273139 /* AppCoordinator.swift */; };
 		2080979F2B12524600972BE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2080979E2B12524600972BE9 /* Assets.xcassets */; };
 		208FC61B2B125C930028F500 /* SharedUI in Frameworks */ = {isa = PBXBuildFile; productRef = 208FC61A2B125C930028F500 /* SharedUI */; };
+		20CF60662B2CC8000032573A /* ScreenFactory+Initial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CF60652B2CC8000032573A /* ScreenFactory+Initial.swift */; };
+		20CF606A2B2CDFDC0032573A /* MainMenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CF60692B2CDFDC0032573A /* MainMenuCoordinator.swift */; };
+		20D9D3672B2A2470006F29E9 /* ScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D9D3662B2A2470006F29E9 /* ScreenFactory.swift */; };
+		20EAA7542B22534F001A31D7 /* CoordinatorsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EAA7532B22534F001A31D7 /* CoordinatorsFactory.swift */; };
+		20EAA7572B2963EE001A31D7 /* NavigationControllerCoordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EAA7562B2963EE001A31D7 /* NavigationControllerCoordinating.swift */; };
+		20EAA75A2B29647B001A31D7 /* ViewControllerCoordinating+Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EAA7592B29647B001A31D7 /* ViewControllerCoordinating+Show.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,7 +54,13 @@
 		208097972B12524500972BE9 /* Partyvity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Partyvity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2080979E2B12524600972BE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		208FC61C2B125DAA0028F500 /* SharedUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SharedUI; sourceTree = "<group>"; };
+		20CF60652B2CC8000032573A /* ScreenFactory+Initial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScreenFactory+Initial.swift"; sourceTree = "<group>"; };
+		20CF60692B2CDFDC0032573A /* MainMenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuCoordinator.swift; sourceTree = "<group>"; };
 		20D39D142B13400A00C6288E /* Core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Core; sourceTree = "<group>"; };
+		20D9D3662B2A2470006F29E9 /* ScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenFactory.swift; sourceTree = "<group>"; };
+		20EAA7532B22534F001A31D7 /* CoordinatorsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorsFactory.swift; sourceTree = "<group>"; };
+		20EAA7562B2963EE001A31D7 /* NavigationControllerCoordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerCoordinating.swift; sourceTree = "<group>"; };
+		20EAA7592B29647B001A31D7 /* ViewControllerCoordinating+Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewControllerCoordinating+Show.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +94,7 @@
 		200CB8A32B1BC832006A7DD7 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				20EAA7522B225337001A31D7 /* Factory */,
 				207ED63D2B1CD1B600273139 /* App */,
 				207ED61F2B1CBF5700273139 /* Coordinators */,
 				200CB8A42B1BC846006A7DD7 /* Protocols */,
@@ -97,6 +110,8 @@
 				200CB8AD2B1BCD40006A7DD7 /* AppCoordinating.swift */,
 				200CB8B12B1BCD96006A7DD7 /* ViewControllerCoordinating.swift */,
 				207ED6232B1CBFEF00273139 /* InitialSceneCoordinating.swift */,
+				20EAA7562B2963EE001A31D7 /* NavigationControllerCoordinating.swift */,
+				20EAA7592B29647B001A31D7 /* ViewControllerCoordinating+Show.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -104,6 +119,7 @@
 		207ED61F2B1CBF5700273139 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
+				20CF60682B2CDFD00032573A /* MainMenu */,
 				207ED6202B1CBF6300273139 /* InitialScene */,
 			);
 			path = Coordinators;
@@ -172,6 +188,24 @@
 				200CB8A02B1BC77D006A7DD7 /* DependencyInjection */,
 			);
 			path = Partyvity;
+			sourceTree = "<group>";
+		};
+		20CF60682B2CDFD00032573A /* MainMenu */ = {
+			isa = PBXGroup;
+			children = (
+				20CF60692B2CDFDC0032573A /* MainMenuCoordinator.swift */,
+			);
+			path = MainMenu;
+			sourceTree = "<group>";
+		};
+		20EAA7522B225337001A31D7 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				20EAA7532B22534F001A31D7 /* CoordinatorsFactory.swift */,
+				20D9D3662B2A2470006F29E9 /* ScreenFactory.swift */,
+				20CF60652B2CC8000032573A /* ScreenFactory+Initial.swift */,
+			);
+			path = Factory;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,7 +299,12 @@
 				207ED63F2B1CD1BD00273139 /* AppCoordinator.swift in Sources */,
 				200CB8A62B1BC855006A7DD7 /* Coordinator.swift in Sources */,
 				200CB8B22B1BCD96006A7DD7 /* ViewControllerCoordinating.swift in Sources */,
+				20CF60662B2CC8000032573A /* ScreenFactory+Initial.swift in Sources */,
+				20EAA7542B22534F001A31D7 /* CoordinatorsFactory.swift in Sources */,
+				20EAA75A2B29647B001A31D7 /* ViewControllerCoordinating+Show.swift in Sources */,
+				20EAA7572B2963EE001A31D7 /* NavigationControllerCoordinating.swift in Sources */,
 				207ED6242B1CBFEF00273139 /* InitialSceneCoordinating.swift in Sources */,
+				20CF606A2B2CDFDC0032573A /* MainMenuCoordinator.swift in Sources */,
 				200CB8AE2B1BCD40006A7DD7 /* AppCoordinating.swift in Sources */,
 				207ED6222B1CBF7600273139 /* InitialSceneCoordinator.swift in Sources */,
 				207ED63C2B1CCEA200273139 /* AppLifecycleResponding.swift in Sources */,
@@ -273,6 +312,7 @@
 				207ED6392B1CC75900273139 /* SceneDelegate.swift in Sources */,
 				207ED6372B1CC71000273139 /* AppDelegate.swift in Sources */,
 				200CB8B02B1BCD75006A7DD7 /* SceneCoordinating.swift in Sources */,
+				20D9D3672B2A2470006F29E9 /* ScreenFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +385,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -401,6 +442,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

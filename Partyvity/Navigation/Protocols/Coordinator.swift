@@ -81,4 +81,15 @@ extension Coordinator {
         // swiftlint:disable:next force_unwrapping
         container.resolver.resolve(serviceType, arguments: arg1, arg2, arg3, arg4)!
     }
+    
+
+    func release(coordinator: Coordinator) {
+        childCoordinators.removeAll { $0 === coordinator }
+    }
+
+    func startChildCoordinator(_ childCoordinator: Coordinator) {
+        childCoordinators.append(childCoordinator)
+        childCoordinator.start()
+    }
+
 }
