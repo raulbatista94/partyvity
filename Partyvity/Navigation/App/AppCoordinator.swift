@@ -33,7 +33,10 @@ extension AppCoordinator: AppCoordinating {
 // Extension is internal to be accessible from test target
 extension AppCoordinator {
     func assembleDependencyInjectionContainer() {
-        // TODO: Setup DI containers
+        container.apply(assemblies: [
+            ViewModelRegistration(),
+            // TODO: Add remainig
+        ])
     }
 }
 

@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Raul Batista on 03.12.2023.
 //
@@ -11,7 +11,7 @@ import Foundation
 public actor CoreDataStorage: Sendable {
     private let container: NSPersistentContainer
     private let context: NSManagedObjectContext
-    
+
     public init(storeURL: URL) throws {
         container = try NSPersistentContainer.load(
             modelName: "PartyvityDataModel",
@@ -22,4 +22,3 @@ public actor CoreDataStorage: Sendable {
         context = container.newBackgroundContext()
     }
 }
-
