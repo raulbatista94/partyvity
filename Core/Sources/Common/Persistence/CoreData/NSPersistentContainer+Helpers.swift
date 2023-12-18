@@ -32,10 +32,10 @@ extension NSPersistentContainer {
 }
 
 extension NSPersistentContainer {
-    /// Called when a certain managed object context has been saved from an external process. 
+    /// Called when a certain managed object context has been saved from an external process.
     /// It should also be called on the context's queue.
     func viewContextDidSaveExternally() {
-        // `refreshAllObjects` only refreshes objects from which the cache is invalid. 
+        // `refreshAllObjects` only refreshes objects from which the cache is invalid.
         // With a staleness intervall of -1 the cache never invalidates.
         // We set the `stalenessInterval` to 0 to make sure that changes in the app extension get processed correctly.
         viewContext.stalenessInterval = 0
@@ -51,4 +51,3 @@ private extension NSManagedObjectModel {
             .flatMap { NSManagedObjectModel(contentsOf: $0) }
     }
 }
-

@@ -24,7 +24,23 @@ final class MainMenuCoordinator {
 extension MainMenuCoordinator: NavigationControllerCoordinator {
     func start() {
         navigationController.viewControllers = [
-            ScreenFactory.Initial.makeInitialScreen()
+            ScreenFactory.Initial.makeMainMenuView(
+                container: container,
+                eventHandler: self
+            )
         ]
+    }
+}
+
+extension MainMenuCoordinator: MainMenuEventHandling {
+    func handle(event: MainMenuEvent) {
+        switch event {
+        case .newGameButtonTapped:
+            print("New game tapped")
+        case .continueButtonTapped:
+            print("Continue tapped")
+        case .previousGamesButtonTapped:
+            print("Previous games tapped")
+        }
     }
 }

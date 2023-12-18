@@ -12,7 +12,7 @@ struct PointsIconView: View {
         case normal
         case double
         case tripe
-        
+
         var title: String {
             switch self {
             case .normal:
@@ -23,18 +23,18 @@ struct PointsIconView: View {
                 return "3x"
             }
         }
-        
+
         var foregroundColor: Color {
             switch self {
             case .normal:
-                .singlePoints
+                    .singlePoints
             case .double:
-                .doublePoints
+                    .doublePoints
             case .tripe:
-                .triplePoints
+                    .triplePoints
             }
         }
-        
+
         var rotationDegrees: Double {
             switch self {
             case .normal:
@@ -46,9 +46,9 @@ struct PointsIconView: View {
             }
         }
     }
-    
+
     let type: PointsType
-    
+
     var body: some View {
         ZStack {
             Circle()
@@ -59,10 +59,10 @@ struct PointsIconView: View {
                 .foregroundColor(type.foregroundColor)
                 .shadow(color: .black, radius: 2)
                 .rotationEffect(.degrees(type.rotationDegrees))
-                
+
         }
         .background(Color.blue)
-            
+
     }
 }
 

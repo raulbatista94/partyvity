@@ -1,6 +1,6 @@
 //
 //  SwiftUIView.swift
-//  
+//
 //
 //  Created by Raul Batista on 06.12.2023.
 //
@@ -75,7 +75,7 @@ private extension ActionButton {
     ActionButton(
         onTap: {},
         title: "Main Menu",
-        style: .primary, 
+        style: .primary,
         size: .medium
     )
 }

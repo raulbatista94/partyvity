@@ -50,6 +50,7 @@ public extension UIImage {
     static let logoLetterV = R.image.logoV()!
     static let logoLetterYBlue = R.image.logoYBlue()!
     static let logoLetterYYellow = R.image.logoYYellow()!
+    static let logoPartivity = R.image.partivity_logo()!
 
     // MARK: - Medal
     static let medalBackground = R.image.bg_medal()!

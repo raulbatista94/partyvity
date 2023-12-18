@@ -29,7 +29,7 @@ extension InitialSceneCoordinator: InitialSceneCoordinating {
         setLaunchscreenWindow()
         // TOOD: At this point we will check if we will
         // open the main menu or continue game.
-        startUserInitialScreen()
+        goToMainMenu()
         
     }
 }
@@ -43,7 +43,7 @@ private extension InitialSceneCoordinator {
         window.makeKeyAndVisible()
     }
     
-    func startUserInitialScreen() {
+    func goToMainMenu() {
         setRootCoordinator(
             CoordinatorsFactory
                 .makeMainMenuCoordinator(container: container)

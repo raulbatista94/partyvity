@@ -31,6 +31,7 @@
 		208FC61B2B125C930028F500 /* SharedUI in Frameworks */ = {isa = PBXBuildFile; productRef = 208FC61A2B125C930028F500 /* SharedUI */; };
 		20CF60662B2CC8000032573A /* ScreenFactory+Initial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CF60652B2CC8000032573A /* ScreenFactory+Initial.swift */; };
 		20CF606A2B2CDFDC0032573A /* MainMenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CF60692B2CDFDC0032573A /* MainMenuCoordinator.swift */; };
+		20CF606C2B3038AD0032573A /* ViewModelRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CF606B2B3038AD0032573A /* ViewModelRegistration.swift */; };
 		20D9D3672B2A2470006F29E9 /* ScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D9D3662B2A2470006F29E9 /* ScreenFactory.swift */; };
 		20EAA7542B22534F001A31D7 /* CoordinatorsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EAA7532B22534F001A31D7 /* CoordinatorsFactory.swift */; };
 		20EAA7572B2963EE001A31D7 /* NavigationControllerCoordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EAA7562B2963EE001A31D7 /* NavigationControllerCoordinating.swift */; };
@@ -56,6 +57,7 @@
 		208FC61C2B125DAA0028F500 /* SharedUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SharedUI; sourceTree = "<group>"; };
 		20CF60652B2CC8000032573A /* ScreenFactory+Initial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScreenFactory+Initial.swift"; sourceTree = "<group>"; };
 		20CF60692B2CDFDC0032573A /* MainMenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuCoordinator.swift; sourceTree = "<group>"; };
+		20CF606B2B3038AD0032573A /* ViewModelRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelRegistration.swift; sourceTree = "<group>"; };
 		20D39D142B13400A00C6288E /* Core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Core; sourceTree = "<group>"; };
 		20D9D3662B2A2470006F29E9 /* ScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenFactory.swift; sourceTree = "<group>"; };
 		20EAA7532B22534F001A31D7 /* CoordinatorsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorsFactory.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				200CB8A12B1BC78D006A7DD7 /* ManagerContainer.swift */,
+				20CF606B2B3038AD0032573A /* ViewModelRegistration.swift */,
 			);
 			path = DependencyInjection;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				20EAA7542B22534F001A31D7 /* CoordinatorsFactory.swift in Sources */,
 				20EAA75A2B29647B001A31D7 /* ViewControllerCoordinating+Show.swift in Sources */,
 				20EAA7572B2963EE001A31D7 /* NavigationControllerCoordinating.swift in Sources */,
+				20CF606C2B3038AD0032573A /* ViewModelRegistration.swift in Sources */,
 				207ED6242B1CBFEF00273139 /* InitialSceneCoordinating.swift in Sources */,
 				20CF606A2B2CDFDC0032573A /* MainMenuCoordinator.swift in Sources */,
 				200CB8AE2B1BCD40006A7DD7 /* AppCoordinating.swift in Sources */,

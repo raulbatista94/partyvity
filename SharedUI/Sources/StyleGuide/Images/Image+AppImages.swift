@@ -50,6 +50,7 @@ public extension Image {
     static let logoLetterV = R.image.logoV.image
     static let logoLetterYBlue = R.image.logoYBlue.image
     static let logoLetterYYellow = R.image.logoYYellow.image
+    static let logoImage = R.image.partivity_logo.image
 
     // MARK: - Medal
     static let medalBackground = R.image.bg_medal.image
