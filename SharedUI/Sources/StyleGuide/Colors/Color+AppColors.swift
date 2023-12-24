@@ -20,4 +20,7 @@ public extension Color {
     static let singlePoints = R.color.pointOne.color
     static let doublePoints = R.color.pointDouble.color
     static let triplePoints = R.color.pointTriple.color
+    static let yellowBorder = R.color.yellowBorder.color
+    static let textInputInactive = R.color.textInputInactive.color
+    static let textInputActive = R.color.textInputActive.color
 }

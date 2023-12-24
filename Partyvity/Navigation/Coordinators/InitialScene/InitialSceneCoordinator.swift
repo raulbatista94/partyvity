@@ -46,7 +46,10 @@ private extension InitialSceneCoordinator {
     func goToMainMenu() {
         setRootCoordinator(
             CoordinatorsFactory
-                .makeMainMenuCoordinator(container: container)
+                .makeMainMenuCoordinator(
+                    window: window,
+                    container: container
+                )
         )
     }
 }

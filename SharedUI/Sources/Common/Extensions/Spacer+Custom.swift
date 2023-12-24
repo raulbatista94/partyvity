@@ -9,10 +9,6 @@ import SwiftUI
 
 public struct Spacer {
     let value: CGFloat?
-
-    init(value: CGFloat?) {
-        self.value = value
-    }
 }
 
 extension Spacer: View {

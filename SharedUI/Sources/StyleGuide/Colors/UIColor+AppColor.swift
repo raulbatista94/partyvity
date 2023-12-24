@@ -15,4 +15,7 @@ public extension UIColor {
     static let neonGreen = UIColor(resource: .neonGreen)
     static let teamOrange = UIColor(resource: .teamOrange)
     static let teamPurple = UIColor(resource: .teamPurple)
+    static let yellowBorder = UIColor(resource: .yellowBorder)
+    static let textInputInactive = UIColor(resource: .textInputInactive)
+    static let textInputActive = UIColor(resource: .textInputActive)
 }

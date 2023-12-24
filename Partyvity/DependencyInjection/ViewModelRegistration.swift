@@ -15,5 +15,10 @@ final class ViewModelRegistration: Assembly {
             MainMenuViewModel(eventHandler: eventHandler)
         }
         .inObjectScope(.graph)
+
+        container.register(TeamCreationViewModel.self) { _ in
+            TeamCreationViewModel()
+        }
+        .inObjectScope(.graph)
     }
 }

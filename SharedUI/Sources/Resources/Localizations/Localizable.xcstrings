@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
     "continue" : {
       "comment" : "Common word \"continue\"",
       "extractionState" : "manual",
@@ -36,6 +39,9 @@
           }
         }
       }
+    },
+    "Team name" : {
+
     }
   },
   "version" : "1.0"

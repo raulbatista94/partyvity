@@ -16,5 +16,3 @@ public enum MainMenuEvent {
 public protocol MainMenuEventHandling: AnyObject {
     func handle(event: MainMenuEvent)
 }
-
-

@@ -32,3 +32,15 @@ public final class HostingController<Content: View>: UIHostingController<Content
         view.setNeedsUpdateConstraints()
     }
 }
+
+struct WithBackgroundImage: ViewModifier {
+    func body(content: Content) -> some View {
+        ZStack {
+            Image(.background)
+                .resizable()
+                .ignoresSafeArea()
+
+            content
+        }
+    }
+}

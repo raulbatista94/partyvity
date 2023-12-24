@@ -29,6 +29,7 @@
 		207ED63F2B1CD1BD00273139 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207ED63E2B1CD1BD00273139 /* AppCoordinator.swift */; };
 		2080979F2B12524600972BE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2080979E2B12524600972BE9 /* Assets.xcassets */; };
 		208FC61B2B125C930028F500 /* SharedUI in Frameworks */ = {isa = PBXBuildFile; productRef = 208FC61A2B125C930028F500 /* SharedUI */; };
+		20AA745D2B37861600200C24 /* TeamCreationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AA745C2B37861600200C24 /* TeamCreationCoordinator.swift */; };
 		20CF60662B2CC8000032573A /* ScreenFactory+Initial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CF60652B2CC8000032573A /* ScreenFactory+Initial.swift */; };
 		20CF606A2B2CDFDC0032573A /* MainMenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CF60692B2CDFDC0032573A /* MainMenuCoordinator.swift */; };
 		20CF606C2B3038AD0032573A /* ViewModelRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CF606B2B3038AD0032573A /* ViewModelRegistration.swift */; };
@@ -55,6 +56,7 @@
 		208097972B12524500972BE9 /* Partyvity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Partyvity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2080979E2B12524600972BE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		208FC61C2B125DAA0028F500 /* SharedUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SharedUI; sourceTree = "<group>"; };
+		20AA745C2B37861600200C24 /* TeamCreationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCreationCoordinator.swift; sourceTree = "<group>"; };
 		20CF60652B2CC8000032573A /* ScreenFactory+Initial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScreenFactory+Initial.swift"; sourceTree = "<group>"; };
 		20CF60692B2CDFDC0032573A /* MainMenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuCoordinator.swift; sourceTree = "<group>"; };
 		20CF606B2B3038AD0032573A /* ViewModelRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelRegistration.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 		207ED61F2B1CBF5700273139 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
+				20AA745B2B37860D00200C24 /* TeamCreation */,
 				20CF60682B2CDFD00032573A /* MainMenu */,
 				207ED6202B1CBF6300273139 /* InitialScene */,
 			);
@@ -191,6 +194,14 @@
 				200CB8A02B1BC77D006A7DD7 /* DependencyInjection */,
 			);
 			path = Partyvity;
+			sourceTree = "<group>";
+		};
+		20AA745B2B37860D00200C24 /* TeamCreation */ = {
+			isa = PBXGroup;
+			children = (
+				20AA745C2B37861600200C24 /* TeamCreationCoordinator.swift */,
+			);
+			path = TeamCreation;
 			sourceTree = "<group>";
 		};
 		20CF60682B2CDFD00032573A /* MainMenu */ = {
@@ -316,6 +327,7 @@
 				207ED6392B1CC75900273139 /* SceneDelegate.swift in Sources */,
 				207ED6372B1CC71000273139 /* AppDelegate.swift in Sources */,
 				200CB8B02B1BCD75006A7DD7 /* SceneCoordinating.swift in Sources */,
+				20AA745D2B37861600200C24 /* TeamCreationCoordinator.swift in Sources */,
 				20D9D3672B2A2470006F29E9 /* ScreenFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

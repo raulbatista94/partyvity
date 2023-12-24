@@ -15,17 +15,20 @@ protocol GameEventHandling {
 @MainActor
 enum CoordinatorsFactory {
     static func makeMainMenuCoordinator(
+        window: UIWindow,
         container: Assembler
     ) -> ViewControllerCoordinator {
-        MainMenuCoordinator(container: container)
+        MainMenuCoordinator(
+            window: window,
+            container: container
+        )
     }
+    
     static func makeGameCoordinator(
-        window: UIWindow,
-        eventHandler: GameEventHandling,
         container: Assembler
-    ) -> Coordinator {
+    ) -> ViewControllerCoordinator {
         // TODO: Replace this with the Game coordinator later
-        InitialSceneCoordinator(window: window, container: container)
+        TeamCreationCoordinator(container: container)
     }
 }
 

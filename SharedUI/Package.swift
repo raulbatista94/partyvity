@@ -17,6 +17,7 @@ let package = Package(
         ),
     ],
     dependencies: [
+        .package(path: "../Core"),
         .package(url: "https://github.com/mac-cain13/R.swift.git", exact: "7.4.0"),
         .package(url: "https://github.com/realm/SwiftLint", exact: "0.53.0"),
     ],
@@ -26,6 +27,7 @@ let package = Package(
         .target(
             name: "SharedUI",
             dependencies: [
+                .product(name: "Core", package: "Core"),
                 .product(name: "RswiftLibrary", package: "R.swift")
             ],
             resources: [
