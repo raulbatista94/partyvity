@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  HostingController.swift
 //  
 //
 //  Created by Raul Batista on 02.12.2023.
@@ -30,17 +30,5 @@ public final class HostingController<Content: View>: UIHostingController<Content
     override public func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         view.setNeedsUpdateConstraints()
-    }
-}
-
-struct WithBackgroundImage: ViewModifier {
-    func body(content: Content) -> some View {
-        ZStack {
-            Image(.background)
-                .resizable()
-                .ignoresSafeArea()
-
-            content
-        }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  View+Convenience.swift
 //  
 //
 //  Created by Raul Batista on 15.12.2023.
