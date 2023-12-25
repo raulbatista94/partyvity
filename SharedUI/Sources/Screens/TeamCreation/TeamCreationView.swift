@@ -40,28 +40,12 @@ struct TeamCreationView: View {
     let nameChanged: (Team, String) -> Void
     var body: some View {
         VStack {
-            ForEach(teams) { team in
-                VStack(spacing: 10) {
-                    TeamInputCellContainer(
-                        viewModel: .init(team: team),
-                        eventHandler: { cellEvent in
-                            switch cellEvent {
-                            case .avatarTapped(let team):
-                                didTapAvatar(team)
-                            case .finished(let team):
-                                didFinishEditign(team)
-                            case .nameChanged(let name):
-                                nameChanged(team, name)
-                            }
-                        }
-                    )
-                }
-            }
+            createTeamsView()
 
-            Spacer(value: 150)
+            SwiftUI.Spacer()
 
             Text("Amount of teams: \(teamsCount)")
-                .font(.titleXLarge)
+                .font(.headlineMedium)
                 .foregroundStyle(Color.white)
 
             TeamCreationSlider(
@@ -70,6 +54,7 @@ struct TeamCreationView: View {
                 trackColor: .textInputInactive,
                 progressColor: .textInputActive
             )
+            .frame(maxHeight: 80)
         }
         .padding(.horizontal, 16)
         .modifier(WithBackgroundImage())
@@ -90,6 +75,27 @@ struct TeamCreationView: View {
             default:
                 print("❌ Invalid team size")
             }
+        }
+    }
+}
+
+private extension TeamCreationView {
+    @MainActor
+    func createTeamsView() -> some View {
+        ForEach(teams) { team in
+            TeamInputCellContainer(
+                viewModel: .init(team: team),
+                eventHandler: { cellEvent in
+                    switch cellEvent {
+                    case .avatarTapped(let team):
+                        didTapAvatar(team)
+                    case .finished(let team):
+                        didFinishEditign(team)
+                    case .nameChanged(let name):
+                        nameChanged(team, name)
+                    }
+                }
+            )
         }
     }
 }
