@@ -4,6 +4,9 @@
     "" : {
 
     },
+    "Amount of teams: %lld" : {
+
+    },
     "continue" : {
       "comment" : "Common word \"continue\"",
       "extractionState" : "manual",

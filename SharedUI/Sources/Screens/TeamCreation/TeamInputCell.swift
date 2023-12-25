@@ -1,5 +1,5 @@
 //
-//  SwiftUIView.swift
+//  TeamInputCellViewModel.swift
 //  
 //
 //  Created by Raul Batista on 22.12.2023.
@@ -7,33 +7,40 @@
 
 import SwiftUI
 import Core
-import Combine
 
 @MainActor
 final class TeamInputCellViewModel: ObservableObject {
     @Published var team: Team
+    @Published var teamName: String
 
     init(team: Team) {
         self.team = team
+        self.teamName = team.teamName
     }
 }
 
 struct TeamInputCellContainer: View {
+    enum TeamCellEvent {
+        case avatarTapped(Team)
+        case nameChanged(String)
+        case finished(Team)
+    }
     @ObservedObject var viewModel: TeamInputCellViewModel
-
-    let avatarTapped: (Team) -> Void
-    let onFinishedEditing: () -> Void
+    let eventHandler: (TeamCellEvent) -> Void
     var body: some View {
         TeamInputCell(
             avatar: viewModel.team.avatarId,
-            teamName: $viewModel.team.teamName,
+            teamName: $viewModel.teamName,
             avatarTapped: {
-                avatarTapped(viewModel.team)
-            }, 
+                eventHandler(.avatarTapped(viewModel.team))
+            },
             finishedEditing: {
-                onFinishedEditing()
+                eventHandler(.finished(viewModel.team))
             }
         )
+        .onChange(of: viewModel.teamName) { name in
+            eventHandler(.nameChanged(name))
+        }
     }
 }
 
