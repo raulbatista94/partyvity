@@ -23,9 +23,7 @@ public struct TeamCreationViewContainer: View {
             teams: $viewModel.teams,
             teamsCount: $viewModel.teamSize,
             didFinishEditign: { _ in },
-            didTapAvatar: { eventHandler?.handle(event: .avatarTapped($0)) },
-            nameChanged: { team, name in
-                viewModel.updateTeam(team: team, name: name) }
+            didTapAvatar: { eventHandler?.handle(event: .avatarTapped($0)) }
         )
     }
 }
@@ -37,7 +35,6 @@ struct TeamCreationView: View {
 
     let didFinishEditign: (Team) -> Void
     let didTapAvatar: (Team) -> Void
-    let nameChanged: (Team, String) -> Void
     var body: some View {
         VStack {
             createTeamsView()
@@ -91,8 +88,6 @@ private extension TeamCreationView {
                         didTapAvatar(team)
                     case .finished(let team):
                         didFinishEditign(team)
-                    case .nameChanged(let name):
-                        nameChanged(team, name)
                     }
                 }
             )
@@ -110,7 +105,6 @@ private extension TeamCreationView {
         ]),
         teamsCount: .constant(2),
         didFinishEditign: { _ in },
-        didTapAvatar: { _ in },
-        nameChanged: { _, _ in }
+        didTapAvatar: { _ in }
     )
 }

@@ -11,18 +11,15 @@ import Core
 @MainActor
 final class TeamInputCellViewModel: ObservableObject {
     @Published var team: Team
-    @Published var teamName: String
 
     init(team: Team) {
         self.team = team
-        self.teamName = team.teamName
     }
 }
 
 struct TeamInputCellContainer: View {
     enum TeamCellEvent {
         case avatarTapped(Team)
-        case nameChanged(String)
         case finished(Team)
     }
     @ObservedObject var viewModel: TeamInputCellViewModel
@@ -30,7 +27,7 @@ struct TeamInputCellContainer: View {
     var body: some View {
         TeamInputCell(
             avatar: viewModel.team.avatarId,
-            teamName: $viewModel.teamName,
+            teamName: $viewModel.team.teamName,
             avatarTapped: {
                 eventHandler(.avatarTapped(viewModel.team))
             },
@@ -38,9 +35,6 @@ struct TeamInputCellContainer: View {
                 eventHandler(.finished(viewModel.team))
             }
         )
-        .onChange(of: viewModel.teamName) { name in
-            eventHandler(.nameChanged(name))
-        }
     }
 }
 
