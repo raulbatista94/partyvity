@@ -26,4 +26,17 @@ extension ScreenFactory {
             return initialScreen
         }
     }
+
+    @MainActor
+    enum TeamCreation {
+        static func makeTeamCreationView(container: Assembler, eventHandler: TeamCreationEventHandling) -> UIViewController {
+            let controller = HostingController(
+                rootView: TeamCreationViewContainer(
+                    viewModel: container.resolver.resolve(TeamCreationViewModel.self)!,
+                    eventHandler: eventHandler
+                )
+            )
+            return controller
+        }
+    }
 }

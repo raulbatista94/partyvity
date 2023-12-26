@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Image+AppImages.swift
 //  
 //
 //  Created by Raul Batista on 02.12.2023.

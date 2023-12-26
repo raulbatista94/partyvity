@@ -15,8 +15,10 @@ final class MainMenuCoordinator {
     let navigationController = UINavigationController()
     var childCoordinators = [Coordinator]()
     let container: Assembler
-    
-    init(container: Assembler) {
+    let window: UIWindow
+
+    init(window: UIWindow, container: Assembler) {
+        self.window = window
         self.container = container
     }
 }
@@ -30,13 +32,21 @@ extension MainMenuCoordinator: NavigationControllerCoordinator {
             )
         ]
     }
+
+    func openNewGame() {
+        setRootCoordinator(
+            CoordinatorsFactory
+                .makeGameCoordinator(container: container)
+        )
+    }
 }
+extension MainMenuCoordinator: SceneCoordinating { }
 
 extension MainMenuCoordinator: MainMenuEventHandling {
     func handle(event: MainMenuEvent) {
         switch event {
         case .newGameButtonTapped:
-            print("New game tapped")
+            openNewGame()
         case .continueButtonTapped:
             print("Continue tapped")
         case .previousGamesButtonTapped:

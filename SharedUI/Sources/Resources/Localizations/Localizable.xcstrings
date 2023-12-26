@@ -1,6 +1,12 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
+    "Amount of teams: %lld" : {
+
+    },
     "continue" : {
       "comment" : "Common word \"continue\"",
       "extractionState" : "manual",
@@ -36,6 +42,9 @@
           }
         }
       }
+    },
+    "Team name" : {
+
     }
   },
   "version" : "1.0"

@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  MainMenuEventHandling.swift
 //  
 //
 //  Created by Raul Batista on 17.12.2023.
@@ -16,5 +16,3 @@ public enum MainMenuEvent {
 public protocol MainMenuEventHandling: AnyObject {
     func handle(event: MainMenuEvent)
 }
-
-
