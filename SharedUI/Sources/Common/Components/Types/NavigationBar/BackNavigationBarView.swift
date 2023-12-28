@@ -1,33 +1,17 @@
 //
-//  SwiftUIView.swift
+//  BackNavigationBarView.swift
+//  
 //
-//
-//  Created by Raul Batista on 27.12.2023.
+//  Created by Raul Batista on 28.12.2023.
 //
 
 import SwiftUI
 
-struct CustomNavigationBar: View {
-    private let title: String
-    private let action: () -> Void
-    
-    init(title: String, action: @escaping () -> Void) {
-        self.title = title
-        self.action = action
-    }
-
+struct BackNavigationBarView: View {
+    let title: String
+    let action: () -> Void
     var body: some View {
         ZStack {
-            HeaderBackgroundShape()
-                .fill(
-                    LinearGradient(
-                        colors: [.gradientPurpleLight, .gradientPurpleDark],
-                        startPoint: .top,
-                        endPoint: .bottom)
-                )
-                .shadow(color: .black, radius: 20, x: 0, y: 10)
-                .ignoresSafeArea(edges: .top)
-
             Text(title)
                 .font(.titleMedium)
                 .foregroundStyle(Color.white)
@@ -43,7 +27,7 @@ struct CustomNavigationBar: View {
                             Image(systemName: "chevron.left")
                                 .foregroundStyle(Color.white)
                                 .padding([.vertical, .leading], 8)
-                            
+
                             Text("Back")
                                 .font(.headlineSmall)
                                 .foregroundStyle(Color.white)
@@ -61,9 +45,4 @@ struct CustomNavigationBar: View {
             .padding(.bottom, 16)
         }
     }
-}
-
-#Preview {
-    CustomNavigationBar(title: "Teams", action: {})
-        .frame(height: 104)
 }

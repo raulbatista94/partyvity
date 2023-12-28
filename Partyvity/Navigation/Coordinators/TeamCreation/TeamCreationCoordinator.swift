@@ -13,21 +13,28 @@ import SharedUI
 @MainActor
 final class TeamCreationCoordinator: NavigationControllerCoordinator {
     
-    let navigationController = UINavigationController()
+    let navigationController: UINavigationController
     var childCoordinators = [Coordinator]()
     let container: Assembler
+    let backAction: (Coordinator) -> Void
 
-    init(container: Assembler) {
+    init(
+        container: Assembler,
+        navigationController: UINavigationController? = nil,
+        backAction: @escaping (Coordinator) -> Void
+    ) {
         self.container = container
+        self.navigationController = navigationController ?? UINavigationController()
+        self.backAction = backAction
     }
 
     func start() { 
-        navigationController.viewControllers = [
-            ScreenFactory.TeamCreation.makeTeamCreationView(
-                container: container,
-                eventHandler: self
-            )
-        ]
+        let viewController = ScreenFactory.TeamCreation.makeTeamCreationView(
+            container: container,
+            eventHandler: self
+        )
+
+        navigationController.pushViewController(viewController, animated: true)
     }
 }
 
@@ -43,7 +50,9 @@ extension TeamCreationCoordinator: TeamCreationEventHandling {
                     self?.navigationController.popViewController(animated: true)
                 }))
         case .finished:
-            print("Finished")
+            navigationController.topViewController?.dismiss(animated: true)
+        case .back:
+            navigationController.popViewController(animated: true)
         }
     }
 }

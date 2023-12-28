@@ -27,6 +27,13 @@ public final class TeamCreationViewModel: ObservableObject {
             }
         }
     }
+
+    @Published var teamTableSize: CGFloat = 0 {
+        didSet {
+            print("teamTableSize changed to \(teamTableSize)")
+        }
+    }
+
     public nonisolated init() {}
 
     func addTeam() {

@@ -11,6 +11,7 @@ import Core
 public enum TeamCreationEvent {
     case avatarTapped(Team)
     case finished
+    case back
 }
 
 public protocol TeamCreationEventHandling: AnyObject {

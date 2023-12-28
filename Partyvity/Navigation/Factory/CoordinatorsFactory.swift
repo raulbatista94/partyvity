@@ -24,11 +24,16 @@ enum CoordinatorsFactory {
         )
     }
     
-    static func makeGameCoordinator(
-        container: Assembler
+    static func makeTeamCreationCoordinator(
+        container: Assembler,
+        navigationController: UINavigationController?,
+        backAction: @escaping (Coordinator) -> Void
     ) -> ViewControllerCoordinator {
-        // TODO: Replace this with the Game coordinator later
-        TeamCreationCoordinator(container: container)
+        TeamCreationCoordinator(
+            container: container,
+            navigationController: navigationController,
+            backAction: backAction
+        )
     }
 }
 

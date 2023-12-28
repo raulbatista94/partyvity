@@ -34,10 +34,16 @@ extension MainMenuCoordinator: NavigationControllerCoordinator {
     }
 
     func openNewGame() {
-        setRootCoordinator(
-            CoordinatorsFactory
-                .makeGameCoordinator(container: container)
+        let coordinator = CoordinatorsFactory
+            .makeTeamCreationCoordinator(
+                container: container, 
+                navigationController: navigationController,
+                backAction: { [weak self] coordinator in
+                    self?.release(coordinator: coordinator)
+            }
         )
+
+        startChildCoordinator(coordinator)
     }
 }
 extension MainMenuCoordinator: SceneCoordinating { }
