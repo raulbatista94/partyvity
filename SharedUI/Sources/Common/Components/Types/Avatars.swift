@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import UIKit
 
-enum Avatar: CaseIterable {
+public enum Avatar: CaseIterable {
     case avatarAlert
     case avatarAlien
     case avatarAngry
@@ -35,7 +35,7 @@ enum Avatar: CaseIterable {
     case avatarUnicorn
     case avatarWink
 
-    var image: Image {
+    public var image: Image {
         switch self {
         case .avatarAlert:
             .avatarAlert
@@ -88,7 +88,7 @@ enum Avatar: CaseIterable {
         }
     }
 
-    var uiImage: UIImage {
+    public var uiImage: UIImage {
         switch self {
         case .avatarAlert:
             .avatarAlert

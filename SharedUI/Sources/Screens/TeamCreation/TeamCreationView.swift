@@ -1,6 +1,6 @@
 //
 //  TeamCreationView.swift
-//  
+//
 //
 //  Created by Raul Batista on 19.12.2023.
 //
@@ -23,7 +23,8 @@ public struct TeamCreationViewContainer: View {
             teams: $viewModel.teams,
             teamsCount: $viewModel.teamSize,
             didFinishEditign: { _ in },
-            didTapAvatar: { eventHandler?.handle(event: .avatarTapped($0)) }
+            didTapAvatar: { eventHandler?.handle(event: .avatarTapped($0))
+            }
         )
     }
 }
@@ -32,12 +33,33 @@ struct TeamCreationView: View {
     @Binding var teams: [Team]
     @Binding var teamsCount: Int
     @State private var thumbImage: Image = .avatarGeek
+    @State private var teamTableSize: CGFloat = 130
 
     let didFinishEditign: (Team) -> Void
     let didTapAvatar: (Team) -> Void
     var body: some View {
         VStack {
-            createTeamsView()
+            ZStack {
+                HeaderBackgroundShape()
+                    .fill(
+                        LinearGradient(
+                            colors: [.gradientPurpleLight, .gradientPurpleDark],
+                            startPoint: .top,
+                            endPoint: .bottom)
+                    )
+                    .shadow(color: .black, radius: 20, x: 0, y: 10)
+                    .ignoresSafeArea(edges: .top)
+                    .frame(height: teamTableSize)
+
+                VStack {
+                    createTeamsView()
+                }
+                .readSize { newSize in
+                    self.teamTableSize = newSize.height + 37
+                }
+                .padding([.bottom, .horizontal], 16)
+
+            }
 
             SwiftUI.Spacer()
 
@@ -52,8 +74,8 @@ struct TeamCreationView: View {
                 progressColor: .textInputActive
             )
             .frame(maxHeight: 80)
+            .padding(.horizontal, 16)
         }
-        .padding(.horizontal, 16)
         .modifier(WithBackgroundImage())
         .onChange(of: teamsCount) { teamSize in
             switch teamSize {

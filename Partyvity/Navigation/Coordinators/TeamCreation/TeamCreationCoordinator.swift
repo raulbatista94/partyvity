@@ -35,7 +35,13 @@ extension TeamCreationCoordinator: TeamCreationEventHandling {
     func handle(event: TeamCreationEvent) {
         switch event {
         case .avatarTapped(let team):
-            print("avatar tapped")
+            show(ScreenFactory.TeamCreation.makeAvatarSelectionView(
+                avatarSelected: { avatar in
+
+            }, 
+                backAction: { [weak self] in
+                    self?.navigationController.popViewController(animated: true)
+                }))
         case .finished:
             print("Finished")
         }

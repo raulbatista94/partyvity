@@ -7,6 +7,9 @@
     "Amount of teams: %lld" : {
 
     },
+    "Back" : {
+
+    },
     "continue" : {
       "comment" : "Common word \"continue\"",
       "extractionState" : "manual",
@@ -44,7 +47,36 @@
       }
     },
     "Team name" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Team name"
+          }
+        }
+      }
+    },
+    "teamAmount" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amount of teams: %lld"
+          }
+        }
+      }
+    },
+    "teamName" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Team name"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"
