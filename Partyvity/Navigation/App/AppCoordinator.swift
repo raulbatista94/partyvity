@@ -35,6 +35,7 @@ extension AppCoordinator {
     func assembleDependencyInjectionContainer() {
         container.apply(assemblies: [
             ViewModelRegistration(),
+            InfrastructureRegistration()
             // TODO: Add remainig
         ])
     }

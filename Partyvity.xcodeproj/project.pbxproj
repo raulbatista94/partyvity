@@ -35,6 +35,7 @@
 		20CF606A2B2CDFDC0032573A /* MainMenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CF60692B2CDFDC0032573A /* MainMenuCoordinator.swift */; };
 		20CF606C2B3038AD0032573A /* ViewModelRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CF606B2B3038AD0032573A /* ViewModelRegistration.swift */; };
 		20D9D3672B2A2470006F29E9 /* ScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D9D3662B2A2470006F29E9 /* ScreenFactory.swift */; };
+		20E2394B2B3EFCB30049D6BC /* InfrastructureRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E2394A2B3EFCB30049D6BC /* InfrastructureRegistration.swift */; };
 		20EAA7542B22534F001A31D7 /* CoordinatorsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EAA7532B22534F001A31D7 /* CoordinatorsFactory.swift */; };
 		20EAA7572B2963EE001A31D7 /* NavigationControllerCoordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EAA7562B2963EE001A31D7 /* NavigationControllerCoordinating.swift */; };
 		20EAA75A2B29647B001A31D7 /* ViewControllerCoordinating+Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EAA7592B29647B001A31D7 /* ViewControllerCoordinating+Show.swift */; };
@@ -64,6 +65,7 @@
 		20CF606B2B3038AD0032573A /* ViewModelRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelRegistration.swift; sourceTree = "<group>"; };
 		20D39D142B13400A00C6288E /* Core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Core; sourceTree = "<group>"; };
 		20D9D3662B2A2470006F29E9 /* ScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenFactory.swift; sourceTree = "<group>"; };
+		20E2394A2B3EFCB30049D6BC /* InfrastructureRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfrastructureRegistration.swift; sourceTree = "<group>"; };
 		20EAA7532B22534F001A31D7 /* CoordinatorsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorsFactory.swift; sourceTree = "<group>"; };
 		20EAA7562B2963EE001A31D7 /* NavigationControllerCoordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerCoordinating.swift; sourceTree = "<group>"; };
 		20EAA7592B29647B001A31D7 /* ViewControllerCoordinating+Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewControllerCoordinating+Show.swift"; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 			children = (
 				200CB8A12B1BC78D006A7DD7 /* ManagerContainer.swift */,
 				20CF606B2B3038AD0032573A /* ViewModelRegistration.swift */,
+				20E2394A2B3EFCB30049D6BC /* InfrastructureRegistration.swift */,
 			);
 			path = DependencyInjection;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20E2394B2B3EFCB30049D6BC /* InfrastructureRegistration.swift in Sources */,
 				207ED63F2B1CD1BD00273139 /* AppCoordinator.swift in Sources */,
 				200CB8A62B1BC855006A7DD7 /* Coordinator.swift in Sources */,
 				200CB8B22B1BCD96006A7DD7 /* ViewControllerCoordinating.swift in Sources */,
