@@ -40,15 +40,14 @@ public struct TeamCreationViewContainer: View {
                     didTapAvatar: { team in
                         eventHandler?.handle(
                             event: .avatarTapped { selectedAvatar in
-                                viewModel.updateTeamsAvatar(
-                                    team: team,
-                                    avatar: selectedAvatar
-                                )
+                                var selectedTeam = team
+                                selectedTeam.avatarId = selectedAvatar.rawValue
+                                viewModel.updateTeam(team: selectedTeam)
                             }
                         )
                     },
                     nameChanged: { updatedTeam in
-                        viewModel.updateTeam(team: updatedTeam, name: updatedTeam.teamName)
+                        viewModel.updateTeam(team: updatedTeam)
                     },
                     startTapped: {
                         eventHandler?.handle(event: .startGame)
@@ -78,7 +77,6 @@ struct TeamCreationView: View {
                 createTeamsView()
             }
             .readSize { newSize in
-                print("New height is \(newSize.height)")
                 teamTableSize = newSize.height + 64 + 38 // + cell height + spacing under the last item
             }
             .padding(.horizontal, 16)

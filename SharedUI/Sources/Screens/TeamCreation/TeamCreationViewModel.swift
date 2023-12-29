@@ -52,19 +52,13 @@ public final class TeamCreationViewModel: ObservableObject {
         addTeam()
     }
 
-    func updateTeam(team: Team, name: String) {
+    func updateTeam(team: Team) {
         guard let index = teams.firstIndex(where: { $0.id == team.id }) else { return }
-        teams[index].teamName = name
-//        if name == "" && teams.last?.teamName == "" && teams.count > 1 {
-//            teams.removeLast()
-//            return
-//        }
-//
-//        addTeamIfNeeded()
+        teams[index] = team
     }
 
-    func updateTeamsAvatar(team: Team, avatar: Avatar) {
-        guard let index = teams.firstIndex(where: { $0.id == team.id }) else { return }
-        teams[index].avatarId = avatar.rawValue
-    }
+//    func updateTeamsAvatar(team: Team, avatar: Avatar) {
+//        guard let index = teams.firstIndex(where: { $0.id == team.id }) else { return }
+//        teams[index].avatarId = avatar.rawValue
+//    }
 }

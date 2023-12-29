@@ -11,6 +11,7 @@ public struct Team: Identifiable, Hashable, Sendable {
     public let id: String
     public var teamName: String
     public var avatarId: String?
+    public var score: Int = 0
 
     public init(
         id: String = UUID().uuidString,
@@ -20,5 +21,11 @@ public struct Team: Identifiable, Hashable, Sendable {
         self.id = id
         self.teamName = teamName
         self.avatarId = avatarId
+    }
+
+    init(from managedObject: ManagedTeam) {
+        self.id = managedObject.id
+        self.teamName = managedObject.teamName
+        self.avatarId = managedObject.avatarId
     }
 }

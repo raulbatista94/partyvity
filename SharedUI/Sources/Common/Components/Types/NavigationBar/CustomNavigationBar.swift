@@ -10,7 +10,7 @@ import SwiftUI
 struct CustomNavigationBar: View {
     private let title: String
     private let action: () -> Void
-    
+
     init(title: String, action: @escaping () -> Void) {
         self.title = title
         self.action = action

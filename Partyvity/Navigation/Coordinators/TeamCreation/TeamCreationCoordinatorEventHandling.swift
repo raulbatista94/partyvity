@@ -9,6 +9,7 @@ import Foundation
 
 enum TeamCreationCoordinatorEvent {
     case back
+    case startGame
 }
 
 protocol TeamCreationCoordinatorEventHandling: AnyObject {

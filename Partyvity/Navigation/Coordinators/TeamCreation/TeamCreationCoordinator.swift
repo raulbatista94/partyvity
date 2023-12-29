@@ -51,7 +51,7 @@ extension TeamCreationCoordinator: TeamCreationEventHandling {
                     self?.navigationController.popViewController(animated: true)
                 }))
         case .startGame:
-            navigationController.topViewController?.dismiss(animated: true)
+            eventHandler?.handle(event: .startGame, from: self)
         case .back:
             eventHandler?.handle(event: .back, from: self)
         }
