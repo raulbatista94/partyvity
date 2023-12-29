@@ -18,6 +18,7 @@
 		200CB8B82B1BCFF9006A7DD7 /* SharedUI in Frameworks */ = {isa = PBXBuildFile; productRef = 200CB8B72B1BCFF9006A7DD7 /* SharedUI */; };
 		200CB8BB2B1BD0BC006A7DD7 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 200CB8BA2B1BD0BC006A7DD7 /* Swinject */; };
 		200CB8BD2B1BD0BC006A7DD7 /* Swinject-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 200CB8BC2B1BD0BC006A7DD7 /* Swinject-Dynamic */; };
+		205CD7702B3EAB27001649CF /* TeamCreationCoordinatorEventHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205CD76F2B3EAB27001649CF /* TeamCreationCoordinatorEventHandling.swift */; };
 		207ED6222B1CBF7600273139 /* InitialSceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207ED6212B1CBF7600273139 /* InitialSceneCoordinator.swift */; };
 		207ED6242B1CBFEF00273139 /* InitialSceneCoordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207ED6232B1CBFEF00273139 /* InitialSceneCoordinating.swift */; };
 		207ED6272B1CC14C00273139 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 207ED6262B1CC14C00273139 /* LaunchScreen.storyboard */; };
@@ -45,6 +46,7 @@
 		200CB8AD2B1BCD40006A7DD7 /* AppCoordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinating.swift; sourceTree = "<group>"; };
 		200CB8AF2B1BCD75006A7DD7 /* SceneCoordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinating.swift; sourceTree = "<group>"; };
 		200CB8B12B1BCD96006A7DD7 /* ViewControllerCoordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCoordinating.swift; sourceTree = "<group>"; };
+		205CD76F2B3EAB27001649CF /* TeamCreationCoordinatorEventHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCreationCoordinatorEventHandling.swift; sourceTree = "<group>"; };
 		207ED6212B1CBF7600273139 /* InitialSceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneCoordinator.swift; sourceTree = "<group>"; };
 		207ED6232B1CBFEF00273139 /* InitialSceneCoordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSceneCoordinating.swift; sourceTree = "<group>"; };
 		207ED6262B1CC14C00273139 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				20AA745C2B37861600200C24 /* TeamCreationCoordinator.swift */,
+				205CD76F2B3EAB27001649CF /* TeamCreationCoordinatorEventHandling.swift */,
 			);
 			path = TeamCreation;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 				200CB8A22B1BC78D006A7DD7 /* ManagerContainer.swift in Sources */,
 				207ED6392B1CC75900273139 /* SceneDelegate.swift in Sources */,
 				207ED6372B1CC71000273139 /* AppDelegate.swift in Sources */,
+				205CD7702B3EAB27001649CF /* TeamCreationCoordinatorEventHandling.swift in Sources */,
 				200CB8B02B1BCD75006A7DD7 /* SceneCoordinating.swift in Sources */,
 				20AA745D2B37861600200C24 /* TeamCreationCoordinator.swift in Sources */,
 				20D9D3672B2A2470006F29E9 /* ScreenFactory.swift in Sources */,

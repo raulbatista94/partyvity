@@ -4,9 +4,6 @@
     "" : {
 
     },
-    "Amount of teams: %lld" : {
-
-    },
     "Back" : {
 
     },
@@ -34,6 +31,9 @@
         }
       }
     },
+    "Number of teams: %lld" : {
+
+    },
     "previousGames" : {
       "comment" : "Title for games history button",
       "extractionState" : "manual",
@@ -45,6 +45,9 @@
           }
         }
       }
+    },
+    "Start" : {
+
     },
     "Team name" : {
       "localizations" : {

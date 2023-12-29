@@ -38,15 +38,23 @@ extension MainMenuCoordinator: NavigationControllerCoordinator {
             .makeTeamCreationCoordinator(
                 container: container, 
                 navigationController: navigationController,
-                backAction: { [weak self] coordinator in
-                    self?.release(coordinator: coordinator)
-            }
+                eventHanlder: self
         )
 
         startChildCoordinator(coordinator)
     }
 }
 extension MainMenuCoordinator: SceneCoordinating { }
+
+extension MainMenuCoordinator: TeamCreationCoordinatorEventHandling {
+    func handle(event: TeamCreationCoordinatorEvent, from childCoordinator: Coordinator) {
+        switch event {
+        case .back:
+            release(coordinator: childCoordinator)
+            navigationController.popViewController(animated: true)
+        }
+    }
+}
 
 extension MainMenuCoordinator: MainMenuEventHandling {
     func handle(event: MainMenuEvent) {

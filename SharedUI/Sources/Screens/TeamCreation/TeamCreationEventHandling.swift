@@ -9,8 +9,8 @@ import Foundation
 import Core
 
 public enum TeamCreationEvent {
-    case avatarTapped(Team)
-    case finished
+    case avatarTapped((Avatar) -> Void)
+    case startGame
     case back
 }
 

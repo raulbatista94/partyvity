@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import UIKit
 
-public enum Avatar: CaseIterable {
+public enum Avatar: String, CaseIterable {
     case avatarAlert
     case avatarAlien
     case avatarAngry

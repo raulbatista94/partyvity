@@ -35,8 +35,24 @@ public struct TeamCreationViewContainer: View {
                     teams: $viewModel.teams,
                     teamsCount: $viewModel.teamSize,
                     teamTableSize: $viewModel.teamTableSize,
+                    shouldShowStartButton: $viewModel.showStartButton,
                     didFinishEditign: { _ in },
-                    didTapAvatar: { eventHandler?.handle(event: .avatarTapped($0)) }
+                    didTapAvatar: { team in
+                        eventHandler?.handle(
+                            event: .avatarTapped { selectedAvatar in
+                                viewModel.updateTeamsAvatar(
+                                    team: team,
+                                    avatar: selectedAvatar
+                                )
+                            }
+                        )
+                    },
+                    nameChanged: { updatedTeam in
+                        viewModel.updateTeam(team: updatedTeam, name: updatedTeam.teamName)
+                    },
+                    startTapped: {
+                        eventHandler?.handle(event: .startGame)
+                    }
                 )
             }
         }
@@ -47,10 +63,14 @@ public struct TeamCreationViewContainer: View {
 struct TeamCreationView: View {
     @Binding var teams: [Team]
     @Binding var teamsCount: Int
-    @State private var thumbImage: Image = .avatarGeek
     @Binding var teamTableSize: CGFloat
+    @Binding var shouldShowStartButton: Bool
+    @State private var thumbImage: Image = .avatarGeek
+
     let didFinishEditign: (Team) -> Void
     let didTapAvatar: (Team) -> Void
+    let nameChanged: (Team) -> Void
+    let startTapped: () -> Void
 
     var body: some View {
         VStack {
@@ -65,18 +85,39 @@ struct TeamCreationView: View {
 
             SwiftUI.Spacer()
 
-            Text("Amount of teams: \(teamsCount)")
-                .font(.headlineMedium)
-                .foregroundStyle(Color.white)
+            ZStack {
+                Button(action: {
+                    startTapped()
+                }, label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 25)
+                            .fill(Color.carmineRed)
+                            .frame(height: 48)
 
-            TeamCreationSlider(
-                value: $teamsCount,
-                thumbImage: $thumbImage,
-                trackColor: .textInputInactive,
-                progressColor: .textInputActive
-            )
-            .frame(height: 80)
-            .padding(.horizontal, 16)
+                        Text("Start")
+                            .font(.headlineMedium)
+                            .foregroundStyle(Color.white)
+                    }
+                })
+                .padding(.horizontal, 16)
+                .opacity(shouldShowStartButton ? 1 : 0)
+
+                VStack {
+                    Text("Number of teams: \(teamsCount)")
+                        .font(.headlineSmall)
+                        .foregroundStyle(Color.white)
+
+                    TeamCreationSlider(
+                        value: $teamsCount,
+                        thumbImage: $thumbImage,
+                        trackColor: .textInputInactive,
+                        progressColor: .textInputActive
+                    )
+                    .frame(height: 80)
+                    .padding(.horizontal, 16)
+                }
+                .opacity(shouldShowStartButton ? 0 : 1)
+            }
         }
         .embedInScrollViewIfNeeded(
             axis: .vertical,
@@ -108,13 +149,15 @@ private extension TeamCreationView {
     func createTeamsView() -> some View {
         ForEach(teams) { team in
             TeamInputCellContainer(
-                viewModel: .init(team: team),
+                viewModel: TeamInputCellViewModel(team: team),
                 eventHandler: { cellEvent in
                     switch cellEvent {
                     case .avatarTapped(let team):
                         didTapAvatar(team)
                     case .finished(let team):
                         didFinishEditign(team)
+                    case .teamNameUpdated(let team):
+                        nameChanged(team)
                     }
                 }
             )
@@ -132,7 +175,10 @@ private extension TeamCreationView {
         ]),
         teamsCount: .constant(2),
         teamTableSize: .constant(100),
+        shouldShowStartButton: .constant(false),
         didFinishEditign: { _ in },
-        didTapAvatar: { _ in }
+        didTapAvatar: { _ in },
+        nameChanged: { _ in },
+        startTapped: {  }
     )
 }

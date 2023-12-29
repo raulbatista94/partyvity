@@ -11,7 +11,7 @@ import Core
 @MainActor
 final class TeamInputCellViewModel: ObservableObject {
     @Published var team: Team
-
+    
     init(team: Team) {
         self.team = team
     }
@@ -20,6 +20,7 @@ final class TeamInputCellViewModel: ObservableObject {
 struct TeamInputCellContainer: View {
     enum TeamCellEvent {
         case avatarTapped(Team)
+        case teamNameUpdated(Team)
         case finished(Team)
     }
     @ObservedObject var viewModel: TeamInputCellViewModel
@@ -35,6 +36,9 @@ struct TeamInputCellContainer: View {
                 eventHandler(.finished(viewModel.team))
             }
         )
+        .onChange(of: viewModel.team.teamName) { _ in
+            eventHandler(.teamNameUpdated(viewModel.team))
+        }
     }
 }
 
@@ -43,7 +47,7 @@ struct TeamInputCell: View {
     @Binding var teamName: String
     let avatarTapped: () -> Void
     let finishedEditing: () -> Void
-
+    
     var body: some View {
         HStack(spacing: 12) {
             AvatarView(avatarImage: Image(
@@ -53,7 +57,7 @@ struct TeamInputCell: View {
             .onTapGesture {
                 avatarTapped()
             }
-
+            
             InputFieldViewContainer(
                 text: $teamName,
                 didFinishEditing: finishedEditing

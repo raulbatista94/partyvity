@@ -16,16 +16,16 @@ final class TeamCreationCoordinator: NavigationControllerCoordinator {
     let navigationController: UINavigationController
     var childCoordinators = [Coordinator]()
     let container: Assembler
-    let backAction: (Coordinator) -> Void
+    private weak var eventHandler: TeamCreationCoordinatorEventHandling?
 
     init(
         container: Assembler,
         navigationController: UINavigationController? = nil,
-        backAction: @escaping (Coordinator) -> Void
+        eventHandler: TeamCreationCoordinatorEventHandling
     ) {
         self.container = container
         self.navigationController = navigationController ?? UINavigationController()
-        self.backAction = backAction
+        self.eventHandler = eventHandler
     }
 
     func start() { 
@@ -41,18 +41,19 @@ final class TeamCreationCoordinator: NavigationControllerCoordinator {
 extension TeamCreationCoordinator: TeamCreationEventHandling {
     func handle(event: TeamCreationEvent) {
         switch event {
-        case .avatarTapped(let team):
+        case .avatarTapped(let avatarSelected):
             show(ScreenFactory.TeamCreation.makeAvatarSelectionView(
-                avatarSelected: { avatar in
-
-            }, 
+                avatarSelected: { [weak self] avatar in
+                    avatarSelected(avatar)
+                    self?.navigationController.popViewController(animated: true)
+                },
                 backAction: { [weak self] in
                     self?.navigationController.popViewController(animated: true)
                 }))
-        case .finished:
+        case .startGame:
             navigationController.topViewController?.dismiss(animated: true)
         case .back:
-            navigationController.popViewController(animated: true)
+            eventHandler?.handle(event: .back, from: self)
         }
     }
 }

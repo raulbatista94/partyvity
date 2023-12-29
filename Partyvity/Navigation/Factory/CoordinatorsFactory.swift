@@ -27,12 +27,12 @@ enum CoordinatorsFactory {
     static func makeTeamCreationCoordinator(
         container: Assembler,
         navigationController: UINavigationController?,
-        backAction: @escaping (Coordinator) -> Void
+        eventHanlder: TeamCreationCoordinatorEventHandling
     ) -> ViewControllerCoordinator {
         TeamCreationCoordinator(
             container: container,
             navigationController: navigationController,
-            backAction: backAction
+            eventHandler: eventHanlder
         )
     }
 }
