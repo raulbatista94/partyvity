@@ -1,6 +1,6 @@
 //
 //  TeamCreationSlider.swift
-//  
+//
 //
 //  Created by Raul Batista on 25.12.2023.
 //
@@ -49,7 +49,7 @@ struct TeamCreationSlider: View {
     ) {
         let thumbPosition = gesture.location.x
         let initialThumbValue = geometry.size.width / 6
-        
+
         // Clamp positions to min and max
         guard
             thumbPosition >= initialThumbValue,
@@ -57,7 +57,7 @@ struct TeamCreationSlider: View {
         else {
             return
         }
-        
+
         /// Get the position of the thumb compared to the position in the whole bar,
         /// since we want whole number we need to round them. This formula will give us rounded
         /// step results 1, 2, 3 etc. up to the `maxTeamMember` count.
@@ -76,7 +76,7 @@ private enum FileConstants {
 #Preview {
     TeamCreationSlider(
         value: .constant(1),
-        thumbImage: .constant(.avatarAlert), 
+        thumbImage: .constant(.avatarAlert),
         trackColor: .textInputInactive,
         progressColor: .textInputActive
     )

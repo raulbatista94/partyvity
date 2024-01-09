@@ -11,7 +11,11 @@ import Core
 
 @MainActor
 public final class TeamCreationViewModel: ObservableObject {
-    @Published var teams = [Team()]
+    @Published var teams = [Team()] {
+        didSet {
+            showStartButton = teams.allSatisfy { !$0.teamName.isEmpty && ($0.avatarId != nil) } && teams.count > 1
+        }
+    }
     @Published var teamSize: Int = 1 {
         didSet {
             let difference = teamSize - teams.count
@@ -27,6 +31,10 @@ public final class TeamCreationViewModel: ObservableObject {
             }
         }
     }
+
+    @Published var teamTableSize: CGFloat = 0
+    @Published var showStartButton: Bool = false
+
     public nonisolated init() {}
 
     func addTeam() {
@@ -44,14 +52,13 @@ public final class TeamCreationViewModel: ObservableObject {
         addTeam()
     }
 
-    func updateTeam(team: Team, name: String) {
+    func updateTeam(team: Team) {
         guard let index = teams.firstIndex(where: { $0.id == team.id }) else { return }
-        teams[index].teamName = name
-        if name == "" && teams.last?.teamName == "" && teams.count > 1 {
-            teams.removeLast()
-            return
-        }
-
-        addTeamIfNeeded()
+        teams[index] = team
     }
+
+//    func updateTeamsAvatar(team: Team, avatar: Avatar) {
+//        guard let index = teams.firstIndex(where: { $0.id == team.id }) else { return }
+//        teams[index].avatarId = avatar.rawValue
+//    }
 }

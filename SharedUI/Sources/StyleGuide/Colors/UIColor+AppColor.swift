@@ -18,4 +18,6 @@ public extension UIColor {
     static let yellowBorder = UIColor(resource: .yellowBorder)
     static let textInputInactive = UIColor(resource: .textInputInactive)
     static let textInputActive = UIColor(resource: .textInputActive)
+    static let gradientPurpleLight = UIColor(resource: .gradientPurpleLight)
+    static let gradientPurpleDark = UIColor(resource: .gradientPurpleDark)
 }

@@ -13,31 +13,47 @@ import SharedUI
 @MainActor
 final class TeamCreationCoordinator: NavigationControllerCoordinator {
     
-    let navigationController = UINavigationController()
+    let navigationController: UINavigationController
     var childCoordinators = [Coordinator]()
     let container: Assembler
+    private weak var eventHandler: TeamCreationCoordinatorEventHandling?
 
-    init(container: Assembler) {
+    init(
+        container: Assembler,
+        navigationController: UINavigationController? = nil,
+        eventHandler: TeamCreationCoordinatorEventHandling
+    ) {
         self.container = container
+        self.navigationController = navigationController ?? UINavigationController()
+        self.eventHandler = eventHandler
     }
 
     func start() { 
-        navigationController.viewControllers = [
-            ScreenFactory.TeamCreation.makeTeamCreationView(
-                container: container,
-                eventHandler: self
-            )
-        ]
+        let viewController = ScreenFactory.TeamCreation.makeTeamCreationView(
+            container: container,
+            eventHandler: self
+        )
+
+        navigationController.pushViewController(viewController, animated: true)
     }
 }
 
 extension TeamCreationCoordinator: TeamCreationEventHandling {
     func handle(event: TeamCreationEvent) {
         switch event {
-        case .avatarTapped(let team):
-            print("avatar tapped")
-        case .finished:
-            print("Finished")
+        case .avatarTapped(let avatarSelected):
+            show(ScreenFactory.TeamCreation.makeAvatarSelectionView(
+                avatarSelected: { [weak self] avatar in
+                    avatarSelected(avatar)
+                    self?.navigationController.popViewController(animated: true)
+                },
+                backAction: { [weak self] in
+                    self?.navigationController.popViewController(animated: true)
+                }))
+        case .startGame:
+            eventHandler?.handle(event: .startGame, from: self)
+        case .back:
+            eventHandler?.handle(event: .back, from: self)
         }
     }
 }

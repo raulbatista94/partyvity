@@ -34,13 +34,34 @@ extension MainMenuCoordinator: NavigationControllerCoordinator {
     }
 
     func openNewGame() {
-        setRootCoordinator(
-            CoordinatorsFactory
-                .makeGameCoordinator(container: container)
+        let coordinator = CoordinatorsFactory
+            .makeTeamCreationCoordinator(
+                container: container, 
+                navigationController: navigationController,
+                eventHanlder: self
         )
+
+        startChildCoordinator(coordinator)
     }
 }
 extension MainMenuCoordinator: SceneCoordinating { }
+
+extension MainMenuCoordinator: TeamCreationCoordinatorEventHandling {
+    func handle(event: TeamCreationCoordinatorEvent, from childCoordinator: Coordinator) {
+        switch event {
+        case .back:
+            release(coordinator: childCoordinator)
+            navigationController.popViewController(animated: true)
+        case .startGame:
+            release(coordinator: childCoordinator)
+            // Set the game VC
+            navigationController.setViewControllers(
+                [UIViewController()],
+                animated: true
+            )
+        }
+    }
+}
 
 extension MainMenuCoordinator: MainMenuEventHandling {
     func handle(event: MainMenuEvent) {

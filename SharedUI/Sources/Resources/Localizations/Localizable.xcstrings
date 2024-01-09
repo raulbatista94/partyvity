@@ -4,7 +4,7 @@
     "" : {
 
     },
-    "Amount of teams: %lld" : {
+    "Back" : {
 
     },
     "continue" : {
@@ -31,6 +31,9 @@
         }
       }
     },
+    "Number of teams: %lld" : {
+
+    },
     "previousGames" : {
       "comment" : "Title for games history button",
       "extractionState" : "manual",
@@ -43,7 +46,42 @@
         }
       }
     },
+    "Start" : {
+
+    },
     "Team name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Team name"
+          }
+        }
+      }
+    },
+    "teamAmount" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amount of teams: %lld"
+          }
+        }
+      }
+    },
+    "teamName" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Team name"
+          }
+        }
+      }
+    },
+    "Teams" : {
 
     }
   },

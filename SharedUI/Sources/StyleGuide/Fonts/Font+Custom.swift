@@ -16,6 +16,7 @@ public extension Font {
     static let bodyLarge = makeFont(name: R.font.nunitoSemiBold.name, size: 36, relativeTo: .body)
     static let bodyMedium = makeFont(name: R.font.nunitoSemiBold.name, size: 32, relativeTo: .body)
     static let bodySmall = makeFont(name: R.font.nunitoSemiBold.name, size: 22, relativeTo: .body)
+    static let headlineSmall = makeFont(name: R.font.nunitoBold.name, size: 18, relativeTo: .headline)
 }
 
 private extension Font {

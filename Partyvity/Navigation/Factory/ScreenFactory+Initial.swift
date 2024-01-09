@@ -11,6 +11,7 @@ import SharedUI
 import Swinject
 
 extension ScreenFactory {
+    // MARK: - Intro screen
     @MainActor
     enum Initial {
         static func makeMainMenuView(container: Assembler, eventHandler: MainMenuEventHandling) -> UIViewController {
@@ -27,6 +28,7 @@ extension ScreenFactory {
         }
     }
 
+    // MARK: - Team creation
     @MainActor
     enum TeamCreation {
         static func makeTeamCreationView(container: Assembler, eventHandler: TeamCreationEventHandling) -> UIViewController {
@@ -37,6 +39,17 @@ extension ScreenFactory {
                 )
             )
             return controller
+        }
+
+        static func makeAvatarSelectionView(
+            avatarSelected: @escaping (Avatar) -> Void,
+            backAction: @escaping () -> Void
+        ) -> UIViewController {
+            let rootView = AvatarSelectionView(
+                avatarSelected: avatarSelected,
+                backAction: backAction
+            )
+            return HostingController(rootView: rootView)
         }
     }
 }

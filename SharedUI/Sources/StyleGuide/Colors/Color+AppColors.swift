@@ -23,4 +23,6 @@ public extension Color {
     static let yellowBorder = R.color.yellowBorder.color
     static let textInputInactive = R.color.textInputInactive.color
     static let textInputActive = R.color.textInputActive.color
+    static let gradientPurpleLight = R.color.gradientPurpleLight.color
+    static let gradientPurpleDark = R.color.gradientPurpleDark.color
 }

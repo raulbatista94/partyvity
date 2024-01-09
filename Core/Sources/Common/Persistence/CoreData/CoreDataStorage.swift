@@ -8,7 +8,7 @@
 import Foundation
 @preconcurrency import CoreData
 
-public actor CoreDataStorage: Sendable {
+public final class CoreDataStorage: Sendable {
     private let container: NSPersistentContainer
     private let context: NSManagedObjectContext
 
@@ -20,5 +20,23 @@ public actor CoreDataStorage: Sendable {
         )
 
         context = container.newBackgroundContext()
+    }
+
+    deinit {
+        cleanUpReferencesToPersistentStores()
+    }
+
+    func perform<T>(_ action: @escaping (NSManagedObjectContext) throws -> T) async throws -> T {
+        let context = context
+        return try await context.perform { try action(context) }
+    }
+}
+
+private extension CoreDataStorage {
+    func cleanUpReferencesToPersistentStores() {
+        context.performAndWait {
+            let coordinator = self.container.persistentStoreCoordinator
+            try? coordinator.persistentStores.forEach(coordinator.remove)
+        }
     }
 }
