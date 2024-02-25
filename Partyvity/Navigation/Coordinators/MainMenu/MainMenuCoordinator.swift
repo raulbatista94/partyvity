@@ -25,12 +25,16 @@ final class MainMenuCoordinator {
 
 extension MainMenuCoordinator: NavigationControllerCoordinator {
     func start() {
-        navigationController.viewControllers = [
-            ScreenFactory.Initial.makeMainMenuView(
-                container: container,
-                eventHandler: self
+        let initialScreen = HostingController(
+            rootView: MainMenuContainerView(
+                viewModel: container.resolver.resolve(
+                    MainMenuViewModel.self,
+                    argument: self as MainMenuEventHandling
+                )!
             )
-        ]
+        )
+
+        navigationController.viewControllers = [initialScreen]
     }
 
     func openNewGame() {

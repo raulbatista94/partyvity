@@ -23,3 +23,19 @@ extension NullStorage: TeamCreating {
         return Team()
     }
 }
+
+extension NullStorage: GameFetching {
+    public func fetchGames() async throws -> [Game] {
+        return [Game(teams: NSMutableOrderedSet())]
+    }
+
+    public func fetchGame(with id: String) async throws -> Game? {
+        return Game(teams: NSMutableOrderedSet())
+    }
+}
+
+extension NullStorage: GameCreating {
+    public func create(from game: Game) async throws -> Game {
+        return Game(teams: NSMutableOrderedSet())
+    }
+}

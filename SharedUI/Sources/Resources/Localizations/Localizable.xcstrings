@@ -5,7 +5,14 @@
 
     },
     "Back" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Back"
+          }
+        }
+      }
     },
     "continue" : {
       "comment" : "Common word \"continue\"",
@@ -32,7 +39,14 @@
       }
     },
     "Number of teams: %lld" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Number of teams: %lld"
+          }
+        }
+      }
     },
     "previousGames" : {
       "comment" : "Title for games history button",
@@ -47,7 +61,14 @@
       }
     },
     "Start" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start"
+          }
+        }
+      }
     },
     "Team name" : {
       "localizations" : {
@@ -82,7 +103,14 @@
       }
     },
     "Teams" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teams"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

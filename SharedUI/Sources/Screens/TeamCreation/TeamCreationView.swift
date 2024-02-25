@@ -5,29 +5,29 @@
 //  Created by Raul Batista on 19.12.2023.
 //
 
+import Core
+import Combine
 import Foundation
 import SwiftUI
-import Core
 
 public struct TeamCreationViewContainer: View {
     @ObservedObject var viewModel: TeamCreationViewModel
-    private weak var eventHandler: TeamCreationEventHandling?
 
-    public init(viewModel: TeamCreationViewModel, eventHandler: TeamCreationEventHandling) {
+    public init(viewModel: TeamCreationViewModel) {
         self.viewModel = viewModel
-        self.eventHandler = eventHandler
     }
 
     public var body: some View {
         ZStack(alignment: .top) {
             HeaderBackground()
                 .frame(height: viewModel.teamTableSize)
+                .animation(.easeInOut, value: 0.1)
 
             VStack {
                 BackNavigationBarView(
                     title: "Teams",
                     action: {
-                        eventHandler?.handle(event: .back)
+                        viewModel.send(.back)
                     }
                 )
 
@@ -38,19 +38,13 @@ public struct TeamCreationViewContainer: View {
                     shouldShowStartButton: $viewModel.showStartButton,
                     didFinishEditign: { _ in },
                     didTapAvatar: { team in
-                        eventHandler?.handle(
-                            event: .avatarTapped { selectedAvatar in
-                                var selectedTeam = team
-                                selectedTeam.avatarId = selectedAvatar.rawValue
-                                viewModel.updateTeam(team: selectedTeam)
-                            }
-                        )
+                        viewModel.send(.avatarTapped(team))
                     },
                     nameChanged: { updatedTeam in
-                        viewModel.updateTeam(team: updatedTeam)
+                        viewModel.send(.updateTeamName(updatedTeam))
                     },
                     startTapped: {
-                        eventHandler?.handle(event: .startGame)
+                        viewModel.send(.startGame)
                     }
                 )
             }

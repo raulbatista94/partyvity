@@ -15,11 +15,15 @@ public final class TeamService {
     public init(storage: Storage) {
         self.storage = storage
     }
-
+    
+    /// Stores the created teams to the database
+    /// - Parameter teams: List of created teams
     public func saveTeams(_ teams: [Team]) async throws {
         try await storage.create(from: teams)
     }
-
+    
+    /// Retrieves the created teams from the database.
+    /// - Returns: List of teams
     public func getTeams() async throws -> [Team] {
         try await storage.fetchTeams()
     }

@@ -5,12 +5,13 @@
 //  Created by Raul Batista on 23.12.2023.
 //
 
-import Foundation
-import SwiftUI
+import Combine
 import Core
+import SwiftUI
 
 @MainActor
 public final class TeamCreationViewModel: ObservableObject {
+    // MARK: - Published properties
     @Published var teams = [Team()] {
         didSet {
             showStartButton = teams.allSatisfy { !$0.teamName.isEmpty && ($0.avatarId != nil) } && teams.count > 1
@@ -35,14 +36,48 @@ public final class TeamCreationViewModel: ObservableObject {
     @Published var teamTableSize: CGFloat = 0
     @Published var showStartButton: Bool = false
 
-    public nonisolated init() {}
+    private(set) var eventSubject = PassthroughSubject<TeamCreationEvent, Never>()
+    private lazy var cancellables = Set<AnyCancellable>()
+    // MARK: - Dependencies
+    private let persistenceService: GameCreating
 
-    func addTeam() {
+    public init(persistenceService: GameCreating) {
+        self.persistenceService = persistenceService
+    }
+
+    func send(_ action: TeamCreationAction) {
+        switch action {
+        case let .avatarTapped(team):
+            eventSubject.send(.avatarTapped { [weak self] selectedAvatar in
+                var selectedTeam = team
+                selectedTeam.avatarId = selectedAvatar.rawValue
+                self?.updateTeam(team: selectedTeam)
+            })
+        case let .updateTeamName(team):
+            updateTeam(team: team)
+        case .startGame:
+            Task { [weak self] in
+                guard let self else {
+                    return
+                }
+                do {
+                    let game = try await self.createGame()
+                    self.eventSubject.send(.startGame(game))
+                } catch {
+                    print("Error starting game: \(error.localizedDescription)")
+                }
+            }
+        case .back:
+            eventSubject.send(.back)
+        }
+    }
+
+    private func addTeam() {
         guard teams.count < 6 else { return }
         teams.append(Team())
     }
 
-    func addTeamIfNeeded() {
+    private func addTeamIfNeeded() {
         guard
             let lastTeam = teams.last,
             !lastTeam.teamName.isEmpty
@@ -52,13 +87,29 @@ public final class TeamCreationViewModel: ObservableObject {
         addTeam()
     }
 
-    func updateTeam(team: Team) {
+    private func updateTeam(team: Team) {
         guard let index = teams.firstIndex(where: { $0.id == team.id }) else { return }
         teams[index] = team
     }
 
-//    func updateTeamsAvatar(team: Team, avatar: Avatar) {
-//        guard let index = teams.firstIndex(where: { $0.id == team.id }) else { return }
-//        teams[index].avatarId = avatar.rawValue
-//    }
+    private func createGame() async throws -> Game {
+        let newGame = Game(teams: NSMutableOrderedSet(array: teams))
+        return try await persistenceService.create(from: newGame)
+    }
+}
+
+public extension TeamCreationViewModel {
+    var eventPublisher: AnyPublisher<TeamCreationEvent, Never> {
+        eventSubject.eraseToAnyPublisher()
+    }
+}
+
+// MARK: - Actions
+extension TeamCreationViewModel {
+    enum TeamCreationAction {
+        case avatarTapped(Team)
+        case updateTeamName(Team)
+        case startGame
+        case back
+    }
 }

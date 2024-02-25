@@ -11,7 +11,7 @@ import Core
 @MainActor
 final class TeamInputCellViewModel: ObservableObject {
     @Published var team: Team
-    
+
     init(team: Team) {
         self.team = team
     }
@@ -47,7 +47,19 @@ struct TeamInputCell: View {
     @Binding var teamName: String
     let avatarTapped: () -> Void
     let finishedEditing: () -> Void
-    
+
+    init(
+        avatar: String? = nil,
+        teamName: Binding<String>,
+        avatarTapped: @escaping () -> Void,
+        finishedEditing: @escaping () -> Void
+    ) {
+        self.avatar = avatar
+        self._teamName = teamName
+        self.avatarTapped = avatarTapped
+        self.finishedEditing = finishedEditing
+    }
+
     var body: some View {
         HStack(spacing: 12) {
             AvatarView(avatarImage: Image(
@@ -57,7 +69,7 @@ struct TeamInputCell: View {
             .onTapGesture {
                 avatarTapped()
             }
-            
+
             InputFieldViewContainer(
                 text: $teamName,
                 didFinishEditing: finishedEditing

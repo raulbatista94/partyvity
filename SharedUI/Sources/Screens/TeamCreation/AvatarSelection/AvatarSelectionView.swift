@@ -8,6 +8,7 @@
 import SwiftUI
 
 public struct AvatarSelectionView: View {
+    @Environment(\.dismiss) var dismiss
     let columns = [
         GridItem(.adaptive(minimum: 72))
     ]
@@ -26,9 +27,11 @@ public struct AvatarSelectionView: View {
     public var body: some View {
         content()
             .modifier(WithBackgroundImage())
-            .modifier(CustomNavBarModifier(
-                title: "Select Avatar",
-                action: backAction)
+            .modifier(
+                CustomNavBarModifier(
+                    title: "Select Avatar",
+                    action: { dismiss () }
+                )
             )
     }
 
@@ -40,6 +43,7 @@ public struct AvatarSelectionView: View {
                     AvatarView(avatarImage: avatar.image)
                         .onTapGesture {
                             avatarSelected(avatar)
+                            dismiss()
                         }
                 }
             }
@@ -55,3 +59,6 @@ public struct AvatarSelectionView: View {
         backAction: {}
     )
 }
+//#Preview {
+//    AvatarSelectionView(avatarSelectionDelegate: )
+//}

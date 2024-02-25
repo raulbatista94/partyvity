@@ -5,15 +5,11 @@
 //  Created by Raul Batista on 23.12.2023.
 //
 
-import Foundation
 import Core
+import Combine
 
 public enum TeamCreationEvent {
     case avatarTapped((Avatar) -> Void)
-    case startGame
+    case startGame(Game)
     case back
-}
-
-public protocol TeamCreationEventHandling: AnyObject {
-    func handle(event: TeamCreationEvent)
 }

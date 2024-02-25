@@ -12,6 +12,9 @@ import Core
 typealias CoreDataTeamStorage = TeamFetching
 & TeamCreating
 
+typealias CoreDataGameStorage = GameFetching
+& GameCreating
+
 final class InfrastructureRegistration: Assembly {
     let coreDataStorage: CoreDataRegistrationTypes = {
         do {
@@ -37,9 +40,17 @@ final class InfrastructureRegistration: Assembly {
         container.register(TeamCreating.self) { [coreDataStorage] _ in
             coreDataStorage
         }
+
+        container.register(GameCreating.self) { [coreDataStorage] _ in
+            coreDataStorage
+        }
+
+        container.register(GameFetching.self) { [coreDataStorage] _ in
+            coreDataStorage
+        }
     }
 }
 
 extension InfrastructureRegistration {
-    typealias CoreDataRegistrationTypes = CoreDataTeamStorage
+    typealias CoreDataRegistrationTypes = CoreDataTeamStorage & CoreDataGameStorage
 }
