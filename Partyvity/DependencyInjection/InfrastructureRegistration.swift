@@ -7,50 +7,11 @@
 
 import Foundation
 import Swinject
-import Core
-
-typealias CoreDataTeamStorage = TeamFetching
-& TeamCreating
-
-typealias CoreDataGameStorage = GameFetching
-& GameCreating
+import enum Core.DIRegistrator
 
 final class InfrastructureRegistration: Assembly {
-    let coreDataStorage: CoreDataRegistrationTypes = {
-        do {
-            let appGroup = "group.com.partyvity.app"
-            let storeURL = URL.storeURL(for: appGroup, databaseName: "PartyvityDataModel")
-            return try CoreDataStorage(storeURL: storeURL)
-        } catch {
-            assertionFailure("Failed to instantiate CoreData store with error: \(error.localizedDescription)")
-            return NullStorage()
-        }
-    }()
-
     func assemble(container: Swinject.Container) {
-        registerStorage(container: container)
+        Core.DIRegistrator.registerStorage(container: container)
+        Core.DIRegistrator.registerServices(container: container)
     }
-    
-    func registerStorage(container: Swinject.Container) {
-        container.register(TeamFetching.self) { [coreDataStorage] _ in
-            coreDataStorage
-        }
-        .inObjectScope(.graph)
-
-        container.register(TeamCreating.self) { [coreDataStorage] _ in
-            coreDataStorage
-        }
-
-        container.register(GameCreating.self) { [coreDataStorage] _ in
-            coreDataStorage
-        }
-
-        container.register(GameFetching.self) { [coreDataStorage] _ in
-            coreDataStorage
-        }
-    }
-}
-
-extension InfrastructureRegistration {
-    typealias CoreDataRegistrationTypes = CoreDataTeamStorage & CoreDataGameStorage
 }

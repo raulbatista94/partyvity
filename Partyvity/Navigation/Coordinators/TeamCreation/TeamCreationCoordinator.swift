@@ -18,6 +18,7 @@ final class TeamCreationCoordinator: NavigationControllerCoordinator {
     var childCoordinators = [Coordinator]()
     let container: Assembler
     var cancellables = Set<AnyCancellable>()
+
     private weak var eventHandler: TeamCreationCoordinatorEventHandling?
 
     init(

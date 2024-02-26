@@ -39,10 +39,10 @@ public final class TeamCreationViewModel: ObservableObject {
     private(set) var eventSubject = PassthroughSubject<TeamCreationEvent, Never>()
     private lazy var cancellables = Set<AnyCancellable>()
     // MARK: - Dependencies
-    private let persistenceService: GameCreating
+    private let gameService: GameServicing
 
-    public init(persistenceService: GameCreating) {
-        self.persistenceService = persistenceService
+    public init(gameService: GameServicing) {
+        self.gameService = gameService
     }
 
     func send(_ action: TeamCreationAction) {
@@ -94,7 +94,7 @@ public final class TeamCreationViewModel: ObservableObject {
 
     private func createGame() async throws -> Game {
         let newGame = Game(teams: NSMutableOrderedSet(array: teams))
-        return try await persistenceService.create(from: newGame)
+        return try await gameService.saveGame(newGame)
     }
 }
 

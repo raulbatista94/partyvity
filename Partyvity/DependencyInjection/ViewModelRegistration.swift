@@ -5,7 +5,7 @@
 //  Created by Raul Batista on 18.12.2023.
 //
 
-@preconcurrency import Core
+import Core
 import Foundation
 import Swinject
 import SharedUI
@@ -20,7 +20,7 @@ final class ViewModelRegistration: Assembly {
 
         container.register(TeamCreationViewModel.self) {
             TeamCreationViewModel(
-                persistenceService: $0.resolve(GameCreating.self)!
+                gameService: $0.resolve(GameServicing.self)!
             )
         }
         .inObjectScope(.graph)
