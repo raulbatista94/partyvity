@@ -5,6 +5,7 @@
 //  Created by Raul Batista on 07.12.2023.
 //
 
+import Core
 import SwiftUI
 
 struct PointsIconView: View {
@@ -50,19 +51,35 @@ struct PointsIconView: View {
     let type: PointsType
 
     var body: some View {
-        ZStack {
-            Circle()
-                .fill(Color.white)
-                .frame(width: 48, height: 48)
-            Text(type.title)
-                .font(.titleMedium)
-                .foregroundColor(type.foregroundColor)
-                .shadow(color: .black, radius: 2)
-                .rotationEffect(.degrees(type.rotationDegrees))
+        Text(type.title)
+            .font(.headlineSmall)
+            .foregroundColor(type.foregroundColor)
+            .shadow(color: .black, radius: 2)
+            .rotationEffect(.degrees(type.rotationDegrees))
+            .padding(.all, 10)
+            .background(
+                Circle()
+                    .fill(Color.white)
+            )
+            .shadow(
+                color: .black.opacity(0.3),
+                radius: 5,
+                x: 0,
+                y: 2
+            )
+    }
+}
 
+extension PointsIconView {
+    static func makeForActivity(_ activityType: ActivityType) -> Self {
+        switch activityType {
+        case .describe:
+            return .init(type: .normal)
+        case .drawing:
+            return .init(type: .double)
+        case .pantomime:
+            return .init(type: .tripe)
         }
-        .background(Color.blue)
-
     }
 }
 

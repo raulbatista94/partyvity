@@ -4,6 +4,39 @@
     "" : {
 
     },
+    "activity.describe" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Describe"
+          }
+        }
+      }
+    },
+    "activity.drawing" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drawing"
+          }
+        }
+      }
+    },
+    "activity.pantomime" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pantomime"
+          }
+        }
+      }
+    },
     "Back" : {
       "localizations" : {
         "en" : {
@@ -69,6 +102,9 @@
           }
         }
       }
+    },
+    "Team 1" : {
+
     },
     "Team name" : {
       "localizations" : {

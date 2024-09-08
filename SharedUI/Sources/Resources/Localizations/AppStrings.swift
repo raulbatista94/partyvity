@@ -13,4 +13,7 @@ enum AppStrings {
     static let `continue` = String(localized: "continue", table: "Localizable", bundle: Bundle.module)
     static let teamName = String(localized: "teamName", table: "Localizable", bundle: Bundle.module)
     static let teamAmount = String(localized: "teamAmount", table: "Localizable", bundle: Bundle.module)
+    static let activityDescribe = String(localized: "activity.describe", table: "Localizable", bundle: Bundle.module)
+    static let activityDrawing = String(localized: "activity.drawing", table: "Localizable", bundle: Bundle.module)
+    static let activityPantomime = String(localized: "activity.pantomime", table: "Localizable", bundle: Bundle.module)
 }

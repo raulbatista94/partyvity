@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct MainMenuContainerView: View {
-    @ObservedObject private var viewModel: MainMenuViewModel
+    @StateObject private var viewModel: MainMenuViewModel
     public var body: some View {
         ZStack {
             Image(.background)
@@ -27,7 +27,7 @@ public struct MainMenuContainerView: View {
     }
 
     public init(viewModel: MainMenuViewModel) {
-        self.viewModel = viewModel
+        self._viewModel = .init(wrappedValue: viewModel)
     }
 }
 
