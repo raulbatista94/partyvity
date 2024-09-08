@@ -59,6 +59,9 @@
         }
       }
     },
+    "Hello world" : {
+
+    },
     "newGame" : {
       "comment" : "Title for new game button",
       "extractionState" : "manual",
@@ -147,6 +150,9 @@
           }
         }
       }
+    },
+    "VOL" : {
+
     }
   },
   "version" : "1.0"

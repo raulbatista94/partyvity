@@ -15,11 +15,11 @@ public enum ActivityType: CaseIterable {
     public var buttonTitle: String {
         switch self {
         case .describe:
-            String(localized: "activityType.describe")
+            String(localized: "activityType.describe", bundle: Bundle.module)
         case .drawing:
-            String(localized: "activityType.drawing")
+            String(localized: "activityType.drawing", bundle: Bundle.module)
         case .pantomime:
-            String(localized: "activityType.pantomime")
+            String(localized: "activityType.pantomime", bundle: Bundle.module)
         }
     }
 

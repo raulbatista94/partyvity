@@ -64,7 +64,8 @@ private extension GameView {
                 viewModel.send(input: .didTapActivity(selectedActivity))
             }
         case .guessing:
-            Text("LOL")
+            GameGuessingView()
+                .clipped()
         case .gameResolving:
             Text("VOL")
         }
