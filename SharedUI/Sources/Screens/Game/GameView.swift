@@ -11,7 +11,7 @@ import SwiftUI
 public struct GameView: View {
     @ObservedObject var viewModel: GameViewModel
 
-    init(viewModel: GameViewModel) {
+    public init(viewModel: GameViewModel) {
         self.viewModel = viewModel
     }
 

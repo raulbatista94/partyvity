@@ -9,7 +9,7 @@ import Core
 import SwiftUI
 
 @MainActor
-final class GameViewModel: ObservableObject {
+public final class GameViewModel: ObservableObject {
     enum GamePhase {
         case activityPicking
         case guessing
@@ -24,7 +24,7 @@ final class GameViewModel: ObservableObject {
 
     let teams: [Team]
 
-    init(teams: [Team]) {
+    public init(teams: [Team]) {
         self.teams = teams
         guard let firstTeam = teams.first else {
             assertionFailure("This can't happen. We shouldn't be able to access this screen without ")
