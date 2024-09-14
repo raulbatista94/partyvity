@@ -1,30 +1,32 @@
 //
-//  TeamCreationCoordinator.swift
+//  GameCoordinator.swift
 //  Partyvity
 //
 //  Created by Raul Batista on 23.12.2023.
 //
 
+import Core
 import Combine
 import Foundation
 import UIKit
 import SharedUI
+import SwiftUI
 import Swinject
 
 @MainActor
-final class TeamCreationCoordinator: NavigationControllerCoordinator {
+final class GameCoordinator: NavigationControllerCoordinator {
     
     let navigationController: UINavigationController
     var childCoordinators = [Coordinator]()
     let container: Assembler
     var cancellables = Set<AnyCancellable>()
 
-    private weak var eventHandler: TeamCreationCoordinatorEventHandling?
+    private weak var eventHandler: TeamCreationEventHandling?
 
     init(
         container: Assembler,
         navigationController: UINavigationController? = nil,
-        eventHandler: TeamCreationCoordinatorEventHandling
+        eventHandler: TeamCreationEventHandling
     ) {
         self.container = container
         self.navigationController = navigationController ?? UINavigationController()
@@ -36,15 +38,15 @@ final class TeamCreationCoordinator: NavigationControllerCoordinator {
     }
 }
 
-extension TeamCreationCoordinator {
+extension GameCoordinator {
     func handle(event: TeamCreationEvent) {
         switch event {
         case let .avatarTapped(avatarAction):
             let avatarView = makeAvatarSelectionView(avatarSelected: avatarAction)
 
             show(avatarView)
-        case .startGame:
-            eventHandler?.handle(event: .startGame, from: self)
+        case let .startGame(game):
+            navigationController.setViewControllers([makeGameView(teams: game.teams)], animated: true)
         case .back:
             eventHandler?.handle(event: .back, from: self)
         }
@@ -52,7 +54,7 @@ extension TeamCreationCoordinator {
 }
 
 // MARK: - Screen factory
-extension TeamCreationCoordinator {
+extension GameCoordinator {
     func makeTeamCreationView() -> UIViewController {
         let viewModel = container.resolver.resolve(TeamCreationViewModel.self)!
         let view = TeamCreationViewContainer(viewModel: viewModel)
@@ -74,5 +76,12 @@ extension TeamCreationCoordinator {
         }
 
         return HostingController(rootView: rootView)
+    }
+
+    func makeGameView(teams: [Team]) -> UIViewController {
+        let viewModel = GameViewModel(teams: teams)
+        let view = GameView(viewModel: viewModel)
+
+        return HostingController(rootView: view)
     }
 }

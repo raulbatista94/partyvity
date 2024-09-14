@@ -39,7 +39,7 @@ extension MainMenuCoordinator: NavigationControllerCoordinator {
 
     func openNewGame() {
         let coordinator = CoordinatorsFactory
-            .makeTeamCreationCoordinator(
+            .makeGameCoordinator(
                 container: container, 
                 navigationController: navigationController,
                 eventHanlder: self
@@ -50,8 +50,8 @@ extension MainMenuCoordinator: NavigationControllerCoordinator {
 }
 extension MainMenuCoordinator: SceneCoordinating { }
 
-extension MainMenuCoordinator: TeamCreationCoordinatorEventHandling {
-    func handle(event: TeamCreationCoordinatorEvent, from childCoordinator: Coordinator) {
+extension MainMenuCoordinator: TeamCreationEventHandling {
+    func handle(event: TeamCreationScreenEvent, from childCoordinator: Coordinator) {
         switch event {
         case .back:
             release(coordinator: childCoordinator)
