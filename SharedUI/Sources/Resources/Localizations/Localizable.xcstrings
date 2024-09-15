@@ -59,7 +59,7 @@
         }
       }
     },
-    "Hello world" : {
+    "Good Job!" : {
 
     },
     "newGame" : {
@@ -151,7 +151,7 @@
         }
       }
     },
-    "VOL" : {
+    "You earned %lld points!" : {
 
     }
   },

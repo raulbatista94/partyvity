@@ -9,11 +9,13 @@ import SwiftUI
 
 struct GameGuessingView: View {
     @State var offset: CGFloat = -48
+    @Binding var word: String
+    let wordDidAppear: () -> Void
+
     var body: some View {
         VStack(spacing: 0) {
             Image(.wordTopShadow)
                 .zIndex(1)
-
             wordView
                 .offset(y: offset)
         }
@@ -25,7 +27,7 @@ extension GameGuessingView {
         ZStack(alignment: .center) {
             Image(.word)
 
-            Text("Hello world")
+            Text(word)
                 .font(.headlineMedium)
                 .foregroundStyle(Color.textPrimary)
                 .padding(.bottom, 20)
@@ -43,6 +45,10 @@ extension GameGuessingView {
                         }
 
                         self.offset = gesture.translation.height - 48
+
+                        if offset > 20 {
+                            wordDidAppear()
+                        }
                     }
                 }
                 .onEnded { gesture in
@@ -53,5 +59,7 @@ extension GameGuessingView {
 }
 
 #Preview {
-    GameGuessingView()
+    GameGuessingView(
+        word: .constant("Naruto"),
+        wordDidAppear: {})
 }

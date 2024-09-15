@@ -27,8 +27,7 @@ public struct GameView: View {
 
                 SwiftUI.Spacer().layoutPriority(1)
 
-                ProgressView(teams: viewModel.teams)
-                    .padding(.bottom, 40)
+                getGameFooterView()
             }
         }
         .modifier(WithBackgroundImage())
@@ -64,10 +63,36 @@ private extension GameView {
                 viewModel.send(input: .didTapActivity(selectedActivity))
             }
         case .guessing:
-            GameGuessingView()
-                .clipped()
-        case .gameResolving:
-            Text("VOL")
+            GameGuessingView(
+                word: .init(
+                    get: { viewModel.currentWord ?? "" },
+                    set: { _ in }
+                ),
+                wordDidAppear: {
+                    viewModel.send(input: .wordDidAppear)
+                }
+            )
+            .clipped()
+        case .roundEvaluation:
+            RoundResultView(earnedPoints: $viewModel.earnedPointsThisTurn)
+        }
+    }
+
+    @ViewBuilder
+    func getGameFooterView() -> some View {
+        switch viewModel.gamePhase {
+        case .activityPicking, .roundEvaluation:
+            ProgressView(teams: viewModel.teams)
+                .padding(.bottom, 40)
+        case .guessing:
+            ActionButton(
+                onTap: {
+                    viewModel.send(input: .advanceToNextWord)
+                },
+                title: AppStrings.previousGames,
+                style: .tertiary
+            )
+            .frame(height: 64)
         }
     }
 }

@@ -9,7 +9,6 @@ import Foundation
 
 enum TeamCreationScreenEvent {
     case back
-    case startGame
 }
 
 protocol TeamCreationEventHandling: AnyObject {

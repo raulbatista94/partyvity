@@ -10,7 +10,7 @@ import Foundation
 public struct Game: Identifiable, Hashable, @unchecked Sendable {
     public let id: String
     public var teams: [Team]
-    
+
     /// Game duration in seconds
     public var gameDuration: Double {
         Date().timeIntervalSince1970 - creationTimestamp

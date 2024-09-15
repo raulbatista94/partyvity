@@ -56,13 +56,6 @@ extension MainMenuCoordinator: TeamCreationEventHandling {
         case .back:
             release(coordinator: childCoordinator)
             navigationController.popViewController(animated: true)
-        case .startGame:
-            release(coordinator: childCoordinator)
-            // Set the game VC
-            navigationController.setViewControllers(
-                [UIViewController()],
-                animated: true
-            )
         }
     }
 }
