@@ -18,17 +18,17 @@ final class GameCoordinator: NavigationControllerCoordinator {
     
     let navigationController: UINavigationController
     var childCoordinators = [Coordinator]()
-    let container: Assembler
+    let resolver: Resolver
     var cancellables = Set<AnyCancellable>()
 
     private weak var eventHandler: TeamCreationEventHandling?
 
     init(
-        container: Assembler,
+        resolver: Resolver,
         navigationController: UINavigationController? = nil,
         eventHandler: TeamCreationEventHandling
     ) {
-        self.container = container
+        self.resolver = resolver
         self.navigationController = navigationController ?? UINavigationController()
         self.eventHandler = eventHandler
     }
@@ -56,7 +56,7 @@ extension GameCoordinator {
 // MARK: - Screen factory
 extension GameCoordinator {
     func makeTeamCreationView() -> UIViewController {
-        let viewModel = container.resolver.resolve(TeamCreationViewModel.self)!
+        let viewModel = resolve(TeamCreationViewModel.self)
         let view = TeamCreationViewContainer(viewModel: viewModel)
 
         viewModel.eventPublisher
@@ -79,7 +79,8 @@ extension GameCoordinator {
     }
 
     func makeGameView(teams: [Team]) -> UIViewController {
-        let viewModel = GameViewModel(teams: teams)
+        let viewModel = resolve(GameViewModel.self, argument: teams)
+
         let view = GameView(viewModel: viewModel)
 
         return HostingController(rootView: view)

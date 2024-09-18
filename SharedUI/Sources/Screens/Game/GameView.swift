@@ -22,13 +22,22 @@ public struct GameView: View {
 
                 SwiftUI.Spacer().layoutPriority(1)
 
+                if viewModel.gamePhase == .guessing {
+                    Text("\(viewModel.remainingTime)s")
+                        .font(.headlineMedium)
+                        .foregroundStyle(.white)
+                }
+
                 getGamePhaseView()
-                    .padding(.horizontal, 56)
+                    .frame(maxHeight: reader.size.height * 0.48)
 
                 SwiftUI.Spacer().layoutPriority(1)
 
                 getGameFooterView()
             }
+        }
+        .onAppear {
+            viewModel.send(input: .viewDidAppear)
         }
         .modifier(WithBackgroundImage())
     }
@@ -62,17 +71,26 @@ private extension GameView {
             GameActivityPickingView { selectedActivity in
                 viewModel.send(input: .didTapActivity(selectedActivity))
             }
+            .padding(.horizontal, 56)
         case .guessing:
-            GameGuessingView(
-                word: .init(
-                    get: { viewModel.currentWord ?? "" },
-                    set: { _ in }
-                ),
-                wordDidAppear: {
-                    viewModel.send(input: .wordDidAppear)
-                }
-            )
-            .clipped()
+            VStack(spacing: .zero) {
+                Rectangle()
+                    .fill(.white.opacity(0.25))
+                    .frame(height: 1)
+                    .shadow(radius: 3, y: 5)
+                    .padding(.horizontal, 42)
+
+                GameGuessingView(
+                    word: .init(
+                        get: { viewModel.currentWord ?? "" },
+                        set: { _ in }
+                    ),
+                    wordDidAppear: {
+                        viewModel.send(input: .wordDidAppear)
+                    }
+                )
+                .clipped()
+            }
         case .roundEvaluation:
             RoundResultView(earnedPoints: $viewModel.earnedPointsThisTurn)
         }
@@ -89,14 +107,20 @@ private extension GameView {
                 onTap: {
                     viewModel.send(input: .advanceToNextWord)
                 },
-                title: AppStrings.previousGames,
+                title: "Got it!",
                 style: .tertiary
             )
             .frame(height: 64)
+            .padding(.horizontal, 16)
+            .padding(.bottom)
         }
     }
 }
 
 #Preview {
-    GameView(viewModel: GameViewModel(teams: GameViewModel.mockTeams))
+    GameView(
+        viewModel: GameViewModel(
+            teams: GameViewModel.mockTeams,
+            wordService: WordService.mock)
+    )
 }

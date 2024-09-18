@@ -16,9 +16,9 @@ public struct MainMenuContainerView: View {
                 .ignoresSafeArea()
 
             MainMenuView(
-                newGameAction: { viewModel.handleEvent(.newGameButtonTapped) },
-                continueGameAction: { viewModel.handleEvent(.continueButtonTapped) },
-                previousGamesAction: { viewModel.handleEvent(.previousGamesButtonTapped) },
+                newGameAction: { viewModel.send(event: .newGameButtonTapped) },
+                continueGameAction: { viewModel.send(event: .continueButtonTapped) },
+                previousGamesAction: { viewModel.send(event: .previousGamesButtonTapped) },
                 shouldShowContinueGameButton: viewModel.gameInProgressAvailable
             )
             .padding(.horizontal, 16)

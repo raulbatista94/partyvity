@@ -15,12 +15,12 @@ import SwiftUI
 final class InitialSceneCoordinator {
     var childCoordinators = [Coordinator]()
     let window: UIWindow
-    let container: Assembler
+    let resolver: Resolver
     private(set) lazy var navigationController: UINavigationController = UINavigationController()
     
-    init(window: UIWindow, container: Assembler) {
+    init(window: UIWindow, resolver: Resolver) {
         self.window = window
-        self.container = container
+        self.resolver = resolver
     }
 }
 
@@ -48,7 +48,7 @@ private extension InitialSceneCoordinator {
             CoordinatorsFactory
                 .makeMainMenuCoordinator(
                     window: window,
-                    container: container
+                    resolver: resolver
                 )
         )
     }

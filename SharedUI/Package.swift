@@ -19,7 +19,6 @@ let package = Package(
     dependencies: [
         .package(path: "../Core"),
         .package(url: "https://github.com/mac-cain13/R.swift.git", exact: "7.4.0"),
-        .package(url: "https://github.com/realm/SwiftLint", exact: "0.53.0"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -35,7 +34,6 @@ let package = Package(
             ],
             plugins: [
                 .plugin(name: "RswiftGeneratePublicResources", package: "R.swift"),
-                .plugin(name: "SwiftLintPlugin", package: "SwiftLint")
             ]
         ),
         .testTarget(

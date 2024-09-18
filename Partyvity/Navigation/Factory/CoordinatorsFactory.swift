@@ -16,21 +16,21 @@ protocol GameEventHandling {
 enum CoordinatorsFactory {
     static func makeMainMenuCoordinator(
         window: UIWindow,
-        container: Assembler
+        resolver: Resolver
     ) -> ViewControllerCoordinator {
         MainMenuCoordinator(
             window: window,
-            container: container
+            resolver: resolver
         )
     }
     
     static func makeGameCoordinator(
-        container: Assembler,
+        resolver: Resolver,
         navigationController: UINavigationController?,
         eventHanlder: TeamCreationEventHandling
     ) -> ViewControllerCoordinator {
         GameCoordinator(
-            container: container,
+            resolver: resolver,
             navigationController: navigationController,
             eventHandler: eventHanlder
         )

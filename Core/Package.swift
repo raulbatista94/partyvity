@@ -16,7 +16,6 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/realm/SwiftLint", exact: "0.53.0"),
         .package(url: "https://github.com/CombineCommunity/CombineExt.git", exact: "1.8.1"),
         .package(url: "https://github.com/Swinject/Swinject.git", from: "2.8.0")
     ],
@@ -25,11 +24,11 @@ let package = Package(
             name: "Core",
             dependencies: ["Swinject"],
             path: "Sources",
+            resources: [
+                .process("Common/words.json")
+            ],
             swiftSettings: [
                 .enableUpcomingFeature("StrictConcurrency=targeted")
-            ],
-            plugins: [
-                .plugin(name: "SwiftLintPlugin", package: "SwiftLint")
             ]
         ),
         .testTarget(

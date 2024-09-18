@@ -11,7 +11,7 @@ import Swinject
 
 protocol SceneCoordinating: Coordinator {
     var window: UIWindow { get }
-    init(window: UIWindow, container: Assembler)
+    init(window: UIWindow, resolver: Resolver)
 }
 
 @MainActor

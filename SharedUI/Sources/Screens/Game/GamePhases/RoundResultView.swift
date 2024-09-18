@@ -19,6 +19,7 @@ struct RoundResultView: View {
             Text("You earned \(earnedPoints) points!")
                 .font(.bodyMedium)
                 .foregroundStyle(.white)
+                .minimumScaleFactor(0.6)
         }
     }
 }

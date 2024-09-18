@@ -9,7 +9,6 @@ import Core
 import Combine
 import SwiftUI
 
-@MainActor
 public final class GameViewModel: ObservableObject {
     enum GamePhase {
         case activityPicking
@@ -24,12 +23,20 @@ public final class GameViewModel: ObservableObject {
     @Published var remainingTime: Int = 60
 
     private var selectedActivity: ActivityType?
+    private var currentDifficulty: WordDifficulty = .baby
     private var timer: AnyCancellable?
+
+    private let wordService: WordProviding
 
     let teams: [Team]
 
-    public init(teams: [Team]) {
+    public init(
+        teams: [Team],
+        wordService: WordProviding
+    ) {
         self.teams = teams
+        self.wordService = wordService
+
         guard let firstTeam = teams.first else {
             assertionFailure("This can't happen. We shouldn't be able to access this screen without ")
             currentTurnTeam = Self.mockTeams.first!
@@ -38,14 +45,21 @@ public final class GameViewModel: ObservableObject {
         currentTurnTeam = firstTeam
     }
 
-    func send(input: Input) {
+    @MainActor func send(input: Input) {
         switch input {
+        case .viewDidAppear:
+            currentWord = wordService.randomWord(for: currentDifficulty)
         case let .didTapActivity(selectedActivity):
             self.selectedActivity = selectedActivity
             gamePhase = .guessing
         case .advanceToNextWord:
-            // TODO: - Handle the advance to next word logic
-            evaluateRound()
+            timer?.cancel()
+            earnedPointsThisTurn += (1 * (selectedActivity?.pointsMultiplier ?? 1))
+            currentDifficulty = currentDifficulty.nextDifficulty()
+            currentWord = wordService.randomWord(for: currentDifficulty)
+            if currentDifficulty == .nightmare {
+                gamePhase = .roundEvaluation
+            }
         case .wordDidAppear:
             startCountDown()
         case .didFinishRound:
@@ -98,6 +112,7 @@ private extension GameViewModel {
 // MARK: - Events
 extension GameViewModel {
     enum Input {
+        case viewDidAppear
         case didTapActivity(ActivityType)
         case advanceToNextWord
         case wordDidAppear

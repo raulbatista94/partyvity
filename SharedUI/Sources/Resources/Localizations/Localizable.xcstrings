@@ -4,6 +4,9 @@
     "" : {
 
     },
+    "%llds" : {
+
+    },
     "activity.describe" : {
       "extractionState" : "manual",
       "localizations" : {

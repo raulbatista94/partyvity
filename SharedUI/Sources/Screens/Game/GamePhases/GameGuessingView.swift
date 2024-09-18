@@ -13,12 +13,8 @@ struct GameGuessingView: View {
     let wordDidAppear: () -> Void
 
     var body: some View {
-        VStack(spacing: 0) {
-            Image(.wordTopShadow)
-                .zIndex(1)
-            wordView
-                .offset(y: offset)
-        }
+        wordView
+            .offset(y: offset)
     }
 }
 
@@ -46,7 +42,7 @@ extension GameGuessingView {
 
                         self.offset = gesture.translation.height - 48
 
-                        if offset > 20 {
+                        if offset > -20 {
                             wordDidAppear()
                         }
                     }
