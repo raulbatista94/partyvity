@@ -5,18 +5,37 @@
 //  Created by Raul Batista on 17.12.2023.
 //
 
+import Combine
 import Foundation
 
-@MainActor
 public class MainMenuViewModel: ObservableObject {
     @Published private(set) var gameInProgressAvailable: Bool = false
-    private weak var eventHandler: MainMenuEventHandling?
+    private let eventSubject = PassthroughSubject<ViewAction, Never>()
 
-    public nonisolated init(eventHandler: MainMenuEventHandling) {
-        self.eventHandler = eventHandler
+    @MainActor func send(event: Input) {
+        switch event {
+        case .newGameButtonTapped:
+            eventSubject.send(.newGameButtonTapped)
+        case .continueButtonTapped:
+            eventSubject.send(.continueButtonTapped)
+        case .previousGamesButtonTapped:
+            eventSubject.send(.previousGamesButtonTapped)
+        }
     }
 
-    func handleEvent(_ event: MainMenuEvent) {
-        eventHandler?.handle(event: event)
+    enum Input {
+        case newGameButtonTapped
+        case continueButtonTapped
+        case previousGamesButtonTapped
+    }
+
+    public enum ViewAction {
+        case newGameButtonTapped
+        case continueButtonTapped
+        case previousGamesButtonTapped
+    }
+
+    public var eventPublisher: AnyPublisher<ViewAction, Never> {
+        eventSubject.eraseToAnyPublisher()
     }
 }

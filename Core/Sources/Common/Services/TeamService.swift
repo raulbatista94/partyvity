@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 public final class TeamService {
     public typealias Storage = TeamCreating & TeamFetching
 

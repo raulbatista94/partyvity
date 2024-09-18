@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct MainMenuContainerView: View {
-    @ObservedObject private var viewModel: MainMenuViewModel
+    @StateObject private var viewModel: MainMenuViewModel
     public var body: some View {
         ZStack {
             Image(.background)
@@ -16,9 +16,9 @@ public struct MainMenuContainerView: View {
                 .ignoresSafeArea()
 
             MainMenuView(
-                newGameAction: { viewModel.handleEvent(.newGameButtonTapped) },
-                continueGameAction: { viewModel.handleEvent(.continueButtonTapped) },
-                previousGamesAction: { viewModel.handleEvent(.previousGamesButtonTapped) },
+                newGameAction: { viewModel.send(event: .newGameButtonTapped) },
+                continueGameAction: { viewModel.send(event: .continueButtonTapped) },
+                previousGamesAction: { viewModel.send(event: .previousGamesButtonTapped) },
                 shouldShowContinueGameButton: viewModel.gameInProgressAvailable
             )
             .padding(.horizontal, 16)
@@ -27,7 +27,7 @@ public struct MainMenuContainerView: View {
     }
 
     public init(viewModel: MainMenuViewModel) {
-        self.viewModel = viewModel
+        self._viewModel = .init(wrappedValue: viewModel)
     }
 }
 

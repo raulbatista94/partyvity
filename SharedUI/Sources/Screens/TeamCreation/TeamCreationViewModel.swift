@@ -9,7 +9,6 @@ import Combine
 import Core
 import SwiftUI
 
-@MainActor
 public final class TeamCreationViewModel: ObservableObject {
     // MARK: - Published properties
     @Published var teams = [Team()] {
@@ -45,7 +44,7 @@ public final class TeamCreationViewModel: ObservableObject {
         self.gameService = gameService
     }
 
-    func send(_ action: TeamCreationAction) {
+    @MainActor func send(_ action: TeamCreationAction) {
         switch action {
         case let .avatarTapped(team):
             eventSubject.send(.avatarTapped { [weak self] selectedAvatar in

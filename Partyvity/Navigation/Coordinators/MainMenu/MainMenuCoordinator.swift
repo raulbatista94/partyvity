@@ -5,6 +5,7 @@
 //  Created by Raul Batista on 15.12.2023.
 //
 
+import Combine
 import Foundation
 import Swinject
 import UIKit
@@ -14,33 +15,40 @@ import SharedUI
 final class MainMenuCoordinator {
     let navigationController = UINavigationController()
     var childCoordinators = [Coordinator]()
-    let container: Assembler
+    let resolver: Resolver
     let window: UIWindow
 
-    init(window: UIWindow, container: Assembler) {
+    private lazy var cancellables = Set<AnyCancellable>()
+
+    init(window: UIWindow, resolver: Resolver) {
         self.window = window
-        self.container = container
+        self.resolver = resolver
     }
 }
 
 extension MainMenuCoordinator: NavigationControllerCoordinator {
     func start() {
+        let viewModel = resolver.resolve(MainMenuViewModel.self)!
+        
         let initialScreen = HostingController(
             rootView: MainMenuContainerView(
-                viewModel: container.resolver.resolve(
-                    MainMenuViewModel.self,
-                    argument: self as MainMenuEventHandling
-                )!
+                viewModel: viewModel
             )
         )
+
+        viewModel.eventPublisher
+            .sink { [weak self] event in
+                self?.handle(event: event)
+            }
+            .store(in: &cancellables)
 
         navigationController.viewControllers = [initialScreen]
     }
 
     func openNewGame() {
         let coordinator = CoordinatorsFactory
-            .makeTeamCreationCoordinator(
-                container: container, 
+            .makeGameCoordinator(
+                resolver: resolver,
                 navigationController: navigationController,
                 eventHanlder: self
         )
@@ -50,25 +58,18 @@ extension MainMenuCoordinator: NavigationControllerCoordinator {
 }
 extension MainMenuCoordinator: SceneCoordinating { }
 
-extension MainMenuCoordinator: TeamCreationCoordinatorEventHandling {
-    func handle(event: TeamCreationCoordinatorEvent, from childCoordinator: Coordinator) {
+extension MainMenuCoordinator: TeamCreationEventHandling {
+    func handle(event: TeamCreationScreenEvent, from childCoordinator: Coordinator) {
         switch event {
         case .back:
             release(coordinator: childCoordinator)
             navigationController.popViewController(animated: true)
-        case .startGame:
-            release(coordinator: childCoordinator)
-            // Set the game VC
-            navigationController.setViewControllers(
-                [UIViewController()],
-                animated: true
-            )
         }
     }
 }
 
-extension MainMenuCoordinator: MainMenuEventHandling {
-    func handle(event: MainMenuEvent) {
+extension MainMenuCoordinator {
+    func handle(event: MainMenuViewModel.ViewAction) {
         switch event {
         case .newGameButtonTapped:
             openNewGame()

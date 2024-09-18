@@ -10,36 +10,50 @@ import SwiftUI
 struct ActionButton: View {
     private let onTap: () -> Void
     private let title: String
-    let style: ComponentStyle
-    let size: ComponentSize
-    let icon: Image?
+    private let style: ComponentStyle
+    private let size: ComponentSize
+    private let icon: Image?
+    private let pointsIcon: PointsIconView?
 
     init(
         onTap: @escaping () -> Void,
         title: String,
         style: ComponentStyle,
         size: ComponentSize = .medium,
-        icon: Image? = nil
+        icon: Image? = nil,
+        pointsIcon: PointsIconView? = nil
     ) {
         self.onTap = onTap
         self.title = title
         self.style = style
         self.size = size
         self.icon = icon
+        self.pointsIcon = pointsIcon
     }
 
     var body: some View {
         Button(
             action: onTap,
             label: {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 24)
-                        .fill(backgroundColor)
+                Text(title)
+                    .font(font)
+                    .foregroundStyle(.white)
+                    .if(pointsIcon != nil) { view in
+                        HStack {
+                            pointsIcon!
+                            
+                            view
+                            
+                            SwiftUI.Spacer()
+                        }
+                    }
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(
+                        RoundedRectangle(cornerRadius: 24)
+                            .fill(backgroundColor)
+                    )
 
-                    Text(title)
-                        .font(font)
-                        .foregroundStyle(.white)
-                }
             }
         )
     }
@@ -76,6 +90,7 @@ private extension ActionButton {
         onTap: {},
         title: "Main Menu",
         style: .primary,
-        size: .medium
+        size: .medium,
+        pointsIcon: PointsIconView(type: .tripe)
     )
 }

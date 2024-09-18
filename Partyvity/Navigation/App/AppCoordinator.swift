@@ -17,7 +17,14 @@ final class AppCoordinator {
 
     private(set) lazy var activeScenes: [ActiveScene] = []
 
-    let container = Assembler()
+    let assembler: Assembler
+    let resolver: Resolver
+
+    init() {
+        let assembler = Assembler()
+        self.assembler = assembler
+        self.resolver = assembler.resolver
+    }
 }
 
 // MARK: - AppCoordinating
@@ -33,10 +40,8 @@ extension AppCoordinator: AppCoordinating {
 // Extension is internal to be accessible from test target
 extension AppCoordinator {
     func assembleDependencyInjectionContainer() {
-        container.apply(assemblies: [
-            ViewModelRegistration(),
+        assembler.apply(assemblies: [
             InfrastructureRegistration()
-            // TODO: Add remainig
         ])
     }
 }
@@ -63,7 +68,7 @@ extension AppCoordinator {
 // MARK: Coordinators management
 private extension AppCoordinator {
     func makeSceneCoordinator<Coordinator: SceneCoordinating>(with window: UIWindow) -> Coordinator {
-        Coordinator(window: window, container: container)
+        Coordinator(window: window, resolver: resolver)
     }
 
     func removeSceneCoordinator(for scene: UIScene) {

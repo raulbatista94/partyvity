@@ -34,24 +34,38 @@ public enum DIRegistrator {
         container.register(TeamFetching.self) { [coreDataStorage] _ in
             coreDataStorage
         }
-        .inObjectScope(.graph)
+        .inObjectScope(.container)
 
         container.register(TeamCreating.self) { [coreDataStorage] _ in
             coreDataStorage
         }
+        .inObjectScope(.container)
 
         container.register(GameCreating.self) { [coreDataStorage] _ in
             coreDataStorage
         }
+        .inObjectScope(.container)
 
         container.register(GameFetching.self) { [coreDataStorage] _ in
             coreDataStorage
         }
+        .inObjectScope(.container)
     }
 
     public static func registerServices(container: Container) {
         container.register(GameServicing.self) { [coreDataStorage] _ in
             GameService(storage: coreDataStorage)
         }
+        .inObjectScope(.container)
+
+        container.register(TeamService.self) { resolver in
+            TeamService(storage: resolver.resolve(TeamService.Storage.self)!)
+        }
+        .inObjectScope(.container)
+
+        container.register(WordProviding.self) { _ in
+            WordService()
+        }
+        .inObjectScope(.container)
     }
 }

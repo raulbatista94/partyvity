@@ -11,7 +11,7 @@ import Core
 
 @MainActor
 protocol Coordinator: AnyObject {
-    var container: Assembler { get }
+    var resolver: Resolver { get }
     var childCoordinators: [Coordinator] { get set }
 
     func start()
@@ -24,14 +24,14 @@ extension Coordinator {
         guard synchronize else {
             if let argument = argument {
                 // swiftlint:disable:next force_unwrapping
-                return container.resolver.resolve(serviceType, argument: argument)!
+                return resolver.resolve(serviceType, argument: argument)!
             } else {
                 // swiftlint:disable:next force_unwrapping
-                return container.resolver.resolve(serviceType)!
+                return resolver.resolve(serviceType)!
             }
         }
 
-        let container = container.resolver as? Container
+        let container = resolver as? Container
 
         if let argument = argument {
             // swiftlint:disable:next force_unwrapping
@@ -61,7 +61,7 @@ extension Coordinator {
     func resolve<Service, Argument>(_ serviceType: Service.Type, argument: Argument? = nil) -> Service {
         if let argument = argument {
             // swiftlint:disable:next force_unwrapping
-            return container.resolver.resolve(serviceType, argument: argument)!
+            return resolver.resolve(serviceType, argument: argument)!
         } else {
             return resolve(serviceType)
         }
@@ -69,17 +69,17 @@ extension Coordinator {
 
     func resolve<Service, Arg1, Arg2>(_ serviceType: Service.Type, arguments arg1: Arg1, _ arg2: Arg2) -> Service {
         // swiftlint:disable:next force_unwrapping
-        container.resolver.resolve(serviceType, arguments: arg1, arg2)!
+        resolver.resolve(serviceType, arguments: arg1, arg2)!
     }
 
     func resolve<Service, Arg1, Arg2, Arg3>(_ serviceType: Service.Type, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3) -> Service {
         // swiftlint:disable:next force_unwrapping
-        container.resolver.resolve(serviceType, arguments: arg1, arg2, arg3)!
+        resolver.resolve(serviceType, arguments: arg1, arg2, arg3)!
     }
 
     func resolve<Service, Arg1, Arg2, Arg3, Arg4>(_ serviceType: Service.Type, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3, _ arg4: Arg4) -> Service {
         // swiftlint:disable:next force_unwrapping
-        container.resolver.resolve(serviceType, arguments: arg1, arg2, arg3, arg4)!
+        resolver.resolve(serviceType, arguments: arg1, arg2, arg3, arg4)!
     }
     
 
