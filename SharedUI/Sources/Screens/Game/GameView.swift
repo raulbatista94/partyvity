@@ -20,21 +20,28 @@ public struct GameView: View {
             VStack {
                 headerView(reader: reader)
 
-                SwiftUI.Spacer().layoutPriority(1)
+                SwiftUI.Spacer(minLength: 44).layoutPriority(1)
 
                 if viewModel.gamePhase == .guessing {
                     Text("\(viewModel.remainingTime)s")
                         .font(.headlineMedium)
                         .foregroundStyle(.white)
                 }
-
-                getGamePhaseView()
-                    .frame(maxHeight: reader.size.height * 0.48)
+                ZStack(alignment: .center) {
+                    if viewModel.gamePhase == .guessing {
+                        circularProgressView(progress: Double(viewModel.remainingTime) / 60, proxy: reader)
+                            .offset(y: -62)
+                    }
+                    getGamePhaseView()
+                        .frame(maxHeight: reader.size.height * 0.48)
+                }
 
                 SwiftUI.Spacer().layoutPriority(1)
 
-                getGameFooterView()
             }
+            .safeAreaInset(edge: .bottom, content: {
+                getGameFooterView()
+            })
         }
         .onAppear {
             viewModel.send(input: .viewDidAppear)
@@ -52,7 +59,7 @@ private extension GameView {
                 .frame(height: reader.size.height * 0.26)
 
             HStack(spacing: 24) {
-                AvatarView(avatarImage: .avatarAlien)
+                AvatarView(avatarImage: (Avatar(rawValue: viewModel.currentTurnTeam.avatarId ?? Avatar.avatarAlien.rawValue) ?? .avatarAlien).image)
 
                 Text(viewModel.currentTurnTeam.teamName)
                     .font(.bodyLarge)
@@ -93,6 +100,9 @@ private extension GameView {
             }
         case .roundEvaluation:
             RoundResultView(earnedPoints: $viewModel.earnedPointsThisTurn)
+                .onTapGesture {
+                    viewModel.send(input: .didFinishRound)
+                }
         }
     }
 
@@ -101,7 +111,7 @@ private extension GameView {
         switch viewModel.gamePhase {
         case .activityPicking, .roundEvaluation:
             ProgressView(teams: viewModel.teams)
-                .padding(.bottom, 40)
+                .frame(maxHeight: 120)
         case .guessing:
             ActionButton(
                 onTap: {
@@ -115,12 +125,34 @@ private extension GameView {
             .padding(.bottom)
         }
     }
+
+    func circularProgressView(progress: Double, proxy: GeometryProxy) -> some View {
+        ZStack {
+            Circle()
+                .trim(from: 0, to: progress)
+                .stroke(
+                    viewModel.currentTeamColor,
+                    style: StrokeStyle(
+                        lineWidth: 8,
+                        lineCap: .round,
+                        lineJoin: .round)
+                )
+
+            Circle()
+                .trim(from: progress, to: 4)
+                .stroke(Color.gradientPurpleLight.opacity(0.32), lineWidth: 2)
+        }
+        .frame(width: proxy.size.height * 0.48, height: proxy.size.height * 0.48)
+        .rotationEffect(.degrees(-90))
+        .animation(.easeInOut, value: progress)
+    }
 }
 
 #Preview {
     GameView(
         viewModel: GameViewModel(
             teams: GameViewModel.mockTeams,
-            wordService: WordService.mock)
+            wordService: WordService.mock
+        )
     )
 }
