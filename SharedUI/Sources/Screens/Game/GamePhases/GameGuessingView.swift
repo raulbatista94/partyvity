@@ -10,6 +10,8 @@ import SwiftUI
 struct GameGuessingView: View {
     @State var offset: CGFloat = -48
     @Binding var word: String
+    @Binding var teamColor: Color
+
     let wordDidAppear: () -> Void
 
     var body: some View {
@@ -21,7 +23,18 @@ struct GameGuessingView: View {
 extension GameGuessingView {
     var wordView: some View {
         ZStack(alignment: .center) {
-            Image(.word)
+            ZStack(alignment: .bottom) {
+                Image(.word)
+                    .foregroundStyle(teamColor)
+                    .shadow(radius: 10)
+
+                Image(systemName: "chevron.down")
+                    .resizable()
+                    .foregroundStyle(.white)
+                    .frame(width: 50, height: 20)
+                    .shadow(radius: 3)
+                    .padding(.bottom, 24)
+            }
 
             Text(word)
                 .font(.headlineMedium)
@@ -57,5 +70,7 @@ extension GameGuessingView {
 #Preview {
     GameGuessingView(
         word: .constant("Naruto"),
-        wordDidAppear: {})
+        teamColor: .constant(.teamPurple),
+        wordDidAppear: {}
+        )
 }

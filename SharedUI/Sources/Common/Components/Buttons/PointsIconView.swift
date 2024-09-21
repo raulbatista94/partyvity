@@ -52,10 +52,21 @@ struct PointsIconView: View {
 
     var body: some View {
         Text(type.title)
-            .font(.headlineSmall)
+            .font(.titleMedium)
             .foregroundColor(type.foregroundColor)
-            .shadow(color: .black, radius: 2)
             .rotationEffect(.degrees(type.rotationDegrees))
+            .shadow(
+                color: .buttonNumberShadow,
+                radius: 0.5
+            )
+            .shadow(
+                color: .buttonNumberShadow,
+                radius: 0.5
+            )
+            .shadow(
+                color: .buttonNumberShadow,
+                radius: 0.5
+            )
             .padding(.all, 10)
             .background(
                 Circle()

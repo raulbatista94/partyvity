@@ -21,17 +21,7 @@ public struct GameView: View {
                 headerView(reader: reader)
 
                 SwiftUI.Spacer(minLength: 44).layoutPriority(1)
-
-                if viewModel.gamePhase == .guessing {
-                    Text("\(viewModel.remainingTime)s")
-                        .font(.headlineMedium)
-                        .foregroundStyle(.white)
-                }
                 ZStack(alignment: .center) {
-                    if viewModel.gamePhase == .guessing {
-                        circularProgressView(progress: Double(viewModel.remainingTime) / 60, proxy: reader)
-                            .offset(y: -62)
-                    }
                     getGamePhaseView()
                         .frame(maxHeight: reader.size.height * 0.48)
                 }
@@ -55,8 +45,22 @@ private extension GameView {
     @ViewBuilder
     func headerView(reader: GeometryProxy) -> some View {
         ZStack {
-            HeaderBackground()
-                .frame(height: reader.size.height * 0.26)
+            HeaderBackground(
+                topColor: .init(
+                    get: {
+                        viewModel.currentTeamColor.lighten(by: 0.3)
+                    },
+                    set: { _ in }
+                ),
+                bottomColor: .init(
+                    get: {
+                        viewModel.currentTeamColor.darken(by: 0.3)
+                    },
+                    set: { _ in }
+                )
+            )
+            .animation(.bouncy, value: viewModel.currentTeamColor)
+            .frame(height: reader.size.height * 0.26)
 
             HStack(spacing: 24) {
                 AvatarView(avatarImage: (Avatar(rawValue: viewModel.currentTurnTeam.avatarId ?? Avatar.avatarAlien.rawValue) ?? .avatarAlien).image)
@@ -81,6 +85,11 @@ private extension GameView {
             .padding(.horizontal, 56)
         case .guessing:
             VStack(spacing: .zero) {
+                Text("\(viewModel.remainingTime)s")
+                    .font(.headlineMedium)
+                    .foregroundStyle(.white)
+                    .padding(.bottom)
+
                 Rectangle()
                     .fill(.white.opacity(0.25))
                     .frame(height: 1)
@@ -90,6 +99,10 @@ private extension GameView {
                 GameGuessingView(
                     word: .init(
                         get: { viewModel.currentWord ?? "" },
+                        set: { _ in }
+                    ),
+                    teamColor: .init(
+                        get: { viewModel.currentTeamColor },
                         set: { _ in }
                     ),
                     wordDidAppear: {
@@ -124,27 +137,6 @@ private extension GameView {
             .padding(.horizontal, 16)
             .padding(.bottom)
         }
-    }
-
-    func circularProgressView(progress: Double, proxy: GeometryProxy) -> some View {
-        ZStack {
-            Circle()
-                .trim(from: 0, to: progress)
-                .stroke(
-                    viewModel.currentTeamColor,
-                    style: StrokeStyle(
-                        lineWidth: 8,
-                        lineCap: .round,
-                        lineJoin: .round)
-                )
-
-            Circle()
-                .trim(from: progress, to: 4)
-                .stroke(Color.gradientPurpleLight.opacity(0.32), lineWidth: 2)
-        }
-        .frame(width: proxy.size.height * 0.48, height: proxy.size.height * 0.48)
-        .rotationEffect(.degrees(-90))
-        .animation(.easeInOut, value: progress)
     }
 }
 

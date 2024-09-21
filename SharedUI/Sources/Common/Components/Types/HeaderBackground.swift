@@ -8,11 +8,22 @@
 import SwiftUI
 
 struct HeaderBackground: View {
+    @Binding var topColor: Color
+    @Binding var bottomColor: Color
+
+    init(
+        topColor: Binding<Color> = .constant(.gradientPurpleLight),
+        bottomColor: Binding<Color> = .constant(.gradientPurpleDark)
+    ) {
+        self._topColor = topColor
+        self._bottomColor = bottomColor
+    }
+
     var body: some View {
         HeaderBackgroundShape()
             .fill(
                 LinearGradient(
-                    colors: [.gradientPurpleLight, .gradientPurpleDark],
+                    colors: [topColor, bottomColor],
                     startPoint: .top,
                     endPoint: .bottom)
             )

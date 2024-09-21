@@ -50,10 +50,9 @@ struct ActionButton: View {
                     .padding()
                     .frame(maxWidth: .infinity)
                     .background(
-                        RoundedRectangle(cornerRadius: 24)
+                        Capsule()
                             .fill(backgroundColor)
                     )
-
             }
         )
     }
