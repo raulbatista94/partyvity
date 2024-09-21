@@ -14,6 +14,7 @@ struct ActionButton: View {
     private let size: ComponentSize
     private let icon: Image?
     private let pointsIcon: PointsIconView?
+    private let backgroundColor: Binding<Color?>
 
     init(
         onTap: @escaping () -> Void,
@@ -21,7 +22,8 @@ struct ActionButton: View {
         style: ComponentStyle,
         size: ComponentSize = .medium,
         icon: Image? = nil,
-        pointsIcon: PointsIconView? = nil
+        pointsIcon: PointsIconView? = nil,
+        backgroundColor: Binding<Color?> = .constant(nil)
     ) {
         self.onTap = onTap
         self.title = title
@@ -29,6 +31,7 @@ struct ActionButton: View {
         self.size = size
         self.icon = icon
         self.pointsIcon = pointsIcon
+        self.backgroundColor = backgroundColor
     }
 
     var body: some View {
@@ -51,7 +54,7 @@ struct ActionButton: View {
                     .frame(maxWidth: .infinity)
                     .background(
                         Capsule()
-                            .fill(backgroundColor)
+                            .fill(backgroundColor.wrappedValue ?? styleBackgroundColor)
                     )
             }
         )
@@ -59,7 +62,7 @@ struct ActionButton: View {
 }
 
 private extension ActionButton {
-    var backgroundColor: Color {
+    var styleBackgroundColor: Color {
         switch style {
         case .primary:
             .carmineRed

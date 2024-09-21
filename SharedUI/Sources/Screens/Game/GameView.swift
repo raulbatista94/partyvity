@@ -131,7 +131,11 @@ private extension GameView {
                     viewModel.send(input: .advanceToNextWord)
                 },
                 title: "Got it!",
-                style: .tertiary
+                style: .tertiary,
+                backgroundColor: .init(
+                    get: { viewModel.currentTeamColor },
+                    set: { _ in }
+                )
             )
             .frame(height: 64)
             .padding(.horizontal, 16)
