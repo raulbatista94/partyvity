@@ -8,7 +8,6 @@
 import SwiftUI
 
 import SwiftUI
-
 struct LogoView: View {
     @State private var animateP = false
     @State private var animateA = false
@@ -20,14 +19,23 @@ struct LogoView: View {
     @State private var animateTGreen = false
     @State private var animateYYellow = false
 
+    // Helper function to get random rotation and offset
+    func randomRotation() -> CGFloat {
+        return CGFloat.random(in: -15...15) // Random rotation between -15 and 15 degrees
+    }
+
+    func randomOffset() -> CGFloat {
+        return CGFloat.random(in: -15...15) // Random vertical movement between -15 and 15 points
+    }
+
     var body: some View {
         GeometryReader { reader in
             HStack {
                 SwiftUI.Spacer()
                 ZStack(alignment: .leading) {
                     Image.logoLetterYYellow
-                        .rotationEffect(.degrees(animateYYellow ? 10 : -10), anchor: .bottom)
-                        .offset(y: animateYYellow ? -10 : 0)
+                        .rotationEffect(.degrees(animateYYellow ? randomRotation() : randomRotation()), anchor: .bottom)
+                        .offset(y: animateYYellow ? randomOffset() : randomOffset())
                         .padding(.leading, reader.size.width * 0.56)
                         .padding(.top, reader.size.height * 0.6)
                         .onAppear {
@@ -37,8 +45,8 @@ struct LogoView: View {
                         }
 
                     Image.logoLetterTGreen
-                        .rotationEffect(.degrees(animateTGreen ? 10 : -10), anchor: .bottom)
-                        .offset(y: animateTGreen ? -10 : 0)
+                        .rotationEffect(.degrees(animateTGreen ? randomRotation() : randomRotation()), anchor: .bottom)
+                        .offset(y: animateTGreen ? randomOffset() : randomOffset())
                         .padding(.leading, reader.size.width * 0.52)
                         .padding(.top, reader.size.height * 0.15)
                         .onAppear {
@@ -48,8 +56,8 @@ struct LogoView: View {
                         }
 
                     Image.logoLetterI
-                        .rotationEffect(.degrees(animateI ? 10 : -10), anchor: .bottom)
-                        .offset(y: animateI ? -10 : 0)
+                        .rotationEffect(.degrees(animateI ? randomRotation() : randomRotation()), anchor: .bottom)
+                        .offset(y: animateI ? randomOffset() : randomOffset())
                         .padding(.leading, reader.size.width * 0.50)
                         .padding(.top, reader.size.height * 0.15)
                         .onAppear {
@@ -59,8 +67,8 @@ struct LogoView: View {
                         }
 
                     Image.logoLetterYBlue
-                        .rotationEffect(.degrees(animateY1 ? 10 : -10), anchor: .bottom)
-                        .offset(y: animateY1 ? -10 : 0)
+                        .rotationEffect(.degrees(animateY1 ? randomRotation() : randomRotation()), anchor: .bottom)
+                        .offset(y: animateY1 ? randomOffset() : randomOffset())
                         .padding(.leading, reader.size.width * 0.25)
                         .padding(.top, reader.size.height * 0.5)
                         .onAppear {
@@ -70,8 +78,8 @@ struct LogoView: View {
                         }
 
                     Image.logoLetterV
-                        .rotationEffect(.degrees(animateV ? 10 : -10), anchor: .bottom)
-                        .offset(y: animateV ? -10 : 0)
+                        .rotationEffect(.degrees(animateV ? randomRotation() : randomRotation()), anchor: .bottom)
+                        .offset(y: animateV ? randomOffset() : randomOffset())
                         .padding(.leading, reader.size.width * 0.34)
                         .padding(.top, reader.size.height * 0.35)
                         .onAppear {
@@ -81,8 +89,8 @@ struct LogoView: View {
                         }
 
                     Image.logoLetterT
-                        .rotationEffect(.degrees(animateT ? 10 : -10), anchor: .bottom)
-                        .offset(y: animateT ? -10 : 0)
+                        .rotationEffect(.degrees(animateT ? randomRotation() : randomRotation()), anchor: .bottom)
+                        .offset(y: animateT ? randomOffset() : randomOffset())
                         .padding(.leading, reader.size.width * 0.23)
                         .onAppear {
                             withAnimation(Animation.easeInOut(duration: 0.6).repeatForever(autoreverses: true).delay(0.6)) {
@@ -91,30 +99,30 @@ struct LogoView: View {
                         }
 
                     Image.logoLetterR
-                        .rotationEffect(.degrees(animateR ? 10 : -10), anchor: .bottom)
-                        .offset(y: animateR ? -10 : 0)
+                        .rotationEffect(.degrees(animateR ? randomRotation() : randomRotation()), anchor: .bottom)
+                        .offset(y: animateR ? randomOffset() : randomOffset())
                         .padding(.leading, reader.size.width * 0.18)
                         .padding(.top, reader.size.height * 0.35)
                         .onAppear {
-                            withAnimation(Animation.easeInOut(duration: 0.6).repeatForever(autoreverses: true).delay(0.7)) {
+                            withAnimation(Animation.easeInOut(duration: 0.5).repeatForever(autoreverses: true).delay(0.7)) {
                                 animateR.toggle()
                             }
                         }
 
                     Image.logoLetterA
-                        .rotationEffect(.degrees(animateA ? 10 : -10), anchor: .bottom)
-                        .offset(y: animateA ? -10 : 0)
+                        .rotationEffect(.degrees(animateA ? randomRotation() : randomRotation()), anchor: .bottom)
+                        .offset(y: animateA ? randomOffset() : randomOffset())
                         .padding(.leading, reader.size.width * 0.07)
                         .padding(.top, reader.size.height * 0.35)
                         .onAppear {
-                            withAnimation(Animation.easeInOut(duration: 0.6).repeatForever(autoreverses: true).delay(0.8)) {
+                            withAnimation(Animation.easeInOut(duration: 0.7).repeatForever(autoreverses: true).delay(0.8)) {
                                 animateA.toggle()
                             }
                         }
 
                     Image.logoLetterP
-                        .rotationEffect(.degrees(animateP ? 10 : -10), anchor: .bottom)
-                        .offset(y: animateP ? -10 : 0)
+                        .rotationEffect(.degrees(animateP ? randomRotation() : randomRotation()), anchor: .bottom)
+                        .offset(y: animateP ? randomOffset() : randomOffset())
                         .onAppear {
                             withAnimation(Animation.easeInOut(duration: 0.6).repeatForever(autoreverses: true).delay(0.9)) {
                                 animateP.toggle()
@@ -127,6 +135,7 @@ struct LogoView: View {
         .frame(height: 150)
     }
 }
+
 
 
 #Preview {
