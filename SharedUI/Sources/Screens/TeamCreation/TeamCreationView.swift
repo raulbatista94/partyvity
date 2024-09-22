@@ -78,19 +78,11 @@ struct TeamCreationView: View {
             SwiftUI.Spacer()
 
             ZStack {
-                Button(action: {
-                    startTapped()
-                }, label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 25)
-                            .fill(Color.carmineRed)
-                            .frame(height: 48)
-
-                        Text("Start")
-                            .font(.headlineMedium)
-                            .foregroundStyle(Color.white)
-                    }
-                })
+                ActionButton(
+                    onTap: { startTapped() },
+                    title: "Start",
+                    style: .primary
+                )
                 .padding(.horizontal, 16)
                 .opacity(shouldShowStartButton ? 1 : 0)
 
@@ -99,14 +91,49 @@ struct TeamCreationView: View {
                         .font(.headlineSmall)
                         .foregroundStyle(Color.white)
 
-                    TeamCreationSlider(
-                        value: $teamsCount,
-                        thumbImage: $thumbImage,
-                        trackColor: .textInputInactive,
-                        progressColor: .textInputActive
-                    )
-                    .frame(height: 80)
-                    .padding(.horizontal, 16)
+                    HStack(spacing: 10) {
+                        Button(action: {
+                            teamsCount = min(teamsCount + 1, 6)
+                        }, label: {
+                            Circle()
+                                .fill(.ultraThinMaterial)
+                                .overlay(content: {
+                                    Text("+")
+                                        .font(.titleXXLarge)
+                                        .foregroundStyle(.white)
+                                        .padding(.bottom, 8)
+                                })
+                        })
+                        .frame(size: 64)
+
+                        thumbImage
+                            .resizable()
+                            .animation(.linear, value: thumbImage)
+                            .frame(size: 64)
+
+                        Button(action: {
+                            teamsCount = max(teamsCount - 1, 1)
+                        }, label: {
+                            Circle()
+                                .fill(.ultraThinMaterial)
+                                .overlay(content: {
+                                    Text("-")
+                                        .font(.titleXXLarge)
+                                        .foregroundStyle(.white)
+                                        .padding(.bottom, 8)
+                                })
+                        })
+                        .frame(size: 64)
+                    }
+
+//                    TeamCreationSlider(
+//                        value: $teamsCount,
+//                        thumbImage: $thumbImage,
+//                        trackColor: .textInputInactive,
+//                        progressColor: .textInputActive
+//                    )
+//                    .frame(height: 80)
+//                    .padding(.horizontal, 16)
                 }
                 .opacity(shouldShowStartButton ? 0 : 1)
             }

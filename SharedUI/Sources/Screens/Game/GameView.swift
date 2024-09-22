@@ -20,21 +20,18 @@ public struct GameView: View {
             VStack {
                 headerView(reader: reader)
 
-                SwiftUI.Spacer().layoutPriority(1)
-
-                if viewModel.gamePhase == .guessing {
-                    Text("\(viewModel.remainingTime)s")
-                        .font(.headlineMedium)
-                        .foregroundStyle(.white)
+                SwiftUI.Spacer(minLength: 44).layoutPriority(1)
+                ZStack(alignment: .center) {
+                    getGamePhaseView()
+                        .frame(maxHeight: reader.size.height * 0.48)
                 }
 
-                getGamePhaseView()
-                    .frame(maxHeight: reader.size.height * 0.48)
-
                 SwiftUI.Spacer().layoutPriority(1)
 
-                getGameFooterView()
             }
+            .safeAreaInset(edge: .bottom, content: {
+                getGameFooterView()
+            })
         }
         .onAppear {
             viewModel.send(input: .viewDidAppear)
@@ -48,11 +45,25 @@ private extension GameView {
     @ViewBuilder
     func headerView(reader: GeometryProxy) -> some View {
         ZStack {
-            HeaderBackground()
-                .frame(height: reader.size.height * 0.26)
+            HeaderBackground(
+                topColor: .init(
+                    get: {
+                        viewModel.currentTeamColor.lighten(by: 0.3)
+                    },
+                    set: { _ in }
+                ),
+                bottomColor: .init(
+                    get: {
+                        viewModel.currentTeamColor.darken(by: 0.3)
+                    },
+                    set: { _ in }
+                )
+            )
+            .animation(.bouncy, value: viewModel.currentTeamColor)
+            .frame(height: reader.size.height * 0.26)
 
             HStack(spacing: 24) {
-                AvatarView(avatarImage: .avatarAlien)
+                AvatarView(avatarImage: (Avatar(rawValue: viewModel.currentTurnTeam.avatarId ?? Avatar.avatarAlien.rawValue) ?? .avatarAlien).image)
 
                 Text(viewModel.currentTurnTeam.teamName)
                     .font(.bodyLarge)
@@ -74,6 +85,11 @@ private extension GameView {
             .padding(.horizontal, 56)
         case .guessing:
             VStack(spacing: .zero) {
+                Text("\(viewModel.remainingTime)s")
+                    .font(.headlineMedium)
+                    .foregroundStyle(.white)
+                    .padding(.bottom)
+
                 Rectangle()
                     .fill(.white.opacity(0.25))
                     .frame(height: 1)
@@ -85,6 +101,10 @@ private extension GameView {
                         get: { viewModel.currentWord ?? "" },
                         set: { _ in }
                     ),
+                    teamColor: .init(
+                        get: { viewModel.currentTeamColor },
+                        set: { _ in }
+                    ),
                     wordDidAppear: {
                         viewModel.send(input: .wordDidAppear)
                     }
@@ -93,6 +113,9 @@ private extension GameView {
             }
         case .roundEvaluation:
             RoundResultView(earnedPoints: $viewModel.earnedPointsThisTurn)
+                .onTapGesture {
+                    viewModel.send(input: .didFinishRound)
+                }
         }
     }
 
@@ -101,14 +124,18 @@ private extension GameView {
         switch viewModel.gamePhase {
         case .activityPicking, .roundEvaluation:
             ProgressView(teams: viewModel.teams)
-                .padding(.bottom, 40)
+                .frame(maxHeight: 120)
         case .guessing:
             ActionButton(
                 onTap: {
                     viewModel.send(input: .advanceToNextWord)
                 },
                 title: "Got it!",
-                style: .tertiary
+                style: .tertiary,
+                backgroundColor: .init(
+                    get: { viewModel.currentTeamColor },
+                    set: { _ in }
+                )
             )
             .frame(height: 64)
             .padding(.horizontal, 16)
@@ -121,6 +148,7 @@ private extension GameView {
     GameView(
         viewModel: GameViewModel(
             teams: GameViewModel.mockTeams,
-            wordService: WordService.mock)
+            wordService: WordService.mock
+        )
     )
 }

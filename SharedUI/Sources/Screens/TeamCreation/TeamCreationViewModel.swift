@@ -22,7 +22,7 @@ public final class TeamCreationViewModel: ObservableObject {
 
             if difference > 0 {
             // Add missing teams
-                for _ in (0...difference) {
+                for _ in (1...difference) {
                     addTeam()
                 }
             } else {

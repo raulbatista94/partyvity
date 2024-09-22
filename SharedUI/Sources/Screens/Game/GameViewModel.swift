@@ -29,6 +29,19 @@ public final class GameViewModel: ObservableObject {
     private let wordService: WordProviding
 
     let teams: [Team]
+    private let colors = [
+            Color.blueLight,
+            Color.carmineRed,
+            Color.teamOrange,
+            Color.teamPurple,
+            Color.yellowBorder,
+            Color.textInputActive
+    ]
+
+    var currentTeamColor: Color {
+        let indexOfCurrentTeam = teams.firstIndex(where: { $0.id == currentTurnTeam.id }) ?? .zero
+        return colors[indexOfCurrentTeam]
+    }
 
     public init(
         teams: [Team],
@@ -73,10 +86,12 @@ private extension GameViewModel {
     func finishRound() {
         currentTurnTeam.updatePoints(gainedPoints: earnedPointsThisTurn)
         earnedPointsThisTurn = .zero
+        remainingTime = 60
+        currentDifficulty = .baby
         gamePhase = .activityPicking
 
         guard
-            let indexOfCurrentTeam = teams.firstIndex(of: currentTurnTeam),
+            let indexOfCurrentTeam = teams.firstIndex(where: { $0.id == currentTurnTeam.id }),
             indexOfCurrentTeam + 1 < teams.count // means the next index would be out
         else {
             currentTurnTeam = teams.first!
@@ -86,8 +101,23 @@ private extension GameViewModel {
         currentTurnTeam = teams[indexOfCurrentTeam + 1]
     }
 
+    func advanceToNextTeam() {
+        
+    }
+
     func evaluateRound() {
         gamePhase = .roundEvaluation
+        
+        Task { [weak self] in
+            guard let self else {
+                return
+            }
+
+            try await Task.sleep(for: .seconds(5))
+            if self.gamePhase == .roundEvaluation {
+                self.finishRound()
+            }
+        }
     }
 
     func startCountDown() {
@@ -131,6 +161,26 @@ extension GameViewModel {
             id: UUID().uuidString,
             teamName: "Klokanice",
             avatarId: Avatar.avatarCash.rawValue
+        ),
+        Team(
+            id: UUID().uuidString,
+            teamName: "Potkanice",
+            avatarId: Avatar.avatarLOL.rawValue
+        ),
+        Team(
+            id: UUID().uuidString,
+            teamName: "slonice",
+            avatarId: Avatar.avatarGeek.rawValue
+        ),
+        Team(
+            id: UUID().uuidString,
+            teamName: "Prdice",
+            avatarId: Avatar.avatarWink.rawValue
+        ),
+        Team(
+            id: UUID().uuidString,
+            teamName: "Prstenice",
+            avatarId: Avatar.avatarAngry.rawValue
         )
     ]
 }

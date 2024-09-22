@@ -50,7 +50,6 @@ struct MainMenuView: View {
                 title: AppStrings.newGame,
                 style: .primary
             )
-            .frame(height: 64)
 
             if shouldShowContinueGameButton {
                 ActionButton(
@@ -60,7 +59,6 @@ struct MainMenuView: View {
                     title: AppStrings.continue,
                     style: .secondary
                 )
-                .frame(height: 64)
             }
 
             ActionButton(
@@ -70,7 +68,6 @@ struct MainMenuView: View {
                 title: AppStrings.previousGames,
                 style: .tertiary
             )
-            .frame(height: 64)
         }
     }
 }
