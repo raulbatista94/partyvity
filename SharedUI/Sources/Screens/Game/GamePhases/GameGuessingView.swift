@@ -55,7 +55,7 @@ extension GameGuessingView {
 
                         self.offset = gesture.translation.height - 48
 
-                        if offset > -20 {
+                        if offset > 0 {
                             wordDidAppear()
                         }
                     }

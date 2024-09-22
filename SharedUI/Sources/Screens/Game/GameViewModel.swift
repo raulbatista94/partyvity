@@ -101,8 +101,23 @@ private extension GameViewModel {
         currentTurnTeam = teams[indexOfCurrentTeam + 1]
     }
 
+    func advanceToNextTeam() {
+        
+    }
+
     func evaluateRound() {
         gamePhase = .roundEvaluation
+        
+        Task { [weak self] in
+            guard let self else {
+                return
+            }
+
+            try await Task.sleep(for: .seconds(5))
+            if self.gamePhase == .roundEvaluation {
+                self.finishRound()
+            }
+        }
     }
 
     func startCountDown() {

@@ -91,29 +91,36 @@ struct TeamCreationView: View {
                         .font(.headlineSmall)
                         .foregroundStyle(Color.white)
 
-                    HStack(spacing: 64) {
+                    HStack(spacing: 10) {
                         Button(action: {
                             teamsCount = min(teamsCount + 1, 6)
                         }, label: {
                             Circle()
-                                .fill(Color.carmineRed)
+                                .fill(.ultraThinMaterial)
                                 .overlay(content: {
                                     Text("+")
                                         .font(.titleXXLarge)
                                         .foregroundStyle(.white)
+                                        .padding(.bottom, 8)
                                 })
                         })
                         .frame(size: 64)
+
+                        thumbImage
+                            .resizable()
+                            .animation(.linear, value: thumbImage)
+                            .frame(size: 64)
 
                         Button(action: {
                             teamsCount = max(teamsCount - 1, 1)
                         }, label: {
                             Circle()
-                                .fill(Color.carmineRed)
+                                .fill(.ultraThinMaterial)
                                 .overlay(content: {
                                     Text("-")
                                         .font(.titleXXLarge)
                                         .foregroundStyle(.white)
+                                        .padding(.bottom, 8)
                                 })
                         })
                         .frame(size: 64)

@@ -67,7 +67,7 @@ private extension ActionButton {
         case .primary:
             .carmineRed
         case .secondary:
-            .blueDark
+            .neonGreen
         case .tertiary:
             .blueLight
         }
