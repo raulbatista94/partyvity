@@ -29,7 +29,7 @@ public final class GameViewModel: ObservableObject {
 
     private let wordService: WordProviding
 
-    let teams: [Team]
+    @Published var teams: [Team]
     private let colors = [
             Color.blueLight,
             Color.carmineRed,
@@ -76,7 +76,7 @@ public final class GameViewModel: ObservableObject {
             currentDifficulty = currentDifficulty.nextDifficulty()
             currentWord = wordService.randomWord(for: currentDifficulty)
             if currentDifficulty == .nightmare {
-                gamePhase = .roundEvaluation
+                evaluateRound()
             }
         case .wordDidAppear:
             startCountDown()
@@ -94,8 +94,6 @@ private extension GameViewModel {
                 return
             }
             
-            self.currentTurnTeam.updatePoints(gainedPoints: earnedPointsThisTurn)
-            try await teamService.updateTeam(team: currentTurnTeam)
             self.earnedPointsThisTurn = .zero
             self.remainingTime = 60
             self.currentDifficulty = .baby
@@ -112,22 +110,25 @@ private extension GameViewModel {
 
             let teamFromDatabase = try await teamService.getTeam(id: idToFetch)
             currentTurnTeam = teamFromDatabase ?? teams[0]
-            print("current turn team \(currentTurnTeam) ")
         }
     }
 
     func evaluateRound() {
         gamePhase = .roundEvaluation
         
-        Task { [weak self] in
+        Task { @MainActor [weak self] in
             guard let self else {
                 return
             }
 
-            try await Task.sleep(for: .seconds(5))
-            if self.gamePhase == .roundEvaluation {
-                self.finishRound()
+            self.currentTurnTeam.updatePoints(gainedPoints: earnedPointsThisTurn)
+            try await teamService.updateTeam(team: currentTurnTeam)
+
+            if let indexOfCurrentTeam = teams.firstIndex(where: { $0.id == self.currentTurnTeam.id}) {
+                teams[indexOfCurrentTeam] = self.currentTurnTeam
             }
+
+            self.finishRound()
         }
     }
 

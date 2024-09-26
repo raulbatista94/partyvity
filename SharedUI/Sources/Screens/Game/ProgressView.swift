@@ -8,16 +8,16 @@
 import Core
 import SwiftUI
 
-struct ProgressViewContainer: View {
-    var body: some View {
-        ProgressView(teams: [
-
-        ])
-    }
-}
+//struct ProgressViewContainer: View {
+//    var body: some View {
+//        ProgressView(teams: [
+//
+//        ])
+//    }
+//}
 
 struct ProgressView: View {
-    var teams: [Team]
+    @Binding var teams: [Team]
     private let colors = [
         Color.blueLight,
         Color.carmineRed,
@@ -33,7 +33,8 @@ struct ProgressView: View {
                 ForEach(teams.indices) { teamIndex in
                     progressBar(
                         proxy: proxy,
-                        progressBarColor: colors[teamIndex]
+                        progressBarColor: colors[teamIndex],
+                        progress: Double(teams[teamIndex].score) / 60
                     )
                 }
             }
@@ -45,15 +46,18 @@ private extension ProgressView {
     @ViewBuilder
     func progressBar(
         proxy: GeometryProxy,
-        progressBarColor: Color
+        progressBarColor: Color,
+        progress: Double
     ) -> some View {
         ZStack(alignment: .leading) {
             Capsule()
                 .frame(
-                    width: proxy.size.width * 0.9,
+                    width: (proxy.size.width * progress) + 4,
                     height: 12
                 )
+                .offset(x: -4)
                 .foregroundStyle(progressBarColor)
+                .animation(.easeInOut, value: progress)
 
             Rectangle()
                 .frame(
@@ -66,7 +70,7 @@ private extension ProgressView {
 }
 
 #Preview {
-    ProgressView(teams: [
+    ProgressView(teams: .constant([
         Team(
             id: UUID().uuidString,
             teamName: "Klokani",
@@ -97,5 +101,5 @@ private extension ProgressView {
             teamName: "Klokanice",
             avatarId: Avatar.avatarCash.rawValue
         )
-    ])
+    ]))
 }
