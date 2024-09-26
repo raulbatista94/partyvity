@@ -25,6 +25,7 @@ public final class GameViewModel: ObservableObject {
     private var selectedActivity: ActivityType?
     private var currentDifficulty: WordDifficulty = .baby
     private var timer: AnyCancellable?
+    private let teamService: TeamService
 
     private let wordService: WordProviding
 
@@ -45,16 +46,20 @@ public final class GameViewModel: ObservableObject {
 
     public init(
         teams: [Team],
-        wordService: WordProviding
+        wordService: WordProviding,
+        teamService: TeamService
     ) {
         self.teams = teams
         self.wordService = wordService
+        self.teamService = teamService
 
         guard let firstTeam = teams.first else {
             assertionFailure("This can't happen. We shouldn't be able to access this screen without ")
-            currentTurnTeam = Self.mockTeams.first!
+            currentTurnTeam = Team()
             return
         }
+
+        // No need to fetch it from DB at this point since it should be a fresh team.
         currentTurnTeam = firstTeam
     }
 
@@ -84,25 +89,31 @@ public final class GameViewModel: ObservableObject {
 // MARK: - Private API
 private extension GameViewModel {
     func finishRound() {
-        currentTurnTeam.updatePoints(gainedPoints: earnedPointsThisTurn)
-        earnedPointsThisTurn = .zero
-        remainingTime = 60
-        currentDifficulty = .baby
-        gamePhase = .activityPicking
+        Task { @MainActor [weak self] in
+            guard let self else {
+                return
+            }
+            
+            self.currentTurnTeam.updatePoints(gainedPoints: earnedPointsThisTurn)
+            try await teamService.updateTeam(team: currentTurnTeam)
+            self.earnedPointsThisTurn = .zero
+            self.remainingTime = 60
+            self.currentDifficulty = .baby
+            self.gamePhase = .activityPicking
 
-        guard
-            let indexOfCurrentTeam = teams.firstIndex(where: { $0.id == currentTurnTeam.id }),
-            indexOfCurrentTeam + 1 < teams.count // means the next index would be out
-        else {
-            currentTurnTeam = teams.first!
-            return
+            let idToFetch: String
+            if
+                let indexOfCurrentTeam = teams.firstIndex(where: { $0.id == self.currentTurnTeam.id }),
+                indexOfCurrentTeam + 1 < teams.count {
+                idToFetch = teams[indexOfCurrentTeam + 1].id
+            } else {
+                idToFetch = teams.first!.id
+            }
+
+            let teamFromDatabase = try await teamService.getTeam(id: idToFetch)
+            currentTurnTeam = teamFromDatabase ?? teams[0]
+            print("current turn team \(currentTurnTeam) ")
         }
-
-        currentTurnTeam = teams[indexOfCurrentTeam + 1]
-    }
-
-    func advanceToNextTeam() {
-        
     }
 
     func evaluateRound() {

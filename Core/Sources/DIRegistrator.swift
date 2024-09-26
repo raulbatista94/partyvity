@@ -9,7 +9,7 @@ import Foundation
 import Swinject
 
 public typealias CoreDataTeamStorage = TeamFetching
-& TeamCreating
+& TeamCreatingOrUpdating
 
 public typealias CoreDataGameStorage = GameFetching
 & GameCreating
@@ -36,7 +36,7 @@ public enum DIRegistrator {
         }
         .inObjectScope(.container)
 
-        container.register(TeamCreating.self) { [coreDataStorage] _ in
+        container.register(TeamCreatingOrUpdating.self) { [coreDataStorage] _ in
             coreDataStorage
         }
         .inObjectScope(.container)
@@ -58,8 +58,8 @@ public enum DIRegistrator {
         }
         .inObjectScope(.container)
 
-        container.register(TeamService.self) { resolver in
-            TeamService(storage: resolver.resolve(TeamService.Storage.self)!)
+        container.register(TeamService.self) { [coreDataStorage] _ in
+            TeamService(storage: coreDataStorage)
         }
         .inObjectScope(.container)
 

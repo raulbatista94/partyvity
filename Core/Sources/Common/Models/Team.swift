@@ -27,6 +27,7 @@ public struct Team: Identifiable, Hashable, Sendable {
         self.id = managedObject.id
         self.teamName = managedObject.teamName
         self.avatarId = managedObject.avatarId
+        self.score = managedObject.score
     }
 
     public mutating func updatePoints(gainedPoints: Int) {

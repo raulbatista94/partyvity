@@ -8,5 +8,5 @@
 import Foundation
 
 public protocol TeamFetching {
-    func fetchTeams() async throws -> [Team]
+    func fetchTeam(id: String) async throws -> Team?
 }
