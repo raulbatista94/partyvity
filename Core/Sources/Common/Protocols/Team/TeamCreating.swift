@@ -7,15 +7,15 @@
 
 import Foundation
 
-public protocol TeamCreating: Sendable {
+public protocol TeamCreatingOrUpdating: Sendable {
     @discardableResult
-    func create(from team: Team) async throws -> Team
+    func createOrUpdate(from team: Team) async throws -> Team
 }
 
-extension TeamCreating {
-    func create(from teams: [Team]) async throws {
+extension TeamCreatingOrUpdating {
+    func createOrUpdate(from teams: [Team]) async throws {
         try await teams.asyncForEach {
-            try await create(from: $0)
+            try await createOrUpdate(from: $0)
         }
     }
 }

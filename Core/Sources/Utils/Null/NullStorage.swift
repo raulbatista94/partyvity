@@ -13,13 +13,14 @@ public actor NullStorage {
 }
 
 extension NullStorage: TeamFetching {
-    public func fetchTeams() async throws -> [Team] {
-        return []
+    public func fetchTeam(id: String) async throws -> Team? {
+        return nil
     }
 }
 
-extension NullStorage: TeamCreating {
-    public func create(from team: Team) async throws -> Team {
+extension NullStorage: TeamCreatingOrUpdating {
+    @discardableResult
+    public func createOrUpdate(from team: Team) async throws -> Team {
         return Team()
     }
 }

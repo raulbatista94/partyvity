@@ -123,7 +123,7 @@ private extension GameView {
     func getGameFooterView() -> some View {
         switch viewModel.gamePhase {
         case .activityPicking, .roundEvaluation:
-            ProgressView(teams: viewModel.teams)
+            ProgressView(teams: $viewModel.teams)
                 .frame(maxHeight: 120)
         case .guessing:
             ActionButton(
@@ -148,7 +148,8 @@ private extension GameView {
     GameView(
         viewModel: GameViewModel(
             teams: GameViewModel.mockTeams,
-            wordService: WordService.mock
+            wordService: WordService.mock,
+            teamService: TeamService.mock
         )
     )
 }

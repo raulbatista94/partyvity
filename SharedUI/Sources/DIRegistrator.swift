@@ -26,7 +26,8 @@ public enum DIRegistrator {
 
             return GameViewModel(
                 teams: teams,
-                wordService: resolver.resolve(WordProviding.self)!
+                wordService: resolver.resolve(WordProviding.self)!,
+                teamService: resolver.resolve(TeamService.self)!
             )
         }
         .inObjectScope(.transient)

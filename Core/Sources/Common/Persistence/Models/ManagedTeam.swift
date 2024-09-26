@@ -5,23 +5,23 @@
 //  Created by Raul Batista on 29.12.2023.
 //
 
+import Foundation
 import CoreData
 
 @objc(ManagedTeam)
-final class ManagedTeam: NSManagedObject {
-    @NSManaged private(set) var id: String
-    @NSManaged private(set) var avatarId: String
-    @NSManaged private(set) var teamName: String
-    @NSManaged private(set) var score: Int
+public final class ManagedTeam: NSManagedObject {
+    @NSManaged private(set) public var id: String
+    @NSManaged private(set) public var avatarId: String
+    @NSManaged private(set) public var teamName: String
+    @NSManaged private(set) public var score: Int
 }
 
-extension ManagedTeam {
+public extension ManagedTeam {
     func updateScore(
         score: Int,
-        for teamId: String,
         in context: NSManagedObjectContext
     ) async throws {
-        let managedTeam: ManagedTeam = try .newInstanceIfNeeded(teamId: teamId, in: context)
+        let managedTeam: ManagedTeam = try .newInstanceIfNeeded(teamId: id, in: context)
         managedTeam.score = score
         try context.save()
     }
@@ -33,6 +33,24 @@ extension ManagedTeam {
         avatarId = team.avatarId ?? "avatarGeek"
         teamName = team.teamName
         score = team.score
+    }
+
+    func fetchTeam(
+        teamId: String,
+        in context: NSManagedObjectContext
+    ) async throws -> ManagedTeam? {
+        let predicate = NSPredicate(
+            format: "%K == %@",
+            #keyPath(ManagedTeam.id),
+            id
+        )
+
+        do {
+            let storedTeam: ManagedTeam? = try Self.find(in: context, predicate: predicate)
+            return storedTeam
+        } catch {
+            throw error
+        }
     }
 }
 

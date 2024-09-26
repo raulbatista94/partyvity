@@ -9,7 +9,7 @@ import Foundation
 
 
 public final class TeamService {
-    public typealias Storage = TeamCreating & TeamFetching
+    public typealias Storage = TeamCreatingOrUpdating & TeamFetching
 
     private let storage: Storage
 
@@ -20,12 +20,20 @@ public final class TeamService {
     /// Stores the created teams to the database
     /// - Parameter teams: List of created teams
     public func saveTeams(_ teams: [Team]) async throws {
-        try await storage.create(from: teams)
+        try await storage.createOrUpdate(from: teams)
     }
 
     /// Retrieves the created teams from the database.
     /// - Returns: List of teams
-    public func getTeams() async throws -> [Team] {
-        try await storage.fetchTeams()
+    public func getTeam(id: String) async throws -> Team? {
+        try await storage.fetchTeam(id: id)
     }
+
+    public func updateTeam(team: Team) async throws {
+        try await storage.createOrUpdate(from: team)
+    }
+}
+
+public extension TeamService {
+    static let mock = TeamService(storage: try! CoreDataStorage(storeURL: URL(string: "localhost")!))
 }
