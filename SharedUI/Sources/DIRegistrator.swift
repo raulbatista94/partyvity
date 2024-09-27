@@ -11,8 +11,10 @@ import Swinject
 
 public enum DIRegistrator {
     public static func registerViewModel(container: Container) {
-        container.register(MainMenuViewModel.self) { _ in
-            MainMenuViewModel()
+        container.register(MainMenuViewModel.self) { resolver in
+            MainMenuViewModel(
+                gameService: resolver.resolve(GameServicing.self)!
+            )
         }
         .inObjectScope(.transient)
 
@@ -21,13 +23,15 @@ public enum DIRegistrator {
         }
         .inObjectScope(.transient)
 
-        container.register(GameViewModel.self) { (resolver, arg1: [Team]) in
-            let (teams) = arg1
+        container.register(GameViewModel.self) { (resolver, arg1: Game) in
+            let (game) = arg1
 
             return GameViewModel(
-                teams: teams,
+                teams: game.teams,
+                game: game,
                 wordService: resolver.resolve(WordProviding.self)!,
-                teamService: resolver.resolve(TeamService.self)!
+                teamService: resolver.resolve(TeamService.self)!, 
+                gameService: resolver.resolve(GameServicing.self)!
             )
         }
         .inObjectScope(.transient)

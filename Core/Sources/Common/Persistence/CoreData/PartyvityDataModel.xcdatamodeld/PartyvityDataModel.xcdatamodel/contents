@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22225" systemVersion="23B74" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22757" systemVersion="23G93" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="ManagedGame" representedClassName="ManagedGame" syncable="YES">
         <attribute name="creationTimestamp" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="currentlySelectedDifficulty" optional="YES" attributeType="String"/>
+        <attribute name="currentWord" optional="YES" attributeType="String"/>
         <attribute name="gameDuration" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="gamePhase" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="roundSeconds" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="selectedActivity" optional="YES" attributeType="String"/>
+        <relationship name="currentTeamTurn" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedTeam"/>
         <relationship name="teams" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="ManagedTeam" inverseName="game" inverseEntity="ManagedTeam"/>
+        <relationship name="winnerTeam" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedTeam"/>
     </entity>
     <entity name="ManagedTeam" representedClassName="ManagedTeam" syncable="YES">
         <attribute name="avatarId" optional="YES" attributeType="String"/>

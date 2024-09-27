@@ -14,7 +14,14 @@ class ManagedGame: NSManagedObject {
     @NSManaged public var id: String?
     @NSManaged public var teams: NSOrderedSet?
     @NSManaged public var gameDuration: Double
+    @NSManaged public var roundSeconds: Double
+    @NSManaged public var gamePhase: String?
+    @NSManaged public var currentWord: String?
+    @NSManaged public var currentTeamTurn: ManagedTeam?
+    @NSManaged public var winnerTeam: ManagedTeam?
+    @NSManaged public var currentlySelectedDifficulty: String?
     @NSManaged public var creationTimestamp: Double
+    @NSManaged public var selectedActivity: String?
 }
 
 extension ManagedGame {

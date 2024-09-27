@@ -147,9 +147,11 @@ private extension GameView {
 #Preview {
     GameView(
         viewModel: GameViewModel(
-            teams: GameViewModel.mockTeams,
+            teams: GameViewModel.mockTeams, 
+            game: Game(teams: []),
             wordService: WordService.mock,
-            teamService: TeamService.mock
+            teamService: TeamService.mock, 
+            gameService: GameService.mock
         )
     )
 }

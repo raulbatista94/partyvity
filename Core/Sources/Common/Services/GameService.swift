@@ -27,7 +27,7 @@ public protocol GameServicing {
     func saveGame(_ game: Game) async throws -> Game
 }
 
-final class GameService: GameServicing {
+public final class GameService: GameServicing {
     typealias GameStorage = GameCreating & GameFetching
     
     private let storage: GameStorage
@@ -44,7 +44,12 @@ final class GameService: GameServicing {
         try await storage.fetchGame(with: id)
     }
 
+    @discardableResult
     public func saveGame(_ game: Game) async throws -> Game {
         try await storage.create(from: game)
     }
+}
+
+public extension GameService {
+    static let mock = GameService(storage: try! CoreDataStorage(storeURL: URL(string:"")!))
 }

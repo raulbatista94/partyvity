@@ -46,7 +46,7 @@ extension GameCoordinator {
 
             show(avatarView)
         case let .startGame(game):
-            navigationController.setViewControllers([makeGameView(teams: game.teams)], animated: true)
+            navigationController.setViewControllers([makeGameView(game: game)], animated: true)
         case .back:
             eventHandler?.handle(event: .back, from: self)
         }
@@ -78,8 +78,8 @@ extension GameCoordinator {
         return HostingController(rootView: rootView)
     }
 
-    func makeGameView(teams: [Team]) -> UIViewController {
-        let viewModel = resolve(GameViewModel.self, argument: teams)
+    func makeGameView(game: Game) -> UIViewController {
+        let viewModel = resolve(GameViewModel.self, argument: game)
 
         let view = GameView(viewModel: viewModel)
 

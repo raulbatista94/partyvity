@@ -23,6 +23,9 @@ public struct MainMenuContainerView: View {
             )
             .padding(.horizontal, 16)
         }
+        .onAppear {
+            viewModel.send(event: .viewDidAppear)
+        }
         .ignoresSafeArea()
     }
 

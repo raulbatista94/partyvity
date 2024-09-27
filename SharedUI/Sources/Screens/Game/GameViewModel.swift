@@ -10,7 +10,7 @@ import Combine
 import SwiftUI
 
 public final class GameViewModel: ObservableObject {
-    enum GamePhase {
+    enum GamePhase: String {
         case activityPicking
         case guessing
         case roundEvaluation
@@ -26,8 +26,11 @@ public final class GameViewModel: ObservableObject {
     private var currentDifficulty: WordDifficulty = .baby
     private var timer: AnyCancellable?
     private let teamService: TeamService
+    private let gameService: GameServicing
 
     private let wordService: WordProviding
+
+    @Published  var game: Game
 
     @Published var teams: [Team]
     private let colors = [
@@ -46,12 +49,16 @@ public final class GameViewModel: ObservableObject {
 
     public init(
         teams: [Team],
+        game: Game,
         wordService: WordProviding,
-        teamService: TeamService
+        teamService: TeamService,
+        gameService: GameServicing
     ) {
         self.teams = teams
         self.wordService = wordService
         self.teamService = teamService
+        self.gameService = gameService
+        self.game = game
 
         guard let firstTeam = teams.first else {
             assertionFailure("This can't happen. We shouldn't be able to access this screen without ")
@@ -67,9 +74,12 @@ public final class GameViewModel: ObservableObject {
         switch input {
         case .viewDidAppear:
             currentWord = wordService.randomWord(for: currentDifficulty)
+            updateGame()
+            UserDefaults.standard.gameInstance = game.id
         case let .didTapActivity(selectedActivity):
             self.selectedActivity = selectedActivity
             gamePhase = .guessing
+            updateGame()
         case .advanceToNextWord:
             timer?.cancel()
             earnedPointsThisTurn += (1 * (selectedActivity?.pointsMultiplier ?? 1))
@@ -78,10 +88,13 @@ public final class GameViewModel: ObservableObject {
             if currentDifficulty == .nightmare {
                 evaluateRound()
             }
+            updateGame()
         case .wordDidAppear:
             startCountDown()
+            updateGame()
         case .didFinishRound:
             finishRound()
+            updateGame()
         }
     }
 }
@@ -148,6 +161,22 @@ private extension GameViewModel {
                     self.remainingTime = 60
                 }
             }
+    }
+
+    func updateGame() {
+        game.teams = teams
+        game.currentTeamTurn = currentTurnTeam
+        game.gamePhase = gamePhase.rawValue
+        game.roundSeconds = Double(remainingTime)
+        game.currentWord = currentWord
+        game.selectedActivity = selectedActivity?.rawValue
+        
+        Task { [weak self] in
+            guard let self else {
+                return
+            }
+            try await self.gameService.saveGame(self.game)
+        }
     }
 }
 

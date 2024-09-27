@@ -10,6 +10,13 @@ import Foundation
 public struct Game: Identifiable, Hashable, @unchecked Sendable {
     public let id: String
     public var teams: [Team]
+    public var gamePhase: String?
+    public var currentlySelectedDifficulty: String?
+    public var roundSeconds: Double?
+    public var currentTeamTurn: Team?
+    public var winnerTeam: Team?
+    public var currentWord: String?
+    public var selectedActivity: String?
 
     /// Game duration in seconds
     public var gameDuration: Double {
@@ -28,5 +35,17 @@ public struct Game: Identifiable, Hashable, @unchecked Sendable {
         self.id = managedObject.id ?? UUID().uuidString
         self.teams = managedObject.teams?.array as? [Team] ?? []
         self.creationTimestamp = managedObject.creationTimestamp
+        self.currentlySelectedDifficulty = managedObject.currentlySelectedDifficulty
+        self.roundSeconds = managedObject.roundSeconds
+        if let currentTeamManagedTurn = managedObject.currentTeamTurn {
+            self.currentTeamTurn = Team(from: currentTeamManagedTurn)
+        }
+
+        if let managedwinnerTeam = managedObject.winnerTeam {
+            winnerTeam = Team(from: managedwinnerTeam)
+        }
+
+        self.currentWord = managedObject.currentWord
+        self.selectedActivity = managedObject.selectedActivity
     }
 }

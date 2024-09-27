@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum ActivityType: CaseIterable {
+public enum ActivityType: String, CaseIterable {
     case describe
     case drawing
     case pantomime
