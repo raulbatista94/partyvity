@@ -34,7 +34,15 @@ final class GameCoordinator: NavigationControllerCoordinator {
     }
 
     func start() { 
+//        navigationController.pushViewController(makeTeamCreationView(), animated: true)
+    }
+
+    func teamCreationFlow() {
         navigationController.pushViewController(makeTeamCreationView(), animated: true)
+    }
+
+    func gameFlow(game: Game) {
+        navigationController.pushViewController(makeGameView(game: game), animated: true)
     }
 }
 

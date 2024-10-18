@@ -5,6 +5,7 @@
 //  Created by Raul Batista on 15.12.2023.
 //
 
+import Core
 import Combine
 import Foundation
 import Swinject
@@ -45,15 +46,21 @@ extension MainMenuCoordinator: NavigationControllerCoordinator {
         navigationController.viewControllers = [initialScreen]
     }
 
-    func openNewGame() {
+    func openNewGame(game: Game? = nil) {
         let coordinator = CoordinatorsFactory
             .makeGameCoordinator(
                 resolver: resolver,
                 navigationController: navigationController,
                 eventHanlder: self
-        )
+        ) as? GameCoordinator
 
-        startChildCoordinator(coordinator)
+        if let game {
+            coordinator?.gameFlow(game: game)
+        } else {
+            coordinator?.teamCreationFlow()
+        }
+
+        startChildCoordinator(coordinator!)
     }
 }
 extension MainMenuCoordinator: SceneCoordinating { }
@@ -73,8 +80,8 @@ extension MainMenuCoordinator {
         switch event {
         case .newGameButtonTapped:
             openNewGame()
-        case .continueButtonTapped:
-            print("Continue tapped")
+        case .continueButtonTapped(let game):
+            openNewGame(game: game)
         case .previousGamesButtonTapped:
             print("Previous games tapped")
         }

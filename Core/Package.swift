@@ -16,7 +16,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/CombineCommunity/CombineExt.git", exact: "1.8.1"),
+        .package(url: "https://github.com/CombineCommunity/CombineExt.git", exact: "1.8.1"), // TODO: Consider removing
         .package(url: "https://github.com/Swinject/Swinject.git", from: "2.8.0")
     ],
     targets: [

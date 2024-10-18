@@ -12,16 +12,14 @@ import CoreData
 @objc(ManagedGame)
 class ManagedGame: NSManagedObject {
     @NSManaged public var id: String?
-    @NSManaged public var teams: NSOrderedSet?
     @NSManaged public var gameDuration: Double
     @NSManaged public var roundSeconds: Double
     @NSManaged public var gamePhase: String?
     @NSManaged public var currentWord: String?
-    @NSManaged public var currentTeamTurn: ManagedTeam?
-    @NSManaged public var winnerTeam: ManagedTeam?
     @NSManaged public var currentlySelectedDifficulty: String?
     @NSManaged public var creationTimestamp: Double
     @NSManaged public var selectedActivity: String?
+    @NSManaged public var managedTeams: NSOrderedSet?
 }
 
 extension ManagedGame {
@@ -51,8 +49,9 @@ extension ManagedGame {
 
     func update(with game: Game, context: NSManagedObjectContext) {
         id = game.id
-        teams = try? NSOrderedSet(array: game.teams.map {
-            let managedTeam: ManagedTeam = try .newInstanceIfNeeded(
+        // Solve correct saving of the teams
+        managedTeams = try? NSOrderedSet(array: game.teams.map {
+            let managedTeam: ManagedTeam = try ManagedTeam.newInstanceIfNeeded(
                 teamId: $0.id,
                 in: context
             )

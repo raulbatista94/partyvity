@@ -28,7 +28,10 @@ public class MainMenuViewModel: ObservableObject {
         case .newGameButtonTapped:
             eventSubject.send(.newGameButtonTapped)
         case .continueButtonTapped:
-            eventSubject.send(.continueButtonTapped)
+            guard let game else {
+                return
+            }
+            eventSubject.send(.continueButtonTapped(game))
         case .previousGamesButtonTapped:
             eventSubject.send(.previousGamesButtonTapped)
         }
@@ -43,7 +46,7 @@ public class MainMenuViewModel: ObservableObject {
 
     public enum ViewAction {
         case newGameButtonTapped
-        case continueButtonTapped
+        case continueButtonTapped(Game)
         case previousGamesButtonTapped
     }
 

@@ -33,18 +33,10 @@ public struct Game: Identifiable, Hashable, @unchecked Sendable {
 
     init(from managedObject: ManagedGame) {
         self.id = managedObject.id ?? UUID().uuidString
-        self.teams = managedObject.teams?.array as? [Team] ?? []
+        self.teams = managedObject.managedTeams?.array as? [Team] ?? []
         self.creationTimestamp = managedObject.creationTimestamp
         self.currentlySelectedDifficulty = managedObject.currentlySelectedDifficulty
         self.roundSeconds = managedObject.roundSeconds
-        if let currentTeamManagedTurn = managedObject.currentTeamTurn {
-            self.currentTeamTurn = Team(from: currentTeamManagedTurn)
-        }
-
-        if let managedwinnerTeam = managedObject.winnerTeam {
-            winnerTeam = Team(from: managedwinnerTeam)
-        }
-
         self.currentWord = managedObject.currentWord
         self.selectedActivity = managedObject.selectedActivity
     }
