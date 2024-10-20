@@ -20,7 +20,7 @@ public class MainMenuViewModel: ObservableObject {
         self.gameService = gameService
     }
 
-    @MainActor func send(event: Input) {
+    func send(event: Input) {
         switch event {
         case .viewDidAppear:
             if let gameId = UserDefaults.standard.gameInstance {
