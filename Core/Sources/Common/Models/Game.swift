@@ -33,7 +33,7 @@ public struct Game: Identifiable, Hashable, @unchecked Sendable {
 
     init(from managedObject: ManagedGame) {
         self.id = managedObject.id ?? UUID().uuidString
-        self.teams = managedObject.managedTeams?.array as? [Team] ?? []
+        self.teams = managedObject.managedTeams.array.compactMap { $0 as? ManagedTeam }.map { Team(from: $0) }
         self.creationTimestamp = managedObject.creationTimestamp
         self.currentlySelectedDifficulty = managedObject.currentlySelectedDifficulty
         self.roundSeconds = managedObject.roundSeconds

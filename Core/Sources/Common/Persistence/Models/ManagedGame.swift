@@ -19,7 +19,9 @@ class ManagedGame: NSManagedObject {
     @NSManaged public var currentlySelectedDifficulty: String?
     @NSManaged public var creationTimestamp: Double
     @NSManaged public var selectedActivity: String?
-    @NSManaged public var managedTeams: NSOrderedSet?
+    @NSManaged public var managedTeams: NSOrderedSet
+    @NSManaged public var currentTurnTeam: ManagedTeam?
+    @NSManaged public var winnerTeam: ManagedTeam?
 }
 
 extension ManagedGame {
@@ -48,9 +50,7 @@ extension ManagedGame {
     }
 
     func update(with game: Game, context: NSManagedObjectContext) {
-        id = game.id
-        // Solve correct saving of the teams
-        managedTeams = try? NSOrderedSet(array: game.teams.map {
+        let teams = try? NSOrderedSet(array: game.teams.map {
             let managedTeam: ManagedTeam = try ManagedTeam.newInstanceIfNeeded(
                 teamId: $0.id,
                 in: context
@@ -58,7 +58,29 @@ extension ManagedGame {
             managedTeam.update(with: $0)
             return managedTeam
         })
+        id = game.id
+        
+        // Solve correct saving of the teams
+        managedTeams = teams ?? NSOrderedSet()
+        if let winnerTeam = game.winnerTeam {
+            self.winnerTeam = try? ManagedTeam.newInstanceIfNeeded(
+                teamId: winnerTeam.id,
+                in: context
+            )
+        }
+
+        if let currentTurnTeam = game.currentTeamTurn {
+            self.currentTurnTeam = try? ManagedTeam.newInstanceIfNeeded(
+                teamId: currentTurnTeam.id,
+                in: context
+            )
+        }
         gameDuration = game.gameDuration
         creationTimestamp = game.creationTimestamp
+        currentWord = game.currentWord
+        selectedActivity = game.selectedActivity
+        currentlySelectedDifficulty = game.currentlySelectedDifficulty
+        gamePhase = game.gamePhase
+        roundSeconds = game.roundSeconds ?? 60
     }
 }

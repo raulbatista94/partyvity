@@ -24,6 +24,7 @@ public protocol GameServicing {
     /// Creates a new game in the data store asynchronously based on the provided game instance.
     /// - Parameter game: An instance of `Game` struct representing the game data to be created.
     /// - Returns: An asynchronous task that resolves to a `Game` instance representing the newly created game.
+    @discardableResult
     func saveGame(_ game: Game) async throws -> Game
 }
 

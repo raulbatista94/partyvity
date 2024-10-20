@@ -170,7 +170,8 @@ private extension GameViewModel {
         game.roundSeconds = Double(remainingTime)
         game.currentWord = currentWord
         game.selectedActivity = selectedActivity?.rawValue
-        
+        game.currentlySelectedDifficulty = currentDifficulty.rawValue
+
         Task { [weak self] in
             guard let self else {
                 return

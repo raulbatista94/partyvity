@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23231" systemVersion="24A348" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22757" systemVersion="24A348" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="ManagedGame" representedClassName="ManagedGame" syncable="YES">
         <attribute name="creationTimestamp" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="currentlySelectedDifficulty" optional="YES" attributeType="String"/>
@@ -9,8 +9,9 @@
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="roundSeconds" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="selectedActivity" optional="YES" attributeType="String"/>
-        <attribute name="winnerTeam" optional="YES" attributeType="Binary"/>
-        <relationship name="managedTeams" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="ManagedTeam" inverseName="game" inverseEntity="ManagedTeam"/>
+        <relationship name="currentTurnTeam" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedTeam"/>
+        <relationship name="managedTeams" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="ManagedTeam" inverseName="game" inverseEntity="ManagedTeam"/>
+        <relationship name="winnerTeam" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedTeam"/>
     </entity>
     <entity name="ManagedTeam" representedClassName="ManagedTeam" syncable="YES">
         <attribute name="avatarId" optional="YES" attributeType="String"/>

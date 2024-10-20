@@ -9,13 +9,14 @@ import Combine
 import Core
 import Foundation
 
+@MainActor
 public class MainMenuViewModel: ObservableObject {
     @Published private(set) var gameInProgressAvailable: Bool = false
     private let eventSubject = PassthroughSubject<ViewAction, Never>()
     private var game: Game?
     private let gameService: GameServicing
 
-    init(gameService: GameServicing) {
+    nonisolated init(gameService: GameServicing) {
         self.gameService = gameService
     }
 
