@@ -123,8 +123,11 @@ private extension GameView {
     func getGameFooterView() -> some View {
         switch viewModel.gamePhase {
         case .activityPicking, .roundEvaluation:
-            ProgressView(teams: $viewModel.teams)
-                .frame(maxHeight: 120)
+            ProgressView(
+                gameMaxPoints: GameViewModel.Constants.winPointsThreshold,
+                teams: $viewModel.teams
+            )
+            .frame(maxHeight: 120)
         case .guessing:
             ActionButton(
                 onTap: {
