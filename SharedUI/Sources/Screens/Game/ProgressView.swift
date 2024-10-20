@@ -1,6 +1,6 @@
 //
 //  SwiftUIView.swift
-//  
+//
 //
 //  Created by Raul Batista on 09.03.2024.
 //
@@ -8,15 +8,9 @@
 import Core
 import SwiftUI
 
-//struct ProgressViewContainer: View {
-//    var body: some View {
-//        ProgressView(teams: [
-//
-//        ])
-//    }
-//}
-
 struct ProgressView: View {
+    let gameMaxPoints: Int
+
     @Binding var teams: [Team]
     private let colors = [
         Color.blueLight,
@@ -30,11 +24,11 @@ struct ProgressView: View {
     var body: some View {
         GeometryReader { proxy in
             VStack {
-                ForEach(teams.indices) { teamIndex in
+                ForEach(0..<teams.count, id: \.self) { teamIndex in
                     progressBar(
                         proxy: proxy,
                         progressBarColor: colors[teamIndex],
-                        progress: Double(teams[teamIndex].score) / 60
+                        progress: Double(teams[teamIndex].score) / CGFloat(gameMaxPoints)
                     )
                 }
             }
@@ -70,36 +64,39 @@ private extension ProgressView {
 }
 
 #Preview {
-    ProgressView(teams: .constant([
-        Team(
-            id: UUID().uuidString,
-            teamName: "Klokani",
-            avatarId: Avatar.avatarAlert.rawValue
-        ),
-        Team(
-            id: UUID().uuidString,
-            teamName: "Klokanice",
-            avatarId: Avatar.avatarCash.rawValue
-        ),
-        Team(
-            id: UUID().uuidString,
-            teamName: "Klokanice",
-            avatarId: Avatar.avatarCash.rawValue
-        ),
-        Team(
-            id: UUID().uuidString,
-            teamName: "Klokanice",
-            avatarId: Avatar.avatarCash.rawValue
-        ),
-        Team(
-            id: UUID().uuidString,
-            teamName: "Klokanice",
-            avatarId: Avatar.avatarCash.rawValue
-        ),
-        Team(
-            id: UUID().uuidString,
-            teamName: "Klokanice",
-            avatarId: Avatar.avatarCash.rawValue
-        )
-    ]))
+    ProgressView(
+        gameMaxPoints: 60,
+        teams: .constant([
+            Team(
+                id: UUID().uuidString,
+                teamName: "Klokani",
+                avatarId: Avatar.avatarAlert.rawValue
+            ),
+            Team(
+                id: UUID().uuidString,
+                teamName: "Klokanice",
+                avatarId: Avatar.avatarCash.rawValue
+            ),
+            Team(
+                id: UUID().uuidString,
+                teamName: "Klokanice",
+                avatarId: Avatar.avatarCash.rawValue
+            ),
+            Team(
+                id: UUID().uuidString,
+                teamName: "Klokanice",
+                avatarId: Avatar.avatarCash.rawValue
+            ),
+            Team(
+                id: UUID().uuidString,
+                teamName: "Klokanice",
+                avatarId: Avatar.avatarCash.rawValue
+            ),
+            Team(
+                id: UUID().uuidString,
+                teamName: "Klokanice",
+                avatarId: Avatar.avatarCash.rawValue
+            )
+        ])
+    )
 }

@@ -17,34 +17,47 @@ public final class GameViewModel: ObservableObject {
     }
 
     @Published var currentTurnTeam: Team
-    @Published var earnedPointsThisTurn: Int = .zero
+    @Published var earnedPointsThisTurn: Int = .zero {
+        didSet {
+            if currentTurnTeam.score + earnedPointsThisTurn >= Constants.winPointsThreshold {
+                eventSubject.send(.winnerTeam(currentTurnTeam))
+            }
+        }
+    }
     @Published var gamePhase: GamePhase = .activityPicking
     @Published var currentWord: String?
     @Published var remainingTime: Int = 60
 
+    private let eventSubject = PassthroughSubject<ViewAction, Never>()
     private var selectedActivity: ActivityType?
     private var currentDifficulty: WordDifficulty = .baby
     private var timer: AnyCancellable?
     private let teamService: TeamService
     private let gameService: GameServicing
-
     private let wordService: WordProviding
+    private let colors = [
+        Color.blueLight,
+        Color.carmineRed,
+        Color.teamOrange,
+        Color.teamPurple,
+        Color.yellowBorder,
+        Color.textInputActive
+    ]
 
     @Published  var game: Game
-
     @Published var teams: [Team]
-    private let colors = [
-            Color.blueLight,
-            Color.carmineRed,
-            Color.teamOrange,
-            Color.teamPurple,
-            Color.yellowBorder,
-            Color.textInputActive
-    ]
 
     var currentTeamColor: Color {
         let indexOfCurrentTeam = teams.firstIndex(where: { $0.id == currentTurnTeam.id }) ?? .zero
         return colors[indexOfCurrentTeam]
+    }
+
+    enum Constants {
+        static let winPointsThreshold: Int = 60
+    }
+
+    public enum ViewAction {
+        case winnerTeam(Team)
     }
 
     public init(
